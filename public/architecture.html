@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clausely -- 8-Agent Swarm Multi-Agent Architecture Board</title>
+  <meta name="description" content="Technical board mapping the 8-Agent Monte Carlo Tree Search litigation swarm and Symbolic Formatting Engine compiler architecture.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables for Dark Mode (Default) */
+    :root {
+      --bg-dark: #070a13;
+      --bg-card: rgba(13, 19, 33, 0.85);
+      --bg-active: rgba(22, 33, 54, 0.9);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --color-primary: #38bdf8;
+      --color-primary-glow: rgba(56, 189, 248, 0.2);
+      --color-accent: #6366f1;
+      --color-accent-glow: rgba(99, 102, 241, 0.2);
+      --color-success: #10b981;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --grid-color: rgba(255, 255, 255, 0.025);
+    }
+
+    /* CSS Variables for Light Mode */
+    [data-theme="light"] {
+      --bg-dark: #f8fafc;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-active: rgba(241, 245, 249, 0.95);
+      --border-card: rgba(15, 23, 42, 0.08);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --color-primary: #0284c7;
+      --color-primary-glow: rgba(2, 132, 199, 0.15);
+      --color-accent: #4f46e5;
+      --color-accent-glow: rgba(79, 70, 229, 0.15);
+      --color-success: #15803d;
+      --color-error: #b91c1c;
+      --color-warning: #d97706;
+      --grid-color: rgba(15, 23, 42, 0.035);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Header navigation bar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid var(--border-card);
+      background: var(--bg-active);
+      color: var(--text-main);
+    }
+
+    .btn:hover {
+      background: var(--bg-card);
+      border-color: var(--color-primary);
+    }
+
+    /* Infinite Canvas Board */
+    .canvas-container {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      cursor: grab;
+      background-color: var(--bg-dark);
+      background-size: 20px 20px;
+      background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    }
+
+    .canvas-container:active {
+      cursor: grabbing;
+    }
+
+    .canvas-content {
+      position: absolute;
+      width: 1000px;
+      height: 700px;
+      transform-origin: 0 0;
+    }
+
+    .diagram-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Panels */
+    .floating-card {
+      position: fixed;
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+    }
+
+    /* Floating Title Card */
+    .title-card {
+      top: 80px;
+      left: 20px;
+      padding: 1.2rem;
+      max-width: 320px;
+    }
+
+    .title-card h1 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .title-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Floating Info Panel */
+    .info-panel {
+      top: 80px;
+      right: 20px;
+      width: 380px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+
+    .info-header {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-section {
+      margin-bottom: 1rem;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .info-val {
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .math-block {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 0.5rem;
+      font-family: monospace;
+      font-size: 0.82rem;
+      margin-top: 0.4rem;
+      color: var(--color-primary);
+      overflow-x: auto;
+    }
+
+    .info-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: var(--color-primary-glow);
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    /* Floating Swarm Harness Copilot Control Card */
+    .harness-card {
+      bottom: 20px;
+      left: 20px;
+      width: 320px;
+      padding: 1.2rem;
+      border: 1px solid var(--color-primary);
+      box-shadow: 0 0 15px var(--color-primary-glow);
+    }
+
+    .harness-card h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .harness-status {
+      font-size: 0.75rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--color-success);
+      color: var(--color-success);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .harness-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Canvas controls */
+    .canvas-controls {
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.4rem;
+      border-radius: 8px;
+    }
+
+    /* Interactive SVG node classes */
+    .svg-node {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .svg-node rect, .svg-node circle {
+      transition: all 0.2s ease;
+    }
+
+    .svg-node:hover rect, .svg-node.active rect {
+      stroke: var(--color-primary);
+      stroke-width: 2.5px;
+      fill: var(--bg-active);
+      filter: drop-shadow(0 0 12px var(--color-primary-glow));
+    }
+
+    .svg-node:hover circle, .svg-node.active circle {
+      stroke: var(--color-primary);
+      stroke-width: 2.5px;
+      fill: var(--bg-active);
+      filter: drop-shadow(0 0 12px var(--color-primary-glow));
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Header controls -->
+  <header>
+    <a href="/" class="logo">clausely<span>.ai</span></a>
+    <div class="header-controls">
+      <a href="/" class="btn"><- Back</a>
+      <button class="btn" id="theme-toggle-btn" onclick="toggleTheme()">Theme: Dark</button>
+    </div>
+  </header>
+
+  <!-- Interactive Infinite Board Canvas -->
+  <div class="canvas-container" id="canvas-container">
+    <div class="canvas-content" id="canvas-content">
+      <svg class="diagram-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="rgba(255, 255, 255, 0.25)"/>
+          </marker>
+        </defs>
+
+        <!-- CLUSTER BACKING BLOCKS -->
+        <!-- Prover Cluster -->
+        <rect x="360" y="50" width="280" height="150" rx="8" fill="rgba(99, 102, 241, 0.03)" stroke="rgba(99, 102, 241, 0.12)" stroke-width="1.5" />
+        <text x="375" y="72" fill="rgba(99, 102, 241, 0.7)" font-family="Outfit" font-size="10" font-weight="bold" letter-spacing="0.08em">PROVER CLUSTER</text>
+
+        <!-- Rater Cluster -->
+        <rect x="360" y="230" width="280" height="150" rx="8" fill="rgba(245, 158, 11, 0.03)" stroke="rgba(245, 158, 11, 0.12)" stroke-width="1.5" />
+        <text x="375" y="252" fill="rgba(245, 158, 11, 0.7)" font-family="Outfit" font-size="10" font-weight="bold" letter-spacing="0.08em">RATER CLUSTER (ELO)</text>
+
+        <!-- Compiler/Oversight Cluster -->
+        <rect x="360" y="410" width="280" height="250" rx="8" fill="rgba(16, 185, 129, 0.03)" stroke="rgba(16, 185, 129, 0.12)" stroke-width="1.5" />
+        <text x="375" y="432" fill="rgba(16, 185, 129, 0.7)" font-family="Outfit" font-size="10" font-weight="bold" letter-spacing="0.08em">COMPILER / OVERSIGHT CLUSTER</text>
+
+        <!-- CONNECTING FLOW ARROWS -->
+        <!-- Intake to Harness -->
+        <path d="M 70 330 L 120 330" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- Harness to MCTS -->
+        <path d="M 220 330 L 260 330" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        
+        <!-- MCTS to Clusters -->
+        <path d="M 320 330 C 340 330, 340 125, 360 125" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        <path d="M 320 330 C 345 330, 345 305, 360 305" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        <path d="M 320 330 C 340 330, 340 535, 360 535" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Cluster outputs to SFE / Case Base -->
+        <path d="M 640 535 L 720 535" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        <path d="M 640 305 C 680 305, 680 180, 720 180" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+        
+        <!-- SFE to Pleading Output -->
+        <path d="M 780 535 C 830 535, 830 360, 850 360" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- NODES -->
+        <!-- Intake -->
+        <g class="svg-node" id="node-intake" onmouseenter="selectNode('intake')" onclick="selectNode('intake')">
+          <circle cx="45" cy="330" r="22" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="45" y="333" fill="#9ca3af" font-family="Outfit" font-size="8" text-anchor="middle" font-weight="bold">INTAKE</text>
+        </g>
+
+        <!-- Swarm Harness Copilot -->
+        <g class="svg-node active" id="node-copilot" onmouseenter="selectNode('copilot')" onclick="selectNode('copilot')">
+          <rect x="120" y="280" width="100" height="100" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="170" y="325" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">SWARM HARNESS</text>
+          <text x="170" y="338" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">COPILOT</text>
+          <text x="170" y="358" fill="#38bdf8" font-family="Outfit" font-size="8" text-anchor="middle">Coordinator</text>
+        </g>
+
+        <!-- MCTS Engine -->
+        <g class="svg-node" id="node-mcts" onmouseenter="selectNode('mcts')" onclick="selectNode('mcts')">
+          <rect x="260" y="295" width="60" height="70" rx="6" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="290" y="325" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">MCTS</text>
+          <text x="290" y="338" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">ENGINE</text>
+          <text x="290" y="352" fill="#9ca3af" font-family="Outfit" font-size="8" text-anchor="middle">P-UCB Solver</text>
+        </g>
+
+        <!-- Petitioner Agent -->
+        <g class="svg-node" id="node-petitioner" onmouseenter="selectNode('petitioner')" onclick="selectNode('petitioner')">
+          <rect x="375" y="90" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="432" y="112" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Petitioner Agent</text>
+        </g>
+
+        <!-- Opponent Agent -->
+        <g class="svg-node" id="node-opponent" onmouseenter="selectNode('opponent')" onclick="selectNode('opponent')">
+          <rect x="505" y="90" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="562" y="112" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Opponent Agent</text>
+        </g>
+
+        <!-- Reviewer Agent -->
+        <g class="svg-node" id="node-reviewer" onmouseenter="selectNode('reviewer')" onclick="selectNode('reviewer')">
+          <rect x="375" y="270" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="432" y="292" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Reviewer Agent</text>
+        </g>
+
+        <!-- Judge Agent -->
+        <g class="svg-node" id="node-judge" onmouseenter="selectNode('judge')" onclick="selectNode('judge')">
+          <rect x="505" y="270" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="562" y="292" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Judge Agent</text>
+        </g>
+
+        <!-- Drafter Agent -->
+        <g class="svg-node" id="node-drafter" onmouseenter="selectNode('drafter')" onclick="selectNode('drafter')">
+          <rect x="375" y="450" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="432" y="472" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Drafter Agent</text>
+        </g>
+
+        <!-- Verifier Agent -->
+        <g class="svg-node" id="node-verifier" onmouseenter="selectNode('verifier')" onclick="selectNode('verifier')">
+          <rect x="505" y="450" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="562" y="472" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Verifier Agent</text>
+        </g>
+
+        <!-- Objector Agent -->
+        <g class="svg-node" id="node-objector" onmouseenter="selectNode('objector')" onclick="selectNode('objector')">
+          <rect x="375" y="530" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="432" y="552" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Objector Agent</text>
+        </g>
+
+        <!-- Presenter Agent -->
+        <g class="svg-node" id="node-presenter" onmouseenter="selectNode('presenter')" onclick="selectNode('presenter')">
+          <rect x="505" y="530" width="115" height="35" rx="5" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="562" y="552" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Presenter Agent</text>
+        </g>
+
+        <!-- SFE Compiler -->
+        <g class="svg-node" id="node-sfe" onmouseenter="selectNode('sfe')" onclick="selectNode('sfe')">
+          <rect x="720" y="500" width="60" height="70" rx="6" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="750" y="530" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">SFE</text>
+          <text x="750" y="543" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">COMPILER</text>
+          <text x="750" y="557" fill="#9ca3af" font-family="Outfit" font-size="7" text-anchor="middle">Rule Engine</text>
+        </g>
+
+        <!-- Case Base Memory Database -->
+        <g class="svg-node" id="node-casebase" onmouseenter="selectNode('casebase')" onclick="selectNode('casebase')">
+          <rect x="720" y="145" width="60" height="70" rx="6" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+          <text x="750" y="172" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">CASE BASE</text>
+          <text x="750" y="185" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">DATABASE</text>
+          <text x="750" y="198" fill="#9ca3af" font-family="Outfit" font-size="7" text-anchor="middle">Firestore</text>
+        </g>
+
+        <!-- Pleading Final Output -->
+        <g class="svg-node" id="node-output" onmouseenter="selectNode('output')" onclick="selectNode('output')">
+          <circle cx="870" cy="330" r="22" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+          <text x="870" y="333" fill="#10b981" font-family="Outfit" font-size="8" text-anchor="middle" font-weight="bold">PLEADING</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Floating Title card -->
+  <div class="floating-card title-card">
+    <h1>Clausely Swarm Board</h1>
+    <p>Hold Left-Click to pan around. Hover over any node to audit its algorithmic logic, inputs, outputs, and parameters.</p>
+  </div>
+
+  <!-- Floating Swarm Harness Copilot Status Card -->
+  <div class="floating-card harness-card">
+    <h3>Swarm Harness Copilot <span class="harness-status">ACTIVE</span></h3>
+    <p>Stateful orchestrator coordinating MCTS strategies, SFE constraints, and demographical/chronological validation registers.</p>
+  </div>
+
+  <!-- Floating Info Panel -->
+  <div class="floating-card info-panel" id="arch-info-panel">
+    <div class="info-header" id="info-node-title">Swarm Harness Copilot</div>
+    
+    <div class="info-section">
+      <div class="info-label">Component Role</div>
+      <div class="info-val" id="info-node-role">Stateful Swarm Coordinator</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-label">Cognitive Engine</div>
+      <div class="info-val" id="info-node-engine">FastAPI Orchestrator / Google ADK SequentialAgent</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-label">AlphaProof Nexus Mapping</div>
+      <div class="info-badge" id="info-node-nexus">SafeVerify Gate Operator</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-label">Algorithmic Math & Quant parameters</div>
+      <div class="math-block" id="info-node-math">No explicit formulas defined.</div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-label">Detailed Operational Guidelines</div>
+      <div class="info-val" id="info-node-desc">
+        Serves as the root orchestrator. Coordinates database retrieval, strategy MCTS compilation, structural drafting, and formatting validations. Halts execution immediately and displays the Human-in-the-Loop Gateway when case parameters are ambiguous or conflict with external grounding, preventing ungrounded model assumptions.
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Canvas Controls -->
+  <div class="floating-card canvas-controls">
+    <button class="btn" style="padding:0.4rem 0.6rem;" onclick="resetPan()">Reset View</button>
+  </div>
+
+  <script>
+    // Infinite Pan & Zoom Engine
+    const container = document.getElementById('canvas-container');
+    const content = document.getElementById('canvas-content');
+    
+    let isDragging = false;
+    let startX, startY;
+    let translateX = 0, translateY = 0;
+    
+    // Set initial centered position with responsive scaling
+    let scale = 1;
+    function initPosition() {
+      // Determine available width (excluding the sidebar info panel on the right and title panel on the left)
+      const sidebarWidth = window.innerWidth > 950 ? 380 : 0;
+      const titleWidth = window.innerWidth > 950 ? 320 : 0;
+      
+      const availableWidth = container.clientWidth - sidebarWidth - titleWidth - 60;
+      const availableHeight = container.clientHeight - 120; // exclude header and padding
+      
+      // Calculate scale to fit the 1000x700 diagram inside available space
+      scale = Math.min(availableWidth / 1000, availableHeight / 700);
+      if (scale > 1.2) scale = 1.2; // don't upscale too much
+      if (scale < 0.45) scale = 0.45; // don't downscale too much
+      
+      // Center the scaled content in the remaining space
+      const offsetX = titleWidth + 30; // offset past title card
+      translateX = offsetX + (availableWidth - (1000 * scale)) / 2;
+      translateY = 70 + (availableHeight - (700 * scale)) / 2; // offset past header
+      
+      updateTransform();
+    }
+    
+    function updateTransform() {
+      content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    container.addEventListener('mousedown', (e) => {
+      // Ignore clicks on floating cards or buttons
+      if (e.target.closest('.floating-card') || e.target.closest('header')) return;
+      isDragging = true;
+      startX = e.clientX - translateX;
+      startY = e.clientY - translateY;
+      container.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      translateX = e.clientX - startX;
+      translateY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+    });
+    
+    window.addEventListener('mouseleave', () => {
+      isDragging = false;
+      container.style.cursor = 'grab';
+    });
+
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      
+      const zoomFactor = 0.05;
+      let newScale = scale;
+      if (e.deltaY < 0) {
+        newScale += zoomFactor; // zoom in
+      } else {
+        newScale -= zoomFactor; // zoom out
+      }
+      
+      // Enforce bounds
+      if (newScale > 3.0) newScale = 3.0;
+      if (newScale < 0.25) newScale = 0.25;
+      
+      // Calculate coordinates to zoom toward mouse position
+      const rect = container.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      // Adjust translations to zoom towards the mouse cursor
+      translateX = mouseX - (mouseX - translateX) * (newScale / scale);
+      translateY = mouseY - (mouseY - translateY) * (newScale / scale);
+      
+      scale = newScale;
+      updateTransform();
+    }, { passive: false });
+
+    function resetPan() {
+      initPosition();
+    }
+
+    // Initialize position after load
+    window.addEventListener('load', initPosition);
+    window.addEventListener('resize', initPosition);
+
+    // Theme Toggle Logic
+    let currentTheme = 'dark';
+    function toggleTheme() {
+      const body = document.body;
+      const btn = document.getElementById('theme-toggle-btn');
+      if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        btn.innerText = 'Theme: Light';
+        currentTheme = 'light';
+      } else {
+        body.removeAttribute('data-theme');
+        btn.innerText = 'Theme: Dark';
+        currentTheme = 'dark';
+      }
+    }
+
+    // Algorithmic Data Map with Quant Parameters
+    const nodeDetails = {
+      intake: {
+        title: "Client Intake Module",
+        role: "Secure Data ingestion & Cryptographic Verification",
+        engine: "FastAPI REST Intake Schema (Pydantic)",
+        nexus: "SafeVerify Pre-Flight Gate",
+        math: "MD5/SHA256 Payload checksum check: H(P_data) == Intake_checksum\nTime stamp validation: Delta_t = Current_t - Payload_t <= 300s",
+        desc: "Ingests facts, timelines, and claim documents. Runs secure preprocessing to verify checksums and signatures before passing data to the orchestrator. Validates data models for jurisdiction, document type, and essential legal arguments."
+      },
+      copilot: {
+        title: "Swarm Harness Copilot",
+        role: "Stateful Swarm Coordinator & HITL Gateway",
+        engine: "FastAPI Orchestrator / Google ADK SequentialAgent",
+        nexus: "SafeVerify Gate Operator",
+        math: "HITL Gate activation condition: P_grounded(Claim) == FALSE\nSafety interception rate: Delta_sec = 100% boundary check",
+        desc: "Serves as the root orchestrator. Coordinates database retrieval, strategy MCTS compilation, structural drafting, and formatting validations. Halts execution immediately and displays the Human-in-the-Loop Gateway when case parameters are ambiguous or conflict with external grounding, preventing ungrounded model assumptions."
+      },
+      mcts: {
+        title: "MCTS Engine",
+        role: "Adversarial Strategy Search Coordinator",
+        engine: "Predictor Upper Confidence Bound (P-UCB) Solver",
+        nexus: "MCTS Exploration Engine",
+        math: "P-UCB Score Formula:\nP-UCB_i = Q_i + c * P_i * (sqrt(N) / (1 + N_i))\nwhere c = 0.2 (exploration constant), P_i = Elo calibrated probability, N_i = node visits",
+        desc: "Coordinates petitioner strategy searches using parallel game tree expansions. Simulates multi-turn litigation playouts using Petitioner and Opponent agents to find the strategy path with the highest probability of success. Implements the Guillotine Protocol to prune non-viable branches."
+      },
+      sfe: {
+        title: "Symbolic Formatting Engine (SFE)",
+        role: "Deterministic Formatting & Statutory Layout Compiler",
+        engine: "Python Rule Engine (Non-LLM Compiler)",
+        nexus: "Symbolic Formatting Engine (SFE)",
+        math: "Margin constraint checks: Left_margin >= 3.0cm, Right_margin >= 2.5cm\nStamp Paper statutory rule: Value >= Rs 100.0 (MH-District Court rules)\nRalph Loop constraint: Scrutiny_errors == 0 -> COMPILE_READY = TRUE",
+        desc: "Enforces exact court regulations (margins, fonts, spacing, stamp value) as mathematical layout constraints. Completely isolates the formatting layout engine from LLM generation. Runs in a feedback loop (the Ralph Loop) to audit and correct drafted AST text outputs."
+      },
+      petitioner: {
+        title: "1. Petitioner Agent",
+        role: "Generative Strategy Proposer",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child)",
+        nexus: "Prover Loop Tactic Generator",
+        math: "Search-Replace mutation blocks: AST_node_new = Mutate(AST_node_old, Tactic_diff)\nOverlap penalty: Jaccard(Path_A, Path_B) < 0.25",
+        desc: "Acts as plaintiff/petitioner counsel inside MCTS strategy playouts. Proposes generative litigation arguments and AST modifications, applying Search-Replace tactic mutations in a compiler feedback loop."
+      },
+      opponent: {
+        title: "2. Opponent Agent",
+        role: "Adversarial Strategy Challenger",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child)",
+        nexus: "Prover Loop Adversary",
+        math: "Contradiction discovery check: Assert(Fact_A != Opponent_Claim)\nObjection severity weighting: W_severity = high if limitation period expired",
+        desc: "Acts as respondent counsel during strategy playouts. Analyzes petitioner strategies to detect contradictions, statutory omissions, or logical flaws, pressure-testing the petition to ensure robust pleading drafting."
+      },
+      reviewer: {
+        title: "3. Reviewer Agent",
+        role: "Judicial Precedent Alignment Auditor",
+        engine: "Gemini 1.5 Flash + Cosine Similarity Checks",
+        nexus: "Peer Rater Agent",
+        math: "Plackett-Luce Elo rating evaluation:\nElo_change = K * (Actual_Win - Predicted_Win)\nGibbs sampling: computes posterior strength distribution across candidate proof nodes",
+        desc: "Audits proposed strategies and citations against historical precedent corpuses, scoring relevance, similarity, and statutory alignment."
+      },
+      judge: {
+        title: "4. Judge Agent",
+        role: "Pleading Outcome Evaluator & Scorer",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child) + LoRA Precedent Matrix",
+        nexus: "Elo Rater & Selection Evaluator",
+        math: "Terminal Reward estimation: R in [0.0, 1.0] representing success probability\nBackpropagation precision updates:\nV(N_i) = V(N_i) + (R - V(N_i))/N(N_i)\nDelta mathematical divergence limit: delta_math = 0.0001",
+        desc: "Scores proposed legal arguments against judicial precedents. Simulates court adjudications to calculate terminal node victory probabilities, calibrating MCTS prior parameters."
+      },
+      drafter: {
+        title: "5. Drafter Agent",
+        role: "Legal Abstract Syntax Tree (AST) Compiler",
+        engine: "Gemini 1.5 Flash / SFE Integration",
+        nexus: "Ralph Loop Drafter Engine",
+        math: "AST hierarchy mapping: Root_node = Matter_id\nSorry-Free Constraint: Count(UNVERIFIED_citations) == 0\nPruning Gate UCT adjustment: UCT(Pruned) = -infinity",
+        desc: "Translates selected litigation strategies into formal legal clauses. Manages AST schema structures, updating sections recursively until formatting is verified as fully compliant."
+      },
+      verifier: {
+        title: "6. Verifier Agent",
+        role: "Chronological & Fact Integrity Scrutineer",
+        engine: "Gemini 1.5 Flash / Google Search Grounding API",
+        nexus: "AEDS Sentinel Validator",
+        math: "Chronological age checking: Delta_age = Current_Year - Birth_Year\nVerification threshold check: Delta_age >= 60 (for civil service retirement caps)\nLimitation Period validation: Delta_time = Filing_date - Cause_of_Action_date <= 30 days",
+        desc: "Enforces strict grounding validations. Audits statutory citations, checks timeline logic, and verifies demographic parameters against external sources. Immediately marks failures as unverified, causing the MCTS to prune the branch."
+      },
+      objector: {
+        title: "7. Objector Agent",
+        role: "Manual Guidelines & Format Compliance Auditor",
+        engine: "Gemini 1.5 Flash / SFE Integration",
+        nexus: "Registry Guideline Sentinel",
+        math: "Page width/height constraints: Width = 21.0cm, Height = 29.7cm (A4 standard)\nLine height constraint rule: Line_spacing = 1.5 (District) or 2.0 (High Court)",
+        desc: "Audits drafted AST layouts against registry-specific guidelines (spacing, margins, fonts, and stamp paper value) before final compilation."
+      },
+      presenter: {
+        title: "8. Presenter Agent",
+        role: "Oratorical Complexity & Speech Optimizer",
+        engine: "Gemini 1.5 Flash / Oratorical Layout Engine",
+        nexus: "Presenter Oratorical Synthesis Gate",
+        math: "Cognitive Load optimization bounds:\nMax_words <= 500 per strategy summary section\nSpeaking duration bounds calculation: Duration = Words / 2.5 per second",
+        desc: "Filters and formats final strategy outputs to maintain brevity, matching court-room speech guidelines and optimizing lawyer cognitive load."
+      },
+      casebase: {
+        title: "Case Base Database",
+        role: "Stateful Vector Search & Experience Cache",
+        engine: "ADK Memory Bank / Cloud Firestore",
+        nexus: "Global Goal Cache",
+        math: "RL Reward Signal Mapping table values:\nRegistry accepted: +3.0, Registry rejected: -3.0, Advocate edited: +0.5/+0.2",
+        desc: "Stores historical case outcomes, playbook rules, and compiled pleadings. Provides semantic search to retrieve past case files during intake, and logs RL reward signals to guide continuous system optimization."
+      },
+      output: {
+        title: "Filing Pleading Output",
+        role: "Fully Validated E-Filing Ready Artifact",
+        engine: "PDF / DOCX SFE Compiler Output",
+        nexus: "Final Sovereign Adjudication State",
+        math: "Cryptographic signature mapping: NIST P-256 ECDSA Root State Hash signing\nCompliance verification outcome: PASS == 1.0",
+        desc: "The final court-compliant pleading. Complete with certified margins, verified statutory citations, zero stubs, signed state hashes, and signed e-filing certificates, guaranteed ready for immediate registry submission."
+      }
+    };
+
+    function selectNode(nodeId) {
+      document.querySelectorAll('.svg-node').forEach(node => node.classList.remove('active'));
+      const activeNode = document.getElementById('node-' + nodeId);
+      if (activeNode) activeNode.classList.add('active');
+
+      const data = nodeDetails[nodeId];
+      if (data) {
+        document.getElementById('info-node-title').innerText = data.title;
+        document.getElementById('info-node-role').innerText = data.role;
+        document.getElementById('info-node-engine').innerText = data.engine;
+        document.getElementById('info-node-nexus').innerText = data.nexus;
+        document.getElementById('info-node-math').innerText = data.math;
+        document.getElementById('info-node-desc').innerText = data.desc;
+      }
+    }
+  </script>
+</body>
+</html>

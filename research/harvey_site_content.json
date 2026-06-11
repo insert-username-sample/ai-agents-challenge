@@ -1,0 +1,224 @@
+{
+  "seo": {
+    "title": "Harvey | AI software for legal and professional services",
+    "description": "Legal AI tailored for leading law firms and corporate legal teams worldwide. Harvey streamlines contract analysis, due diligence, compliance, and litigation.",
+    "ogTitle": "Harvey - Professional Class AI",
+    "ogDescription": "Harvey is the platform built to meet the standards of the world's leading professional service firms.",
+    "ogImage": "https://cdn.sanity.io/images/07s0r5r6/production/9a4b2e0eec438fb56057db128a11ade2c04c01cf-2400x1260.png?fm=jpg&q=95&dpr=2"
+  },
+  "headings": [
+    {
+      "tag": "h1",
+      "text": "Practice Made Perfect"
+    },
+    {
+      "tag": "h2",
+      "text": "Unlock Professional Class AI for Your Firm"
+    },
+    {
+      "tag": "h3",
+      "text": "Harvey is AI designed for legal and professional services. Advance your expertise on a secure platform that lets you focus on high-value work."
+    },
+    {
+      "tag": "h3",
+      "text": "Real impact for real clients"
+    },
+    {
+      "tag": "h3",
+      "text": "Helping teams stay focused and see measurable results"
+    },
+    {
+      "tag": "h3",
+      "text": "Enterprise-grade security and controls"
+    },
+    {
+      "tag": "h3",
+      "text": "Overview"
+    },
+    {
+      "tag": "h3",
+      "text": "Assistant"
+    },
+    {
+      "tag": "h3",
+      "text": "Vault"
+    },
+    {
+      "tag": "h3",
+      "text": "Knowledge"
+    },
+    {
+      "tag": "h3",
+      "text": "Agents"
+    },
+    {
+      "tag": "h3",
+      "text": "Harvey Mobile"
+    },
+    {
+      "tag": "h3",
+      "text": "Ecosystem"
+    },
+    {
+      "tag": "h3",
+      "text": "Contract Intelligence"
+    },
+    {
+      "tag": "h3",
+      "text": "Command Center"
+    },
+    {
+      "tag": "h3",
+      "text": "Shared Spaces"
+    },
+    {
+      "tag": "h3",
+      "text": "Innovation"
+    },
+    {
+      "tag": "h3",
+      "text": "In-House"
+    },
+    {
+      "tag": "h3",
+      "text": "Transactional"
+    },
+    {
+      "tag": "h3",
+      "text": "Litigation"
+    },
+    {
+      "tag": "h3",
+      "text": "Mid-Sized Firms"
+    }
+  ],
+  "platform_features": [
+    {
+      "name": "Overview",
+      "description": "A unified view of how Harvey's products work together to support your entire practice."
+    },
+    {
+      "name": "Assistant",
+      "description": "Ask questions, analyze documents, and draft faster with domain-specific AI."
+    },
+    {
+      "name": "Vault",
+      "description": "Securely store, organize, and bulk-analyze legal documents."
+    },
+    {
+      "name": "Knowledge",
+      "description": "Research complex legal, regulatory, and tax questions across domains."
+    },
+    {
+      "name": "Agents",
+      "description": "Purpose built agents execute complex legal work end to end."
+    },
+    {
+      "name": "Harvey Mobile",
+      "description": "Get up to speed, capture new information, and keep work moving from anywhere."
+    },
+    {
+      "name": "Ecosystem",
+      "description": "Access Harvey where you already work and ground every answer in sources you trust."
+    },
+    {
+      "name": "Contract Intelligence",
+      "description": "Surface insights, strengthen negotiations, and accelerate reviews."
+    },
+    {
+      "name": "Command Center",
+      "description": "Analytics, benchmarking, and agentic insights to lead their organization's AI transformation."
+    },
+    {
+      "name": "Shared Spaces",
+      "description": "Work with legal teams across organizations in secure, shared spaces."
+    }
+  ],
+  "solutions": [
+    {
+      "name": "Innovation",
+      "description": "Scale expertise and impact to drive firmwide transformation."
+    },
+    {
+      "name": "In-House",
+      "description": "Streamline work and shift focus to strategy and speed."
+    },
+    {
+      "name": "Transactional",
+      "description": "Accelerate due diligence, contract analysis, and review with precision and control."
+    },
+    {
+      "name": "Litigation",
+      "description": "Reduce manual effort, prioritize strategy, and drive stronger outcomes in litigation."
+    },
+    {
+      "name": "Mid-Sized Firms",
+      "description": "Drive outsize impact with tools built for lean teams."
+    }
+  ],
+  "key_workflows": [
+    "Deal Management",
+    "Due Diligence",
+    "Fund Formation",
+    "Contract Analysis",
+    "Complex Workflows",
+    "Document Storage",
+    "Legal Research"
+  ],
+  "stats": [
+    {
+      "metric": "20+",
+      "label": "Average hours saved per month"
+    },
+    {
+      "metric": "142,000+",
+      "label": "Professionals using Harvey"
+    },
+    {
+      "metric": "1,500+",
+      "label": "Law firms and in-house legal teams using Harvey"
+    },
+    {
+      "metric": "60",
+      "label": "Countries Harvey is used in"
+    },
+    {
+      "metric": "65+",
+      "label": "AmLaw 100 firms using Harvey"
+    }
+  ],
+  "testimonials": [
+    {
+      "author": "Dr. Claudia Junker",
+      "role": "General Counsel",
+      "company": "Deutsche Telekom AG",
+      "quote": "The legal industry is evolving rapidly, and AI is essential to keep pace with growing complexity. Harvey has transformed how we work--enabling us to navigate challenges with precision, tackle intricate legal issues, and focus on delivering strategic value."
+    },
+    {
+      "author": "Rich Robbins",
+      "role": "Director of Applied Artificial Intelligence",
+      "company": "Reed Smith",
+      "quote": "What we have seen at Reed Smith with Harvey is by far the most successful firm technology adoption story I have ever been a part of."
+    },
+    {
+      "author": "Marie-Cecile Martin",
+      "role": "Head of Legal Operations",
+      "company": "Syngenta Group",
+      "quote": "Harvey has become part of our routine. Having a partner like Harvey at this stage is a real game-changer."
+    }
+  ],
+  "security": {
+    "summary": "Harvey meets the highest industry standards for security and compliance. We include all default controls that enterprise teams expect: SAML SSO, audit logs, IP allow-listing, data lifecycle management, and more.",
+    "standards": [
+      "SOC 2 Type II",
+      "CCPA",
+      "ISO 27001",
+      "GDPR",
+      "ISO 27701",
+      "ISO 42001"
+    ]
+  },
+  "footer": {
+    "copyright": "Copyright (c) 2026 Harvey AI Corporation. All rights reserved."
+  }
+}

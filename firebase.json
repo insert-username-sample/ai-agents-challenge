@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "clausely-ai",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

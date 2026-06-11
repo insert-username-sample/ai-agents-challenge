@@ -1,0 +1,83 @@
+NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement ("Agreement") is entered into as of {effective_date} ("Effective Date") by and between:
+
+PARTY A (Disclosing Party):
+{party_a_name}, a {party_a_entity_type} having its registered office at {party_a_address}, represented by {party_a_representative}, {party_a_designation}
+(hereinafter referred to as the "Disclosing Party")
+
+AND
+
+PARTY B (Receiving Party):
+{party_b_name}, a {party_b_entity_type} having its registered office at {party_b_address}, represented by {party_b_representative}, {party_b_designation}
+(hereinafter referred to as the "Receiving Party")
+
+(The Disclosing Party and the Receiving Party are individually referred to as a "Party" and collectively as "Parties".)
+
+WHEREAS:
+
+A. The Disclosing Party possesses certain confidential and proprietary information relating to {subject_matter} ("Purpose").
+
+B. The Receiving Party desires to receive such confidential information for the Purpose, subject to the terms and conditions set forth herein.
+
+NOW, THEREFORE, in consideration of the mutual covenants and agreements herein contained, the Parties agree as follows:
+
+1. DEFINITION OF CONFIDENTIAL INFORMATION
+
+1.1 "Confidential Information" shall mean all information, whether oral, written, electronic, or in any other form, disclosed by the Disclosing Party to the Receiving Party, including but not limited to:
+    (a) trade secrets, inventions, patents, copyrights, trademarks;
+    (b) business plans, financial data, customer lists;
+    (c) technical data, designs, algorithms, source code;
+    (d) any information marked as "Confidential" or "Proprietary."
+
+1.2 Confidential Information shall NOT include information that:
+    (a) is or becomes publicly available through no fault of the Receiving Party;
+    (b) was already in the Receiving Party's possession prior to disclosure;
+    (c) is independently developed by the Receiving Party;
+    (d) is disclosed pursuant to a court order or statutory requirement.
+
+2. OBLIGATIONS OF THE RECEIVING PARTY
+
+2.1 The Receiving Party shall hold all Confidential Information in strict confidence.
+2.2 The Receiving Party shall not disclose Confidential Information to any third party without the prior written consent of the Disclosing Party.
+2.3 The Receiving Party shall use the Confidential Information solely for the Purpose.
+2.4 The Receiving Party shall protect the Confidential Information with at least the same degree of care as it uses for its own confidential information, but in no event less than reasonable care.
+
+3. TERM
+
+3.1 This Agreement shall remain in effect for a period of {term_years} years from the Effective Date, unless earlier terminated by either Party with {notice_period_days} days' prior written notice.
+3.2 The obligations of confidentiality shall survive the termination of this Agreement for a period of {survival_years} years.
+
+4. RETURN OF INFORMATION
+
+4.1 Upon termination of this Agreement or upon the Disclosing Party's written request, the Receiving Party shall promptly return or destroy all Confidential Information, including all copies, summaries, and extracts thereof.
+
+5. REMEDIES
+
+5.1 The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party, and the Disclosing Party shall be entitled to seek injunctive relief under the provisions of the Specific Relief Act, 1963, in addition to any other remedies available at law.
+
+6. GOVERNING LAW AND JURISDICTION
+
+6.1 This Agreement shall be governed by and construed in accordance with the laws of India.
+6.2 Any disputes arising out of this Agreement shall be subject to the exclusive jurisdiction of the courts in {jurisdiction_city}, India.
+
+7. MISCELLANEOUS
+
+7.1 This Agreement constitutes the entire agreement between the Parties with respect to the subject matter hereof.
+7.2 No amendment or modification of this Agreement shall be valid unless made in writing and signed by both Parties.
+7.3 The failure of either Party to enforce any provision of this Agreement shall not constitute a waiver of such provision.
+
+IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
+
+DISCLOSING PARTY:                           RECEIVING PARTY:
+
+_____________________________              _____________________________
+{party_a_name}                             {party_b_name}
+By: {party_a_representative}               By: {party_b_representative}
+Title: {party_a_designation}               Title: {party_b_designation}
+Date: {effective_date}                     Date: {effective_date}
+
+WITNESS 1:                                 WITNESS 2:
+Name: _______________                      Name: _______________
+Address: _______________                   Address: _______________
+Signature: _______________                 Signature: _______________

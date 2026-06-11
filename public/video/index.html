@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clausely ai - Demo & Pitch Video</title>
+  <meta name="description" content="Watch the full demonstration of Clausely, a zero-hallucination legal drafting multi-agent swarm built on Google's Agent Development Kit.">
+  
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.4);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --color-primary: #38bdf8;
+      --color-primary-glow: rgba(56, 189, 248, 0.15);
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.12) 0%, transparent 40%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .badge {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--color-primary);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .video-section {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .video-section h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .video-section p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      font-weight: 300;
+    }
+
+    /* Video Player Card */
+    .video-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .video-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      background: #030712;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: block;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #0f172a;
+      box-shadow: 0 4px 20px var(--color-primary-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem 0;
+      border-top: 1px solid var(--border-card);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="/" class="logo" id="logo-home">clausely<span>.ai</span></a>
+      <span class="badge">GOOGLE CLOUD RAPID AGENT HACKATHON</span>
+    </header>
+
+    <main>
+      <section class="video-section">
+        <h1>Clausely AI Pitch & Demonstration</h1>
+        <p>Watch the demonstration of Clausely, our Zero-Hallucination Legal Compilation Engine built with Google's Agent Development Kit and Google DeepMind's AlphaProof Nexus principles.</p>
+        
+        <div class="video-card">
+          <video class="video-player" id="main-video-player" controls preload="auto" poster="/clausely_logo.png">
+            <source src="/clausely_demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="btn-group">
+          <a href="/" class="btn btn-primary" id="back-home-btn">Return to Home</a>
+          <a href="https://devpost.team/google-cloud-for-startups/projects/16164" class="btn btn-secondary" id="devpost-video-btn">View Devpost Submission</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built with pride for the Google Cloud Rapid Agent Hackathon 2026.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+LEGAL NOTICE UNDER SECTION 138 OF THE NEGOTIABLE INSTRUMENTS ACT, 1881
+
+Date: {notice_date}
+
+SENT BY REGISTERED POST A.D. / SPEED POST / HAND DELIVERY
+
+To,
+{drawer_name}
+{drawer_address}
+
+Subject: Legal Notice under Section 138 of the Negotiable Instruments Act, 1881 read with Section 141 for dishonour of cheque bearing No. {cheque_number} dated {cheque_date} for Rs. {cheque_amount}/- ({cheque_amount_words})
+
+Dear Sir/Madam,
+
+Under instructions from and on behalf of my client, {payee_name}, {payee_designation}, residing at {payee_address}, I hereby serve upon you the following Legal Notice:
+
+1. That my client {payee_name} is the lawful holder/payee of Cheque No. {cheque_number} dated {cheque_date} drawn on {bank_name}, {bank_branch} Branch, for a sum of Rs. {cheque_amount}/- ({cheque_amount_words}) issued by you in favour of my client towards {consideration_description}.
+
+2. That my client presented the said cheque for encashment through their bank, {payee_bank_name}, {payee_bank_branch} Branch, on {presentation_date}. However, the said cheque was returned dishonoured by the drawee bank on {dishonour_date} with the endorsement "{dishonour_reason}".
+
+3. That the dishonour of the said cheque constitutes an offence punishable under Section 138 of the Negotiable Instruments Act, 1881, which is punishable with imprisonment for a term which may extend to two years, or with fine which may extend to twice the amount of the cheque, or with both.
+
+4. That under the provisions of Section 138(b) of the Negotiable Instruments Act, 1881, the payee or the holder in due course of the cheque is required to make a demand for the payment of the said amount of money by giving a notice in writing to the drawer of the cheque within thirty days of the receipt of information by him from the bank regarding the return of the cheque as unpaid.
+
+5. That I, on behalf of my client, hereby demand that you make payment of the sum of Rs. {cheque_amount}/- ({cheque_amount_words}) within fifteen (15) days from the date of receipt of this notice, failing which my client shall be constrained to initiate criminal proceedings against you under Section 138 of the Negotiable Instruments Act, 1881 before the competent court of law, and you shall also be liable to pay costs of litigation, interest, and damages as the Court may deem fit.
+
+6. That you are also liable to pay interest at the rate of {interest_rate}% per annum on the said sum from the date of dishonour of the cheque till the date of actual payment.
+
+7. That a copy of this notice is being retained for record and for being produced before the competent court of law, if required.
+
+You are hereby called upon to make the payment of Rs. {cheque_amount}/- ({cheque_amount_words}) within fifteen (15) days from the date of receipt of this notice, failing which my client shall be compelled to initiate appropriate legal proceedings against you at your risk, cost, and consequences.
+
+Please treat this notice as urgent and act accordingly.
+
+Thanking you,
+
+Yours faithfully,
+
+{advocate_name}
+Advocate
+{bar_council_enrollment}
+{advocate_address}
+{advocate_phone}
+{advocate_email}
+
+On behalf of: {payee_name}
+
+CC: {payee_name} (Client Copy)

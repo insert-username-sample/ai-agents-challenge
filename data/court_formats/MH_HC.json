@@ -1,0 +1,65 @@
+{
+  "court_name": "Bombay High Court",
+  "jurisdiction_code": "MH-HC",
+  "margin_left_cm": 4.0,
+  "margin_right_cm": 2.5,
+  "margin_top_cm": 3.0,
+  "margin_bottom_cm": 2.5,
+  "font_body": "Times New Roman",
+  "font_size_body": 14,
+  "font_heading": "Times New Roman",
+  "font_size_heading": 16,
+  "font_heading_bold": true,
+  "line_spacing": 2.0,
+  "paragraph_spacing_before": 0,
+  "paragraph_spacing_after": 12,
+  "header_required": true,
+  "header_format": "IN THE HIGH COURT OF JUDICATURE AT BOMBAY\n{bench_name} BENCH\n\n{case_type} NO. {case_number} OF {year}",
+  "footer_required": true,
+  "footer_format": "Page {page_num} of {total_pages} | Advocate: {advocate_name} | Bar No. {bar_number}",
+  "stamp_paper_required": false,
+  "stamp_paper_value": "0",
+  "stamp_paper_currency": "INR",
+  "notary_required": false,
+  "verification_clause_required": true,
+  "language_options": ["en"],
+  "required_sections": [
+    "cause_title",
+    "synopsis_and_list_of_dates",
+    "jurisdiction_clause",
+    "facts",
+    "grounds",
+    "prayer",
+    "verification",
+    "advocate_signature"
+  ],
+  "section_order": [
+    "cause_title",
+    "synopsis_and_list_of_dates",
+    "jurisdiction_clause",
+    "facts",
+    "grounds",
+    "prayer",
+    "verification",
+    "advocate_signature"
+  ],
+  "fatal_defects": [
+    "missing_cause_title",
+    "incorrect_margins",
+    "missing_verification",
+    "missing_synopsis",
+    "missing_jurisdiction_clause",
+    "incorrect_line_spacing"
+  ],
+  "curable_defects": [
+    "minor_formatting_inconsistency",
+    "missing_page_numbers",
+    "incorrect_font_size_by_1pt",
+    "missing_index"
+  ],
+  "annexure_rules": {
+    "prefix": "Exhibit",
+    "numbering": "alphabetical",
+    "format": "Exhibit {letter}"
+  }
+}

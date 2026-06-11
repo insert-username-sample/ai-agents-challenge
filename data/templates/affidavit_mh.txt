@@ -1,0 +1,44 @@
+AFFIDAVIT
+
+IN THE COURT OF THE {court_designation}
+{city_name}
+
+{case_type} NO. {case_number} OF {year}
+
+IN THE MATTER OF:
+
+{petitioner_name}
+{petitioner_address}
+                                                    ... PETITIONER/APPLICANT
+
+VERSUS
+
+{respondent_name}
+{respondent_address}
+                                                    ... RESPONDENT/OPPONENT
+
+AFFIDAVIT
+
+I, {deponent_name}, aged {deponent_age} years, {deponent_occupation}, residing at {deponent_address}, do hereby solemnly affirm and state as follows:
+
+1. That I am the {relationship_to_case} in the above-mentioned {case_type} and am well acquainted with the facts and circumstances of the case and am competent to swear this affidavit.
+
+2. That the facts stated herein are true to my knowledge and belief and nothing material has been concealed therefrom.
+
+{numbered_facts}
+
+VERIFICATION
+
+I, {deponent_name}, the above-named deponent, do hereby verify that the contents of the above Affidavit are true and correct to my knowledge and belief. No part of it is false and nothing material has been concealed therefrom.
+
+Verified at {city_name} on this {day} day of {month}, {year}.
+
+DEPONENT
+
+{deponent_name}
+
+Through Advocate:
+{advocate_name}
+{bar_council_enrollment}
+{advocate_address}
+{advocate_phone}

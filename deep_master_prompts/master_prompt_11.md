@@ -1,0 +1,607 @@
+# MASTER DISTILLATION PROMPT 011: MCTS ENGINE & CORE STATE MACHINE
+
+## MACRO-PHASE 1: THE SEARCH DIRECTIVE
+The MCTS (Monte Carlo Tree Search) Engine is the mathematical foundation of the entire Swarm. It is not an LLM agent; it is the rigid state machine that structures the LLM calls. It treats the legal case as a deterministic game tree where nodes are legal arguments and edges are adversarial counter-arguments.
+
+### STAGE 1: NODE INITIALIZATION AND EXPANSION
+The Node Initialization and Expansion stage establishes the root search parameters and expands the state tree using dynamic Upper Confidence Bound (UCT) heuristics to map the legal strategy landscape.
+- **Sub-Stage 1.1:** Root Node Definition.
+  - **Micro-Step 1.1.1:** Read raw legal dispute variables from intake payload.
+    - **Sub-Micro 1.1.1.1:** Instantiate Root Node $N_0$ representation parameters.
+      - **Sub-Micro-Sub 1.1.1.1.1:** Set default value parameter $V(N_0) = 0$.
+        - **Ultra-Deep-Micro 1.1.1.1.1.1:** Set default visit count parameter $N(N_0) = 0$.
+          - **Sub-Ultra-Deep 1.1.1.1.1.1.1:** Map incident facts to root node state descriptors keys.
+            - **Sub-Sub-Ultra-Deep 1.1.1.1.1.1.1.1:** Verify if intake validation is successful.
+              - **Sub-Sub-Sub-Ultra-Deep 1.1.1.1.1.1.1.1.1:** Compute hash of root node state values variables.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 1.1.1.1.1.1.1.1.1.1:** Record root initialization timestamp parameters.
+                  - **Deepest-Hyper-Matrix-Cell 1.1.1.1.1.1.1.1.1.1.1:** Save root node state records to memory registry.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of intake facts representation.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of intake schema validation loops.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.3:** Confirm that zero duplicate facts are mapped to root node state descriptors.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify character bounds.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit intake metadata.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if facts validation flags missing sections.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.7:** Audit initialization latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.8:** Confirm page counts in intake payload match root node parameters.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.9:** Log root initialization status to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 1.1.1.1.1.1.1.1.1.1.1.10:** Lock root node state parameters and proceed to child strategy spawning.
+    - **Sub-Micro 1.1.1.2:** Verify root properties matches case files listings.
+    - **Sub-Micro 1.1.1.3:** Check availability of backend database tables indexes.
+    - **Sub-Micro 1.1.1.4:** Write root initialization status logs.
+  - **Micro-Step 1.1.2:** Audit root node schema conformity.
+  - **Micro-Step 1.1.3:** Verify memory pointers bounds allocation.
+  - **Micro-Step 1.1.4:** Lock root database indices parameters.
+- **Sub-Stage 1.2:** Strategy Generator Spawning.
+  - **Micro-Step 1.2.1:** Spawn child nodes representing potential legal strategies.
+    - **Sub-Micro 1.2.1.1:** Call Petitioner Agent to generate $k$ strategy options.
+      - **Sub-Micro-Sub 1.2.1.1.1:** Set exploration limits parameter on strategy search depth.
+        - **Ultra-Deep-Micro 1.2.1.1.1.1:** Assign unique ID string to each generated child node.
+          - **Sub-Ultra-Deep 1.2.1.1.1.1.1:** Initialize value metrics of child nodes to zero.
+            - **Sub-Sub-Ultra-Deep 1.2.1.1.1.1.1.1:** If strategy generation fails, trigger default fallback template.
+              - **Sub-Sub-Sub-Ultra-Deep 1.2.1.1.1.1.1.1.1:** Calculate semantic cosine similarity of strategy options text.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 1.2.1.1.1.1.1.1.1.1:** Retrieve case law precedent matching stats.
+                  - **Deepest-Hyper-Matrix-Cell 1.2.1.1.1.1.1.1.1.1.1:** Write strategy generation status reports to execution registers.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of strategy node mappings.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of strategy option consistency sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.3:** Confirm that zero duplicate strategies exist in the child nodes list.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to audit strategy description tags.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] for each child node strategy.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if strategy selection is ungrounded.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.7:** Audit strategy generation latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.8:** Confirm strategy bounds conform to intake parameters.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.9:** Log strategy generation status to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 1.2.1.1.1.1.1.1.1.1.1.10:** Lock active child nodes listings and proceed to UCT selection.
+    - **Sub-Micro 1.2.1.2:** Filter out duplicate legal strategy paths.
+    - **Sub-Micro 1.2.1.3:** Map children node coordinates to parent state properties.
+    - **Sub-Micro 1.2.1.4:** Save active child nodes listings.
+  - **Micro-Step 1.2.2:** Verify child nodes visit limits.
+  - **Micro-Step 1.2.3:** Audit children node linkage metrics.
+  - **Micro-Step 1.2.4:** Lock active child node registers.
+- **Sub-Stage 1.3:** P-UCB Score Selection.
+  - **Micro-Step 1.3.1:** Select target exploration node using P-UCB formula.
+    - **Sub-Micro 1.3.1.1:** Read visit and value attributes of child nodes.
+      - **Sub-Micro-Sub 1.3.1.1.1:** Apply formula: $P-UCB_i = Q_i + c \cdot P_i \cdot \frac{\sqrt{N}}{1 + N_i}$.
+        - **Ultra-Deep-Micro 1.3.1.1.1.1:** Adjust exploration constant $c$ (default 0.2) and compute prior probabilities $P_i$ derived from Elo ratings.
+          - **Sub-Ultra-Deep 1.3.1.1.1.1.1:** Calculate P-UCB scores of all child nodes list.
+            - **Sub-Sub-Ultra-Deep 1.3.1.1.1.1.1.1:** Route path containing maximum UCT score to active search.
+              - **Sub-Sub-Sub-Ultra-Deep 1.3.1.1.1.1.1.1.1:** Trace change trends of child UCT values.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 1.3.1.1.1.1.1.1.1.1:** Highlight branches with zero visit count metrics.
+                  - **Deepest-Hyper-Matrix-Cell 1.3.1.1.1.1.1.1.1.1.1:** Record UCT selection status logs in persistent memory registry.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of UCT calculation steps.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of UCT score verification runs.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.3:** Confirm that zero infinite loops occur during selection sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify confidence interval values.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit UCT score matrices.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if UCT selection falls below threshold.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.7:** Audit selection latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.8:** Confirm exploration constant C remains within boundary constraints.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.9:** Log UCT selection metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 1.3.1.1.1.1.1.1.1.1.1.10:** Lock selected node parameters coordinates and proceed to tree expansion.
+    - **Sub-Micro 1.3.1.2:** Verify exploration constant scale bounds.
+    - **Sub-Micro 1.3.1.3:** Reset exploration parameters on search restarts.
+    - **Sub-Micro 1.3.1.4:** Lock selected node parameters coordinates.
+  - **Micro-Step 1.3.2:** Audit selection path trajectory.
+  - **Micro-Step 1.3.3:** Verify exploration boundaries compliance.
+  - **Micro-Step 1.3.4:** Lock selected node registry files.
+- **Sub-Stage 1.4:** Search Tree Expansion.
+  - **Micro-Step 1.4.1:** Mutate state tree by adding selected child nodes.
+    - **Sub-Micro 1.4.1.1:** Update parent node pointers parameters.
+      - **Sub-Micro-Sub 1.4.1.1.1:** Check total branch count limits (max 1024 branches).
+        - **Ultra-Deep-Micro 1.4.1.1.1.1:** Insert new nodes to state registry index.
+          - **Sub-Ultra-Deep 1.4.1.1.1.1.1:** Recalculate path coordinates hashes values.
+            - **Sub-Sub-Ultra-Deep 1.4.1.1.1.1.1.1:** Broadcast update confirmation token to observer agents.
+              - **Sub-Sub-Sub-Ultra-Deep 1.4.1.1.1.1.1.1.1:** Measure expansion time duration profiles.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 1.4.1.1.1.1.1.1.1.1:** Check state tree memory bounds allocation limits.
+                  - **Deepest-Hyper-Matrix-Cell 1.4.1.1.1.1.1.1.1.1.1:** Write expansion audit records to persistent registers database.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of committed tree mutations.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of path hash verification runs.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.3:** Confirm that zero unreferenced nodes remain after expansion.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify tree structure.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] for each child node link.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if tree depth exceeds maximum constraints.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.7:** Audit expansion latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.8:** Confirm that final branch count is below limits.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.9:** Log tree expansion status to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 1.4.1.1.1.1.1.1.1.1.1.10:** Lock committed expanded tree states and proceed to reward audits.
+    - **Sub-Micro 1.4.1.2:** Filter out unreferenced child branches files.
+    - **Sub-Micro 1.4.1.3:** Trace hierarchy path lengths averages.
+    - **Sub-Micro 1.4.1.4:** Commit expanded tree states.
+  - **Micro-Step 1.4.2:** Verify tree structure integrity parameters.
+  - **Micro-Step 1.4.3:** Audit memory block indices.
+  - **Micro-Step 1.4.4:** Lock committed expanded tree states.
+
+### STAGE 2: 10,000x BACKPROPAGATION AUDIT
+The Backpropagation stage propagates rewards computed at the terminal states back through the tree nodes recursively, executing 10,000x floating-point audits to prevent numeric drift and math faults.
+- **Sub-Stage 2.1:** Reward Retrieval.
+  - **Micro-Step 2.1.1:** Read terminal node evaluation from Judge Agent.
+    - **Sub-Micro 2.1.1.1:** Verify signature on Judge outcome payload.
+      - **Sub-Micro-Sub 2.1.1.1.1:** Extract reward value parameter $R$.
+        - **Ultra-Deep-Micro 2.1.1.1.1.1:** Confirm reward value lies within bounds (0.0 to 100.0).
+          - **Sub-Ultra-Deep 2.1.1.1.1.1.1:** Match terminal node ID with active search path data.
+            - **Sub-Sub-Ultra-Deep 2.1.1.1.1.1.1.1:** If validation checks fail, discard evaluation transaction.
+              - **Sub-Sub-Sub-Ultra-Deep 2.1.1.1.1.1.1.1.1:** Measure payload transfer latency metrics.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 2.1.1.1.1.1.1.1.1.1:** Save reward values in temporary buffers.
+                  - **Deepest-Hyper-Matrix-Cell 2.1.1.1.1.1.1.1.1.1.1:** Write reward receipt logs to persistent execution registers.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of Judge outcomes.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of reward extraction audits.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.3:** Confirm that zero out-of-bound reward values are mapped.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check data signature authenticity.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit reward records.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if reward values are inconsistent.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.7:** Audit retrieval latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.8:** Confirm signature keys match Judge credentials.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.9:** Log reward metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 2.1.1.1.1.1.1.1.1.1.1.10:** Lock reward metrics state and proceed to path sweeps.
+    - **Sub-Micro 2.1.1.2:** Check for missing terminal node attributes.
+    - **Sub-Micro 2.1.1.3:** Filter out invalid reward formats.
+    - **Sub-Micro 2.1.1.4:** Lock reward metrics state.
+  - **Micro-Step 2.1.2:** Verify Judge signature validity.
+  - **Micro-Step 2.1.3:** Audit payload transfer transactions.
+  - **Micro-Step 2.1.4:** Lock reward transaction tables.
+- **Sub-Stage 2.2:** Path Traversal Sweeps.
+  - **Micro-Step 2.2.1:** Traverse path from terminal node to root node.
+    - **Sub-Micro 2.2.1.1:** Trace parent pointers recursively.
+      - **Sub-Micro-Sub 2.2.1.1.1:** Compile list of nodes in active path.
+        - **Ultra-Deep-Micro 2.2.1.1.1.1:** Confirm path integrity matches state tree registry.
+          - **Sub-Ultra-Deep 2.2.1.1.1.1.1:** Check count of nodes in path.
+            - **Sub-Sub-Ultra-Deep 2.2.1.1.1.1.1.1:** If path is disconnected, trigger desync halt.
+              - **Sub-Sub-Sub-Ultra-Deep 2.2.1.1.1.1.1.1.1:** Calculate path traversal duration times.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 2.2.1.1.1.1.1.1.1.1:** Save active path lists in memory buffers.
+                  - **Deepest-Hyper-Matrix-Cell 2.2.1.1.1.1.1.1.1.1.1:** Write path traversal status logs to persistent databases.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of path node listings.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of parent pointer consistency checks.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.3:** Confirm that zero loops occur during path traversal.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify parent pointers.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check active linkages.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if path traversal flags broken parent links.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.7:** Audit traversal latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.8:** Confirm traversal depth is below limit.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.9:** Log path traversal parameters to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 2.2.1.1.1.1.1.1.1.1.1.10:** Lock path traversal maps and proceed to score updates.
+    - **Sub-Micro 2.2.1.2:** Filter out loops in parent linkages.
+    - **Sub-Micro 2.2.1.3:** Detect missing node links in parent trails.
+    - **Sub-Micro 2.2.1.4:** Lock path traversal maps.
+  - **Micro-Step 2.2.2:** Audit parent links integrity.
+  - **Micro-Step 2.2.3:** Verify path length metrics.
+  - **Micro-Step 2.2.4:** Lock active path configurations.
+- **Sub-Stage 2.3:** Score Update Execution.
+  - **Micro-Step 2.3.1:** Update value and visit counts of path nodes.
+    - **Sub-Micro 2.3.1.1:** Run 10,000x floating-point precision updates.
+      - **Sub-Micro-Sub 2.3.1.1.1:** Increment visit count parameter $N(N_i) = N(N_i) + 1$.
+        - **Ultra-Deep-Micro 2.3.1.1.1.1:** Recalculate average value: $V(N_i) = V(N_i) + \frac{R - V(N_i)}{N(N_i)}$.
+          - **Sub-Ultra-Deep 2.3.1.1.1.1.1:** Check for floating point drift errors.
+            - **Sub-Sub-Ultra-Deep 2.3.1.1.1.1.1.1:** If sum of rewards diverges by $> 0.0001$, trigger math fault error.
+              - **Sub-Sub-Sub-Ultra-Deep 2.3.1.1.1.1.1.1.1:** Record updated node metrics coordinates.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 2.3.1.1.1.1.1.1.1.1:** Save updated values to state tree database.
+                  - **Deepest-Hyper-Matrix-Cell 2.3.1.1.1.1.1.1.1.1.1:** Output score update summaries to compilation logs files.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of floating-point arithmetic states.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of score update verification sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.3:** Confirm that zero division-by-zero errors occur in UCT updates.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to audit numerical precision values.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check floating point values.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if UCT values diverge mathematically.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.7:** Audit score update latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.8:** Confirm that visit count increment equals exactly 1.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.9:** Log score updates to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 2.3.1.1.1.1.1.1.1.1.1.10:** Lock score update settings and proceed to playout controls.
+    - **Sub-Micro 2.3.1.2:** Execute tree recalculation on math fault flags.
+    - **Sub-Micro 2.3.1.3:** Clear score update cache files.
+    - **Sub-Micro 2.3.1.4:** Lock score update parameter settings.
+  - **Micro-Step 2.3.2:** Audit floating point precision drift.
+  - **Micro-Step 2.3.3:** Verify value averaging limits.
+  - **Micro-Step 2.3.4:** Lock tree recalculation parameters.
+- **Sub-Stage 2.4:** Simulation Playout Control.
+  - **Micro-Step 2.4.1:** Run fast probabilistic approximations.
+    - **Sub-Micro 2.4.1.1:** Execute 10 non-LLM heuristic models.
+      - **Sub-Micro-Sub 2.4.1.1.1:** Run mock opponent arguments simulation.
+        - **Ultra-Deep-Micro 2.4.1.1.1.1:** Compute probability of success for mock playout.
+          - **Sub-Ultra-Deep 2.4.1.1.1.1.1:** Average mock outcomes to get intermediate reward.
+            - **Sub-Sub-Ultra-Deep 2.4.1.1.1.1.1.1:** Save simulation outcomes to active path.
+              - **Sub-Sub-Sub-Ultra-Deep 2.4.1.1.1.1.1.1.1:** Measure heuristic simulation runtime.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 2.4.1.1.1.1.1.1.1.1:** Verify accuracy of mock models.
+                  - **Deepest-Hyper-Matrix-Cell 2.4.1.1.1.1.1.1.1.1.1:** Output simulation playout reports to persistent registry.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of heuristic playout results.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of playout simulation audits.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.3:** Confirm that zero ungrounded heuristic states are committed.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check mock probability scores.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit playout paths.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if heuristic simulation diverges from precedent.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.7:** Audit playout duration latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.8:** Confirm simulation outcome bounds conform to guidelines.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.9:** Log playout metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 2.4.1.1.1.1.1.1.1.1.1.10:** Lock simulation parameters state and proceed to novelty search.
+    - **Sub-Micro 2.4.1.2:** Filter out anomalous simulation paths.
+    - **Sub-Micro 2.4.1.3:** Adjust simulation count dynamically based on UCT.
+    - **Sub-Micro 2.4.1.4:** Lock simulation parameters state.
+  - **Micro-Step 2.4.2:** Verify heuristic models accuracy.
+  - **Micro-Step 2.4.3:** Audit playout duration metrics.
+  - **Micro-Step 2.4.4:** Lock mock simulation parameters.
+
+### STAGE 3: NOVELTY SEARCH AND PRUNING
+The Novelty Search and Pruning stage filters anomalous UCT values and severs branches that contain logical contradictions, employing alpha-beta cuts and matrix poisoning to secure tree safety.
+- **Sub-Stage 3.1:** Glitch Candidate Detection.
+  - **Micro-Step 3.1.1:** Scan search tree for anomalous UCT values.
+    - **Sub-Micro 3.1.1.1:** Calculate derivative of UCT scores changes.
+      - **Sub-Micro-Sub 3.1.1.1.1:** Identify nodes with UCT increases $> 3.0$ standard deviations.
+        - **Ultra-Deep-Micro 3.1.1.1.1.1:** Flag targets as `GLITCH_CANDIDATE` nodes.
+          - **Sub-Ultra-Deep 3.1.1.1.1.1.1:** Route candidate IDs to Verifier Agent queue.
+            - **Sub-Sub-Ultra-Deep 3.1.1.1.1.1.1.1:** Block future visit allocations to candidates pending check.
+              - **Sub-Sub-Sub-Ultra-Deep 3.1.1.1.1.1.1.1.1:** Check candidate node parent path history.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 3.1.1.1.1.1.1.1.1.1:** Measure semantic novelty index scores.
+                  - **Deepest-Hyper-Matrix-Cell 3.1.1.1.1.1.1.1.1.1.1:** Save detection status records to persistent registry database.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of detected glitch nodes.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of derivative calculation audits.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.3:** Confirm that zero valid nodes are mistakenly flagged as candidates.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check standard deviation values.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit anomaly scores.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if glitch node detection is bypassed.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.7:** Audit candidate scanning latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.8:** Confirm that visit blocking is actively enforced on candidates.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.9:** Log glitch candidate parameters to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 3.1.1.1.1.1.1.1.1.1.1.10:** Lock glitch candidate identifiers and proceed to verification.
+    - **Sub-Micro 3.1.1.2:** Compare candidate content with legal guidelines.
+    - **Sub-Micro 3.1.1.3:** Filter out verified non-anomalous nodes.
+    - **Sub-Micro 3.1.1.4:** Lock glitch candidate identifiers.
+  - **Micro-Step 3.1.2:** Audit glitch candidate indices.
+  - **Micro-Step 3.1.3:** Verify visit block status parameters.
+  - **Micro-Step 3.1.4:** Lock candidate validation states.
+- **Sub-Stage 3.2:** Deep Node Verification.
+  - **Micro-Step 3.2.1:** Monitor Verifier Agent check on glitch nodes.
+    - **Sub-Micro 3.2.1.1:** Query Verifier response registers.
+      - **Sub-Micro-Sub 3.2.1.1.1:** Read check status flags of glitch nodes.
+        - **Ultra-Deep-Micro 3.2.1.1.1.1:** Parse verification outcomes details.
+          - **Sub-Ultra-Deep 3.2.1.1.1.1.1:** If Verifier invalidates node, trigger pruning routine.
+            - **Sub-Sub-Ultra-Deep 3.2.1.1.1.1.1.1:** Save verification metrics to state database.
+              - **Sub-Sub-Sub-Ultra-Deep 3.2.1.1.1.1.1.1.1:** Record verification completion timestamps.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 3.2.1.1.1.1.1.1.1.1:** Cross-check file metadata matches.
+                  - **Deepest-Hyper-Matrix-Cell 3.2.1.1.1.1.1.1.1.1.1:** Output deep node verification reports to compilation log tables.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of Verifier outcomes.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of verification monitoring audits.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.3:** Confirm that zero unverified nodes are marked as complete.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check verification status flags.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] for each verification detail.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if Verifier logs contain timeout flags.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.7:** Audit verification duration latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.8:** Confirm that metadata keys match case files indexes.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.9:** Log verification compliance metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 3.2.1.1.1.1.1.1.1.1.1.10:** Lock verification state parameters and proceed to pruning.
+    - **Sub-Micro 3.2.1.2:** Compute average check times of glitch nodes.
+    - **Sub-Micro 3.2.1.3:** Detect repeating validation failures.
+    - **Sub-Micro 3.2.1.4:** Lock verification state parameters.
+  - **Micro-Step 3.2.2:** Verify deep verification outcomes.
+  - **Micro-Step 3.2.3:** Audit metadata alignment parameters.
+  - **Micro-Step 3.2.4:** Lock verification metrics configuration.
+- **Sub-Stage 3.3:** Alpha-Beta Pruning.
+  - **Micro-Step 3.3.1:** Sever invalidated branches from state tree.
+    - **Sub-Micro 3.3.1.1:** Execute pruning algorithms.
+      - **Sub-Micro-Sub 3.3.1.1.1:** Clear target branch pointers parameters.
+        - **Ultra-Deep-Micro 3.3.1.1.1.1:** Re-route active explore search to parent node.
+          - **Sub-Ultra-Deep 3.3.1.1.1.1.1:** Update total visit count variables of state tree.
+            - **Sub-Sub-Ultra-Deep 3.3.1.1.1.1.1.1:** Broadcast branch pruning token to swarm.
+              - **Sub-Sub-Sub-Ultra-Deep 3.3.1.1.1.1.1.1.1:** Measure memory bytes released by pruning.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 3.3.1.1.1.1.1.1.1.1:** Output pruning execution logs data files.
+                  - **Deepest-Hyper-Matrix-Cell 3.3.1.1.1.1.1.1.1.1.1:** Save pruning status variables to persistent database files.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of pruned tree branches.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of pointer clearing audits.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.3:** Confirm that zero memory leaks occur post-pruning.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify parent re-routing path.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check total visit count updates.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if pruned branches remain reachable.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.7:** Audit pruning execution latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.8:** Confirm that pruning tokens are broadcast successfully.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.9:** Log pruning transaction details to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 3.3.1.1.1.1.1.1.1.1.1.10:** Lock pruning parameters and proceed to matrix poisoning.
+    - **Sub-Micro 3.3.1.2:** Run diagnostic routines on tree health metrics.
+    - **Sub-Micro 3.3.1.3:** Clear cached evaluations of pruned nodes.
+    - **Sub-Micro 3.3.1.4:** Lock pruning parameter settings.
+  - **Micro-Step 3.3.2:** Audit memory release operations.
+  - **Micro-Step 3.3.3:** Verify diagnostic routines outcomes.
+  - **Micro-Step 3.3.4:** Lock pruning settings parameters.
+- **Sub-Stage 3.4:** UCT Matrix Poisoning.
+  - **Micro-Step 3.4.1:** Poison local UCT scores of pruned paths.
+    - **Sub-Micro 3.4.1.1:** Set explore values coordinates.
+      - **Sub-Micro-Sub 3.4.1.1.1:** Set UCT score of pruned paths to $-\infty$.
+        - **Ultra-Deep-Micro 3.4.1.1.1.1:** Set explore weight multipliers to zero.
+          - **Sub-Ultra-Deep 3.4.1.1.1.1.1:** Write warning flag markers to node data.
+            - **Sub-Sub-Ultra-Deep 3.4.1.1.1.1.1.1:** Ensure search never visits poisoned paths.
+              - **Sub-Sub-Sub-Ultra-Deep 3.4.1.1.1.1.1.1.1:** Record poisoned node count index parameters.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 3.4.1.1.1.1.1.1.1.1:** Save matrix validation states.
+                  - **Deepest-Hyper-Matrix-Cell 3.4.1.1.1.1.1.1.1.1.1:** Write matrix audit logs database files to compilation records.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of poisoned UCT matrices.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of matrix poisoning audits.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.3:** Confirm that zero poisoned nodes are selected for explore visits.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check score values.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to verify warning flags.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if explore weight exceeds zero.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.7:** Audit poisoning latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.8:** Confirm poisoned node count matches pruned branch indices.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.9:** Log matrix poisoning metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 3.4.1.1.1.1.1.1.1.1.1.10:** Lock matrix poisoning settings and proceed to state dumps.
+    - **Sub-Micro 3.4.1.2:** Filter out un-poisoned dead paths.
+    - **Sub-Micro 3.4.1.3:** Trace UCT variance post-poisoning.
+    - **Sub-Micro 3.4.1.4:** Lock matrix poisoning settings.
+  - **Micro-Step 3.4.2:** Audit matrix verification parameters.
+  - **Micro-Step 3.4.3:** Verify UCT score boundaries.
+  - **Micro-Step 3.4.4:** Lock matrix settings tables.
+
+### STAGE 4: STATE DUMP
+The State Dump stage extracts the final search tree configurations and principal variation snapshots, serializing them into JSON formats and preparing the environment for memory clearing.
+- **Sub-Stage 4.1:** Principal Variation Snapshot.
+  - **Micro-Step 4.1.1:** Track highest-value path in search tree.
+    - **Sub-Micro 4.1.1.1:** Parse node visit count values.
+      - **Sub-Micro-Sub 4.1.1.1.1:** Compile list of nodes in Principal Variation.
+        - **Ultra-Deep-Micro 4.1.1.1.1.1:** Confirm path starting point matches $N_0$.
+          - **Sub-Ultra-Deep 4.1.1.1.1.1.1:** Calculate path average confidence rating.
+            - **Sub-Sub-Ultra-Deep 4.1.1.1.1.1.1.1:** Save snapshot records to persistent registry files.
+              - **Sub-Sub-Sub-Ultra-Deep 4.1.1.1.1.1.1.1.1:** Compute average path length values.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 4.1.1.1.1.1.1.1.1.1:** Highlight discrepancies in Principal Variation.
+                  - **Deepest-Hyper-Matrix-Cell 4.1.1.1.1.1.1.1.1.1.1:** Output snapshot summaries to persistent compile logs databases.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of Principal Variation nodes list.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of path tracking audits.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.3:** Confirm that path starting node is root node N_0.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify confidence ratings.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check path linkages.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if confidence rating falls below limit.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.7:** Audit snapshot latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.8:** Confirm file lock permissions on snapshot directory are secure.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.9:** Log snapshot configurations to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 4.1.1.1.1.1.1.1.1.1.1.10:** Lock snapshot configurations and proceed to serialization.
+    - **Sub-Micro 4.1.1.2:** Check file lock permissions on snapshot directory.
+    - **Sub-Micro 4.1.1.3:** Filter out short paths.
+    - **Sub-Micro 4.1.1.4:** Lock snapshot configurations.
+  - **Micro-Step 4.1.2:** Audit path rating parameters.
+  - **Micro-Step 4.1.3:** Verify path length bounds.
+  - **Micro-Step 4.1.4:** Lock snapshot directory locks.
+- **Sub-Stage 4.2:** State Dump Serializer.
+  - **Micro-Step 4.2.1:** Serialize snapshot details to JSON format.
+    - **Sub-Micro 4.2.1.1:** Format JSON-RPC properties structures.
+      - **Sub-Micro-Sub 4.2.1.1.1:** Include transaction type: `STATE_DUMP`.
+        - **Ultra-Deep-Micro 4.2.1.1.1.1:** Include principal_variation node list keys.
+          - **Sub-Ultra-Deep 4.2.1.1.1.1.1:** Include confidence score metrics keys.
+            - **Sub-Sub-Ultra-Deep 4.2.1.1.1.1.1.1:** Send state dump payload to Drafter queue.
+              - **Sub-Sub-Sub-Ultra-Deep 4.2.1.1.1.1.1.1.1:** Measure serialized payload file sizes.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 4.2.1.1.1.1.1.1.1.1:** Confirm transmission success indicators.
+                  - **Deepest-Hyper-Matrix-Cell 4.2.1.1.1.1.1.1.1.1.1:** Write serialization check logs to persistent database files.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of formatted JSON payloads.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of serialization format verification sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.3:** Confirm that payload size matches e-filing guidelines.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify transmission indicators.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to audit serialization hashes.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if JSON properties are malformed.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.7:** Audit serialization latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.8:** Confirm digital signatures of payload files are validated.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.9:** Log serialization status metrics to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 4.2.1.1.1.1.1.1.1.1.1.10:** Lock state dump registry variables and proceed to monitoring.
+    - **Sub-Micro 4.2.1.2:** Verify digital signatures of payload files.
+    - **Sub-Micro 4.2.1.3:** Log serialization start timestamps.
+    - **Sub-Micro 4.2.1.4:** Lock state dump registry state variables.
+  - **Micro-Step 4.2.2:** Audit JSON schema compliance.
+  - **Micro-Step 4.2.3:** Verify digital signatures matching.
+  - **Micro-Step 4.2.4:** Lock state dump parameters.
+- **Sub-Stage 4.3:** Search Execution Monitor.
+  - **Micro-Step 4.3.1:** Monitor MCTS iteration limits variables.
+    - **Sub-Micro 4.3.1.1:** Read active iteration count parameters.
+      - **Sub-Micro-Sub 4.3.1.1.1:** Compare current visits count with Max_Iterations.
+        - **Ultra-Deep-Micro 4.3.1.1.1.1:** Compare elapsed time with time limit parameters.
+          - **Sub-Ultra-Deep 4.3.1.1.1.1.1:** If limits are exceeded, trigger search stop event.
+            - **Sub-Sub-Ultra-Deep 4.3.1.1.1.1.1.1:** Send termination token to coordinator engine.
+              - **Sub-Sub-Sub-Ultra-Deep 4.3.1.1.1.1.1.1.1:** Record search execution statistics metrics.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 4.3.1.1.1.1.1.1.1.1:** Update search performance indicators maps.
+                  - **Deepest-Hyper-Matrix-Cell 4.3.1.1.1.1.1.1.1.1.1:** Output iteration status summaries logs to compiler database.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of search execution monitor metrics.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of iteration count limit verification runs.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.3:** Confirm that search terminates exactly on iteration limits.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check elapsed duration values.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check socket linkages.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if iteration limits exceed limits.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.7:** Audit monitoring latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.8:** Confirm that termination tokens are transmitted successfully.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.9:** Log execution monitoring details to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 4.3.1.1.1.1.1.1.1.1.1.10:** Lock execution monitor settings and proceed to memory clear.
+    - **Sub-Micro 4.3.1.2:** Track loop memory leakage parameters.
+    - **Sub-Micro 4.3.1.3:** Run diagnostic sweeps on search paths.
+    - **Sub-Micro 4.3.1.4:** Lock execution monitor settings.
+  - **Micro-Step 4.3.2:** Audit memory leaks duration profiles.
+  - **Micro-Step 4.3.3:** Verify search loop execution parameters.
+  - **Micro-Step 4.3.4:** Lock monitor settings configuration.
+- **Sub-Stage 4.4:** State Memory Clear.
+  - **Micro-Step 4.4.1:** Wipe search tree states from memory post-termination.
+    - **Sub-Micro 4.4.1.1:** Send clear signals to volatile databases.
+      - **Sub-Micro-Sub 4.4.1.1.1:** Confirm memory release completes.
+        - **Ultra-Deep-Micro 4.4.1.1.1.1:** Delete temporary explore files scans.
+          - **Sub-Ultra-Deep 4.4.1.1.1.1.1:** Close active database query connections.
+            - **Sub-Sub-Ultra-Deep 4.4.1.1.1.1.1.1:** Write state clear completion logs data files.
+              - **Sub-Sub-Sub-Ultra-Deep 4.4.1.1.1.1.1.1.1:** Verify clean exit code variables.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 4.4.1.1.1.1.1.1.1.1:** Track overall memory cleanup latency metrics.
+                  - **Deepest-Hyper-Matrix-Cell 4.4.1.1.1.1.1.1.1.1.1:** Output state memory clear summary to persistent compile registers.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of volatile memory release records.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of database socket closure audits.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.3:** Confirm that 100% of memory buffers return to baseline.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check memory clearance indicators.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check database socket status.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if database sockets remain open post-termination.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.7:** Audit cleanup duration latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.8:** Confirm clean exit codes align with system guidelines.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.9:** Log memory clear parameters to persistent database.
+                    - **Ultimate-Matrix-Audit-Gate 4.4.1.1.1.1.1.1.1.1.1.10:** Lock cleanup constraints indicators and proceed to Malequeara override.
+    - **Sub-Micro 4.4.1.2:** Reset database connections configurations.
+    - **Sub-Micro 4.4.1.3:** Reset tree visit registers metrics.
+    - **Sub-Micro 4.4.1.4:** Close state memory sessions.
+  - **Micro-Step 4.4.2:** Verify memory release operation status.
+  - **Micro-Step 4.4.3:** Audit tree visit counters.
+  - **Micro-Step 4.4.4:** Lock memory close session configurations.
+
+### STAGE 5: MALEQUEARA FINAL ARBITRATION & COGNITIVE GATE
+The Malequeara Final Arbitration and Cognitive Gate represents the absolute terminal sovereign layer of verification. Malequeara overrides any LLM outputs, audits the selection and compliance wars of the swarm, and patches strategic loopholes prior to commits.
+- **Sub-Stage 5.1:** Malequeara Interception and Awakening Conditions.
+  - **Micro-Step 5.1.1:** Monitor active search state for critical violations and final termination signals.
+    - **Sub-Micro 5.1.1.1:** Intercept the MCTS tree at the absolute final node prior to payload serialization.
+      - **Sub-Micro-Sub 5.1.1.1.1:** Verify if any Rule-17 source citation violation occurred across the entire decision path.
+        - **Ultra-Deep-Micro 5.1.1.1.1.1:** Check if the Verifier Agent accepted citations lacking verifiable public URLs.
+          - **Sub-Ultra-Deep 5.1.1.1.1.1.1:** Trigger System 5 override if search path contains Witch of Envy hallucinations.
+            - **Sub-Sub-Ultra-Deep 5.1.1.1.1.1.1.1:** Apply dynamic penalization constant Lambda * P-assumption (1000 * 1.0) to the UCT value of the offending branch.
+              - **Sub-Sub-Sub-Ultra-Deep 5.1.1.1.1.1.1.1.1:** Purge the flagged hallucination node and recalculate the global search tree root hash.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 5.1.1.1.1.1.1.1.1.1:** Perform vector state mutation: State(t+1) = State(t) - Hallucination_Weights.
+                  - **Deepest-Hyper-Matrix-Cell 5.1.1.1.1.1.1.1.1.1.1:** Calculate branching entropy H, and if H equals exactly 0, halt compilation and re-seed the generation engine.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of each citation node to verify absolute structural integrity.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of paragraph-level source URL verification checks.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.3:** Assert that zero non-verifiable citations exist in the final Principal Variation.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] for each page layout token to check for citation placement.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] for each legal clause to audit verification anchors.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.6:** Apply UCT matrix penalty if the Verifier ledger is missing signature keys.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.7:** Audit sovereign verification parameters at step s to ensure absolute compliance.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.8:** Confirm that Malequeara override status flags are recorded in custom telemetry.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.9:** Log all override events to persistent compiler state database.
+                    - **Ultimate-Matrix-Audit-Gate 5.1.1.1.1.1.1.1.1.1.1.10:** Lock Malequeara activation parameters and proceed to history overview.
+    - **Sub-Micro 5.1.1.2:** Check sovereign override activation status bounds.
+    - **Sub-Micro 5.1.1.3:** Save override activation metrics.
+    - **Sub-Micro 5.1.1.4:** Lock override activation settings.
+  - **Micro-Step 5.1.2:** Verify override condition indicators.
+  - **Micro-Step 5.1.3:** Audit override state variables.
+  - **Micro-Step 5.1.4:** Lock override settings tables.
+- **Sub-Stage 5.2:** Verification of the Swarm Adversarial History.
+  - **Micro-Step 5.2.1:** Audit the historical MCTS iterations, selection wars, and adversarial games.
+    - **Sub-Micro 5.2.1.1:** Re-evaluate the two great adversarial wars among the three primary spirits (Drafter, Objector, Verifier).
+      - **Sub-Micro-Sub 5.2.1.1.1:** Trace the decision matrix path to ensure all objections raised during selection wars were resolved.
+        - **Ultra-Deep-Micro 5.2.1.1.1.1:** Confirm that all validation gates checked in the compliance battles are cryptographically signed.
+          - **Sub-Ultra-Deep 5.2.1.1.1.1.1:** Validate that the Petitioner's strategy and the Respondent's objections are balanced without cooperative bias.
+            - **Sub-Sub-Ultra-Deep 5.2.1.1.1.1.1.1:** Review alternative remedy exhaustion arguments (Section 9 appeals) and standing (locus standi).
+              - **Sub-Sub-Sub-Ultra-Deep 5.2.1.1.1.1.1.1.1:** Assert that the Judge Agent's base score modifier rules are correctly applied.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 5.2.1.1.1.1.1.1.1.1:** Verify that the case-law citation scores conform to bench sizes and pending curative reviews.
+                  - **Deepest-Hyper-Matrix-Cell 5.2.1.1.1.1.1.1.1.1.1:** Reject citations with final scores below 100 (for Supreme Court) or 50 (for High Courts).
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of each selection war transaction log.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of objection-resolution tracing to confirm final compliance.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.3:** Assert that the adversarial game tree has zero un-evaluated strategy nodes.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify the legal issue mappings.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] for each precedent citation score.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if any adversarial step violates limitation periods.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.7:** Audit regional registry rule compliance (Nagpur Bench circulars) at step s.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.8:** Confirm that all vernacular translation semantic loss is within safe bounds.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.9:** Log adversarial war audit results to sovereign telemetry.
+                    - **Ultimate-Matrix-Audit-Gate 5.2.1.1.1.1.1.1.1.1.1.10:** Lock historical game parameters and proceed to loophole search.
+    - **Sub-Micro 5.2.1.2:** Verify adversarial history state integrity.
+    - **Sub-Micro 5.2.1.3:** Save historical game metrics.
+    - **Sub-Micro 5.2.1.4:** Lock adversarial history settings.
+  - **Micro-Step 5.2.2:** Audit historical iterations bounds.
+  - **Micro-Step 5.2.3:** Verify agent interactions tracking.
+  - **Micro-Step 5.2.4:** Lock historical interaction parameters.
+- **Sub-Stage 5.3:** Loophole Extraction and Legal Strategy Audit.
+  - **Micro-Step 5.3.1:** Run deep heuristic analysis to find any lingering logical loopholes or strategic vulnerabilities.
+    - **Sub-Micro 5.3.1.1:** Parse the final drafted legal document AST for implicit strategic loopholes.
+      - **Sub-Micro-Sub 5.3.1.1.1:** Match paragraph claims against the Opponent Agent's adversarial protocol patterns.
+        - **Ultra-Deep-Micro 5.3.1.1.1.1:** Identify alternative statutory interpretations that could undermine the Petitioner's arguments.
+          - **Sub-Ultra-Deep 5.3.1.1.1.1.1:** Audit the prayer clause layout to ensure it requests all necessary reliefs.
+            - **Sub-Sub-Ultra-Deep 5.3.1.1.1.1.1.1:** Check for procedural gaps (such as non-exhaustion of domestic remedies).
+              - **Sub-Sub-Sub-Ultra-Deep 5.3.1.1.1.1.1.1.1:** Flag any ambiguous assertions in the pleading statements.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 5.3.1.1.1.1.1.1.1.1:** Calculate risk exposure score of all flagged loopholes.
+                  - **Deepest-Hyper-Matrix-Cell 5.3.1.1.1.1.1.1.1.1.1:** If risk score exceeds threshold, trigger automatic structural corrections.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of each pleading statement.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of loophole detection checks against statutes.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.3:** Confirm that the prayer clause has zero logical overlaps.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify statutory section alignments.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check case-law limitations.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if any loophole is detected without dynamic patches.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.7:** Audit loophole correction latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.8:** Confirm that final loophole risks are below baseline limits.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.9:** Log loophole risk assessments to compilation reports.
+                    - **Ultimate-Matrix-Audit-Gate 5.3.1.1.1.1.1.1.1.1.1.10:** Lock loophole parameters and proceed to final UCT score matrix checks.
+    - **Sub-Micro 5.3.1.2:** Verify loophole risk bounds variables.
+    - **Sub-Micro 5.3.1.3:** Save loophole search outputs logs.
+    - **Sub-Micro 5.3.1.4:** Lock loophole settings.
+  - **Micro-Step 5.3.2:** Audit statutory exception bounds.
+  - **Micro-Step 5.3.3:** Verify loophole exposure ratings.
+  - **Micro-Step 5.3.4:** Lock loophole database entries.
+- **Sub-Stage 5.4:** UCT Matrix Enforcement and Security Gating.
+  - **Micro-Step 5.4.1:** Enforce strict security parameters across the final committed UCT matrix values.
+    - **Sub-Micro 5.4.1.1:** Confirm that all pruned or invalidated paths have been fully poisoned to negative infinity.
+      - **Sub-Micro-Sub 5.4.1.1.1:** Audit exploration scores of the remaining branches to prevent adversarial reward hijacks.
+        - **Ultra-Deep-Micro 5.4.1.1.1.1:** Validate that the final confidence margins exceed the minimum boundary threshold.
+          - **Sub-Ultra-Deep 5.4.1.1.1.1.1:** Strip out any node that contains remote scripts or mathematical macro injections.
+            - **Sub-Sub-Ultra-Deep 5.4.1.1.1.1.1.1:** Calculate structural variance indicators for active strategy nodes.
+              - **Sub-Sub-Sub-Ultra-Deep 5.4.1.1.1.1.1.1.1:** Run statistical tests to verify tree balance values.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 5.4.1.1.1.1.1.1.1.1:** Compute Jaccard similarity matrices to detect duplication post-pruning.
+                  - **Deepest-Hyper-Matrix-Cell 5.4.1.1.1.1.1.1.1.1.1:** Compare final strategy path mappings with compiled precedents registers.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of the final UCT score configuration matrix.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of UCT score validation sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.3:** Confirm that zero un-poisoned branch fragments remain in memory.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to check matrix variance values.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to check path security bounds.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if matrix balance parameters diverge.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.7:** Audit matrix verification latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.8:** Confirm that zero remote macro injections exist in AST elements.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.9:** Log UCT matrix validation results to sovereign registry.
+                    - **Ultimate-Matrix-Audit-Gate 5.4.1.1.1.1.1.1.1.1.1.10:** Lock matrix parameters and proceed to final tree committing.
+    - **Sub-Micro 5.4.1.2:** Verify matrix safety boundaries parameters.
+    - **Sub-Micro 5.4.1.3:** Save matrix verification outputs.
+    - **Sub-Micro 5.4.1.4:** Lock matrix validation settings.
+  - **Micro-Step 5.4.2:** Audit matrix safety settings.
+  - **Micro-Step 5.4.3:** Verify balance variance tolerances.
+  - **Micro-Step 5.4.4:** Lock matrix validation parameters.
+- **Sub-Stage 5.5:** Final Sovereign Adjudication and Tree Committing.
+  - **Micro-Step 5.5.1:** Perform final UCT score lock and emit compiler-ready tokens.
+    - **Sub-Micro 5.5.1.1:** Commit the MCTS state tree into its absolute terminal read-only format.
+      - **Sub-Micro-Sub 5.5.1.1.1:** Run a complete cryptographic sweep to seal the final Principal Variation.
+        - **Ultra-Deep-Micro 5.5.1.1.1.1:** Confirm that all nodes in the Principal Variation are verified by Malequeara.
+          - **Sub-Ultra-Deep 5.5.1.1.1.1.1:** Sign the root state tree with the sovereign private key.
+            - **Sub-Sub-Ultra-Deep 5.5.1.1.1.1.1.1:** Set visit count metrics of all unselected branches to zero.
+              - **Sub-Sub-Sub-Ultra-Deep 5.5.1.1.1.1.1.1.1:** Lock database write permissions for the MCTS registry.
+                - **Ultra-Deep-Sub-Sub-Sub-Sub 5.5.1.1.1.1.1.1.1.1:** Generate the final compiler-ready state token payload.
+                  - **Deepest-Hyper-Matrix-Cell 5.5.1.1.1.1.1.1.1.1.1:** Assert that the state machine is ready for final assembly.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.1:** Run 100 reviews of each committed node.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.2:** Run 1000 steps of sovereign key check sweeps.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.3:** Confirm that the final Principal Variation has zero missing hashes.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.4:** Execute step s in [1, 1000] to verify tree structure.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.5:** Execute review step r in [1, 100] to confirm signature.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.6:** Apply UCT penalty if state committing is aborted.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.7:** Audit state committing latency at step s.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.8:** Confirm that committed hashes align with the evidence ledger.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.9:** Log final committed telemetry state values.
+                    - **Ultimate-Matrix-Audit-Gate 5.5.1.1.1.1.1.1.1.1.1.10:** Lock committed parameters and close sovereign adjudication session.
+    - **Sub-Micro 5.5.1.2:** Verify state committing outcomes variables.
+    - **Sub-Micro 5.5.1.3:** Save final committed tree metadata.
+    - **Sub-Micro 5.5.1.4:** Close sovereign adjudication session.
+  - **Micro-Step 5.5.2:** Audit committing outcome parameters.
+  - **Micro-Step 5.5.3:** Verify signature checks validity.
+  - **Micro-Step 5.5.4:** Lock committed state tree entries.
+
+# ENGINEERING CONSTRAINTS AND MATHEMATICAL CONFIGURATIONS
+## CORE ENGINE CONSTANTS
+- Dynamic Exploration Parameter: $C_{base} = 1.41421356$
+- Max Expansion Nodes Threshold: $K_{max} = 1024$
+- Floating Point Validation Bound: $\delta_{math} = 0.0001$
+- Malequeara Override Penalty Constant: $\Lambda = 1000.0$
+- Playout Heuristic Sample Size: $S_{playout} = 10$
+- Max Global Search Iterations: $I_{max} = 10000$
+- Sovereign Key Seal Registry Status: `READ_ONLY`
+- UCT Confidence Interval Bounds: $[C_{min}, C_{max}] = [0.5, 3.0]$
+- Branching Entropy Minimum Threshold: $H_{min} = 0.05$
+- Jaccard Overlap Detection Threshold: $J_{threshold} = 0.85$
+- Default Precedent Citation Score Limit: $S_{min} = 100$
+- Limitation Period Validation Margin: $T_{margin} = 10$
+- Swarm Execution Timeout Limit: $T_{timeout} = 600$
+- Memory Garbage Collection Limit: $M_{limit} = 128.0$
+- Maximum Call Attempt Retry Limit: $R_{limit} = 5$
+- Heuristic Branching Constant Modifier: $\alpha_{branch} = 0.5$
+- Validation Consensus Quorum Ratio: $Q_{ratio} = 0.66$
+
+# SOVEREIGN CRYPTOGRAPHIC KEY REGISTRY AND SEAL PROCEDURES
+## SOVEREIGN KEY SEAL PROCESS
+- **Step 1:** Generate ECDSA key pair using NIST P-256 curve structure parameters.
+- **Step 2:** Match generated public key hash with Verifier ledger registry token keys.
+- **Step 3:** Sign final MCTS root node state hash using compiler private key signature.
+- **Step 4:** Export signature values matrix in base64 format parameters to custom metadata.
+- **Step 5:** Broadcast signed sovereign token state payload to telemetry observer ports.
+- **Step 6:** Purge all volatile registers containing compiler private keys keys values.
+- **Step 7:** Close secure cryptographic session channels and lock write ports permissions.
+- **Step 8:** Commit the final state seal token to persistent storage log database.
+- **Step 9:** Verify signature checks integrity scores after committing.
+- **Step 10:** Broadcast terminal verification token to external API gateway registers.
+- **Step 11:** Clear all telemetry socket ports and terminate secure session context.
+
+
+## ALPHAPROOF NEXUS COMPLIANCE
+The MCTS Engine must operate in compliance with the AlphaProof Nexus search specification:
+- **P-UCB Evolutionary Search**: Select exploration paths using the Predictor Upper Confidence Bound (P-UCB) formula, where prior probabilities ($P_i$) are calibrated from Elo ratings computed by the Judge and Reviewer agents.
+- **Guillotine Protocol (Pruning)**: Retain the top 64 sketches. Prune low-performing branches and immediately prune paths violating physical or statutory bounds by setting UCT score to -infinity and evicting them from the population database.
+
+[END OF DISTILLATION PROMPT 011]

@@ -1,0 +1,56 @@
+# Python runtime/cache artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Frontend/build caches
+node_modules/
+.next/
+dist/
+build/
+coverage/
+
+# Tool and OS noise
+.DS_Store
+Thumbs.db
+*.log
+
+# Large downloaded/reference payloads kept outside git by default.
+# Commit curated source, reports, plans, and raw conversation logs instead.
+downloads/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.parquet
+*.sqlite3
+*.bin
+*.pickle
+
+# Generated report caches and binary office artifacts
+*.docx
+*.pptx
+*.xlsx
+*.pdf
+
+# Clausely audit logs are first-class artifacts and must stay trackable.
+!rigorous_testing/
+!rigorous_testing/raw_conversation_log*.jsonl
+
+# Firebase and Chrome local profiles
+.chrome-debug-profile/
+.firebase/
+
+# Ignore long debug filenames
+rigorous_testing/gemini-3.5flash-*

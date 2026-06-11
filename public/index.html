@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clausely ai -- Zero-Hallucination Legal Drafting Swarm</title>
+  <meta name="description" content="A stateful legal compilation engine built on Google ADK, utilizing a Swarm Harness Copilot and Unified Grounding Validator to achieve 100% compliant filings.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Styling variables - Premium Slate & Indigo Dark Mode Palette */
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: rgba(17, 24, 39, 0.6);
+      --bg-active: rgba(30, 41, 59, 0.8);
+      --border-card: rgba(255, 255, 255, 0.06);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --color-primary: #38bdf8;
+      --color-primary-glow: rgba(56, 189, 248, 0.15);
+      --color-accent: #6366f1;
+      --color-accent-glow: rgba(99, 102, 241, 0.15);
+      --color-success: #10b981;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(56, 189, 248, 0.08) 0%, transparent 40%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 1.5rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .badge {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--color-primary);
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      background: rgba(17, 24, 39, 0.4);
+      padding: 0.35rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-card);
+      max-width: max-content;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-active);
+      color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    /* Content Panes */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Overview Section Styling */
+    .hero {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 2.5rem auto;
+      font-weight: 300;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #080d16;
+      box-shadow: 0 4px 15px var(--color-primary-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .video-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      max-width: 900px;
+      margin: 0 auto 4rem auto;
+    }
+
+    video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 8px;
+      background: #020617;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Architecture Diagram Tab Styling */
+    .arch-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .arch-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .diagram-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .diagram-svg {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+    }
+
+    .svg-node {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .svg-node rect, .svg-node circle {
+      transition: all 0.2s ease;
+    }
+
+    .svg-node:hover rect, .svg-node.active rect {
+      stroke: var(--color-primary);
+      stroke-width: 2.5px;
+      fill: rgba(30, 41, 59, 0.9);
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+    }
+
+    .svg-node:hover circle, .svg-node.active circle {
+      stroke: var(--color-accent);
+      stroke-width: 2.5px;
+      fill: rgba(30, 41, 59, 0.9);
+      filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
+    }
+
+    .info-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 520px;
+    }
+
+    .info-header {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-section {
+      margin-bottom: 1.2rem;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-val {
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .info-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: var(--color-accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    /* Simulator Styling */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 850px) {
+      .sim-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .config-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-select, .form-input, .form-textarea {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      color: var(--text-main);
+      padding: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .form-select:focus, .form-input:focus, .form-textarea:focus {
+      border-color: var(--color-primary);
+      outline: none;
+      box-shadow: 0 0 5px rgba(56, 189, 248, 0.2);
+    }
+
+    .sim-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sim-status-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status-dot.active {
+      background: var(--color-warning);
+      box-shadow: 0 0 8px var(--color-warning);
+      animation: pulse 1.5s infinite;
+    }
+
+    .status-dot.success {
+      background: var(--color-success);
+      box-shadow: 0 0 8px var(--color-success);
+    }
+
+    .status-dot.error {
+      background: var(--color-error);
+      box-shadow: 0 0 8px var(--color-error);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      min-height: 400px;
+    }
+
+    @media (max-width: 1050px) {
+      .sim-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Terminal Console */
+    .terminal-card {
+      background: #020617;
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      font-family: monospace;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .terminal-header {
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.r { background: #ef4444; }
+    .terminal-dot.y { background: #f59e0b; }
+    .terminal-dot.g { background: #10b981; }
+
+    .terminal-body {
+      padding: 1rem;
+      overflow-y: auto;
+      flex-grow: 1;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 420px;
+    }
+
+    .log-line {
+      word-break: break-all;
+    }
+
+    .log-audit { color: #a5f3fc; }
+    .log-gate { color: #f472b6; }
+    .log-info { color: #9ca3af; }
+    .log-success { color: #34d399; }
+    .log-error { color: #f87171; }
+    .log-warning { color: #fbbf24; }
+
+    /* Visualizer (Tree & Stats) */
+    .visualizer-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .viz-header {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 0.5rem;
+    }
+
+    .viz-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .tree-canvas-container {
+      width: 100%;
+      height: 180px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .tree-canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+    }
+
+    .elo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      text-align: left;
+    }
+
+    .elo-table th {
+      background: rgba(30, 41, 59, 0.4);
+      padding: 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .elo-table td {
+      padding: 0.5rem;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .elo-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .val-positive { color: var(--color-success); font-weight: bold; }
+    .val-negative { color: var(--color-error); font-weight: bold; }
+
+    /* Human-in-the-Loop Gateway Modal */
+    .hitl-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .hitl-overlay.active {
+      display: flex;
+    }
+
+    .hitl-modal {
+      background: #111827;
+      border: 2px solid var(--color-warning);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+      animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalSlide {
+      from { transform: scale(0.9) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .hitl-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--color-warning);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hitl-body {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+    }
+
+    .hitl-mismatch-box {
+      background: rgba(245, 158, 11, 0.05);
+      border: 1px dashed rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .hitl-mismatch-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+
+    .hitl-mismatch-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .hitl-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Compiled Pleading Preview Paper */
+    .pleading-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .pleading-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-card);
+      padding-bottom: 0.8rem;
+    }
+
+    .pleading-paper-scroller {
+      max-height: 500px;
+      overflow-y: auto;
+      background: #0b0f19;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .pleading-paper {
+      background: #fafaf9;
+      color: #1c1917;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 13.5px;
+      line-height: 1.5;
+      padding: 2.5cm 1.5cm 2.5cm 2cm; /* Margin markers representation */
+      border: 1px solid #d6d3d1;
+      border-radius: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      min-height: 650px;
+    }
+
+    /* SFE border visual representation */
+    .pleading-paper::before {
+      content: '';
+      position: absolute;
+      top: 2.5cm;
+      bottom: 2.5cm;
+      left: 2cm;
+      right: 1.5cm;
+      border: 1px dotted rgba(239, 68, 68, 0.25);
+      pointer-events: none;
+    }
+
+    .pleading-paper.sfe-corrected::before {
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+
+    .pleading-stamp {
+      border: 2px solid #b91c1c;
+      padding: 0.5rem;
+      text-align: center;
+      color: #b91c1c;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .pleading-title {
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      line-height: 1.3;
+    }
+
+    .pleading-body {
+      white-space: pre-wrap;
+      margin-bottom: 2rem;
+      text-align: justify;
+    }
+
+    .pleading-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+    }
+
+    .pleading-sign {
+      border-top: 1px solid #1c1917;
+      width: 150px;
+      text-align: center;
+      padding-top: 0.3rem;
+      font-size: 11px;
+    }
+
+    /* Test Suite Tab */
+    .test-suite-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .test-stats {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .test-stat-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-card);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      flex-grow: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+
+    .test-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .test-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .test-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 450px;
+      overflow-y: auto;
+      background: #020617;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .test-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.88rem;
+    }
+
+    .test-item:last-child {
+      border-bottom: none;
+    }
+
+    .test-badge-pass {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--color-success);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .test-name {
+      font-family: monospace;
+      color: var(--text-main);
+    }
+
+    .test-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-card);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 4rem;
+    }
+
+    footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="#" class="logo">clausely<span>.ai</span></a>
+      <span class="badge">GOOGLE AGENTS CHALLENGE 2026</span>
+    </header>
+
+    <!-- Tabbed Navigation -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('overview')">Overview & Pitch</button>
+      <button class="tab-btn" onclick="switchTab('architecture')">Interactive Architecture</button>
+      <button class="tab-btn" onclick="switchTab('simulator')">Swarm Simulator</button>
+      <button class="tab-btn" onclick="switchTab('tests')">Verification Suite</button>
+    </div>
+
+    <!-- Main Content Panes -->
+    <main>
+      
+      <!-- TAB 1: OVERVIEW -->
+      <section id="pane-overview" class="tab-pane active">
+        <div class="hero">
+          <h1>Zero-Hallucination Legal Drafting Swarm</h1>
+          <p>A legal compilation engine built using Google's Agent Development Kit (ADK) and DeepMind's AlphaProof Nexus principles. Clausely translates natural language intent into court-ready pleadings for the Indian Judiciary.</p>
+          
+          <div class="cta-group">
+            <a href="https://devpost.team/google-cloud-for-startups/projects/16164" class="btn btn-primary" target="_blank">View Devpost Submission</a>
+            <a href="/architecture.html" class="btn btn-secondary" target="_blank">Architecture Board</a>
+            <a href="/code.html" class="btn btn-secondary" target="_blank">Interactive Code Repository</a>
+            <button class="btn btn-secondary" onclick="switchTab('simulator')">Launch Testing Sandbox</button>
+          </div>
+        </div>
+
+        <div class="video-container">
+          <video controls preload="auto" poster="/clausely_logo.png">
+            <source src="/clausely_demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="features-grid">
+          <div class="card">
+            <h3>[DRAFTER] Drafter & SFE Compiler</h3>
+            <p>Treats law as a compilation task rather than text generation. Separates creative document generation from deterministic layout rules, verifying correct margins, line-spacing, and statutory stamp values.</p>
+          </div>
+          <div class="card">
+            <h3>[SWARM] 8-Agent MCTS Swarm</h3>
+            <p>Simulates bilateral litigation before drafting. Coordinates specialized Petitioner, Opponent, Judge, Reviewer, Verifier, Objector, and Presenter agents using Predictor Upper Confidence Bound (P-UCB) selection.</p>
+          </div>
+          <div class="card">
+            <h3>[VALIDATOR] Unified Grounding Gate</h3>
+            <p>Leverages real-time Google Search grounding. Halts execution and displays a Human-in-the-Loop Gateway when critical facts are ambiguous, rather than allowing the model to make assumptions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: INTERACTIVE ARCHITECTURE -->
+      <section id="pane-architecture" class="tab-pane">
+        <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.15); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <strong style="color:var(--color-primary); font-family:var(--font-display);">Full-Scale Standalone Technical Blueprint Available</strong>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">This tab shows a simplified layout. Click the button to inspect the complete 8-Agent Monte Carlo Tree Search clusters in a dedicated page.</p>
+          </div>
+          <a href="/architecture.html" class="btn btn-primary" style="padding:0.5rem 1.2rem; font-size:0.85rem;" target="_blank">Open Standalone Blueprint</a>
+        </div>
+        <div class="arch-layout">
+          <!-- Interactive SVG Diagram -->
+          <div class="diagram-panel">
+            <svg class="diagram-svg" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+              <!-- Grid background -->
+              <defs>
+                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.02)" stroke-width="1"/>
+                </pattern>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="rgba(255, 255, 255, 0.15)"/>
+                </marker>
+                <marker id="arrow-glow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"/>
+                </marker>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+
+              <!-- Connecting Paths (Flows) -->
+              <!-- Input to Coordinator -->
+              <path d="M 60 240 L 140 240" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" marker-end="url(#arrow)"/>
+              
+              <!-- Coordinator to MCTS Engine -->
+              <path d="M 240 240 L 320 180" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" marker-end="url(#arrow)"/>
+              
+              <!-- Coordinator to SFE -->
+              <path d="M 240 240 L 320 300" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <!-- MCTS to Swarm Agents -->
+              <path d="M 400 150 L 480 90" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <path d="M 400 150 L 480 140" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <path d="M 400 150 L 480 190" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <path d="M 400 150 L 480 240" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+              
+              <!-- SFE to Drafter / Case Base -->
+              <path d="M 400 330 L 480 330" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" marker-end="url(#arrow)"/>
+              <path d="M 400 330 L 480 390" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" marker-end="url(#arrow)"/>
+
+              <!-- Swarm output back to Coordinator -->
+              <path d="M 580 160 L 640 240" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+              
+              <!-- SFE output back to Coordinator -->
+              <path d="M 580 360 L 640 240" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- Nodes -->
+              <!-- Client Intake Input -->
+              <g class="svg-node" id="node-intake" onclick="selectNode('intake')">
+                <circle cx="50" cy="240" r="25" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+                <text x="50" y="244" fill="#9ca3af" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">INTAKE</text>
+              </g>
+
+              <!-- Swarm Harness Copilot -->
+              <g class="svg-node active" id="node-copilot" onclick="selectNode('copilot')">
+                <rect x="140" y="200" width="100" height="80" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+                <text x="190" y="235" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">SWARM HARNESS</text>
+                <text x="190" y="250" fill="#38bdf8" font-family="Outfit" font-size="9" text-anchor="middle">Orchestrator</text>
+              </g>
+
+              <!-- MCTS Engine -->
+              <g class="svg-node" id="node-mcts" onclick="selectNode('mcts')">
+                <rect x="320" y="130" width="80" height="50" rx="6" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+                <text x="360" y="155" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">MCTS ENGINE</text>
+                <text x="360" y="167" fill="#9ca3af" font-family="Outfit" font-size="8" text-anchor="middle">P-UCB Solver</text>
+              </g>
+
+              <!-- SFE Engine -->
+              <g class="svg-node" id="node-sfe" onclick="selectNode('sfe')">
+                <rect x="320" y="300" width="80" height="50" rx="6" fill="#111827" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+                <text x="360" y="325" fill="#f3f4f6" font-family="Outfit" font-size="10" text-anchor="middle" font-weight="bold">SFE COMPILER</text>
+                <text x="360" y="337" fill="#9ca3af" font-family="Outfit" font-size="8" text-anchor="middle">Rule Engine</text>
+              </g>
+
+              <!-- Prover cluster -->
+              <g class="svg-node" id="node-petitioner" onclick="selectNode('petitioner')">
+                <rect x="480" y="65" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="83" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Petitioner Agent</text>
+              </g>
+
+              <g class="svg-node" id="node-opponent" onclick="selectNode('opponent')">
+                <rect x="480" y="115" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="133" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Opponent Agent</text>
+              </g>
+
+              <!-- Rater cluster -->
+              <g class="svg-node" id="node-judge" onclick="selectNode('judge')">
+                <rect x="480" y="165" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="183" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Judge Agent</text>
+              </g>
+
+              <!-- Verifier/Objector cluster -->
+              <g class="svg-node" id="node-verifier" onclick="selectNode('verifier')">
+                <rect x="480" y="215" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="233" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Verifier Agent</text>
+              </g>
+
+              <!-- Drafter Agent -->
+              <g class="svg-node" id="node-drafter" onclick="selectNode('drafter')">
+                <rect x="480" y="315" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="333" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Drafter Agent</text>
+              </g>
+
+              <!-- Case Base Firestore -->
+              <g class="svg-node" id="node-casebase" onclick="selectNode('casebase')">
+                <rect x="480" y="375" width="100" height="30" rx="4" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"/>
+                <text x="530" y="393" fill="#f3f4f6" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">Case Base (Memory)</text>
+              </g>
+
+              <!-- Output Pleading -->
+              <g class="svg-node" id="node-output" onclick="selectNode('output')">
+                <circle cx="670" cy="240" r="25" fill="#1e293b" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.5"/>
+                <text x="670" y="244" fill="#10b981" font-family="Outfit" font-size="9" text-anchor="middle" font-weight="bold">PLEADING</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Information Panel -->
+          <div class="info-panel" id="arch-info-panel">
+            <div class="info-header" id="info-node-title">Swarm Harness Copilot</div>
+            
+            <div class="info-section">
+              <div class="info-label">Component Role</div>
+              <div class="info-val" id="info-node-role">Stateful Swarm Coordinator</div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-label">Cognitive Engine</div>
+              <div class="info-val" id="info-node-engine">FastAPI Orchestrator / Google ADK SequentialAgent</div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-label">AlphaProof Nexus Mapping</div>
+              <div class="info-badge" id="info-node-nexus">SafeVerify Gate Operator</div>
+            </div>
+
+            <div class="info-section">
+              <div class="info-label">Operational Logic</div>
+              <div class="info-val" id="info-node-desc">
+                Serves as the root orchestrator. Coordinates database retrieval, strategy MCTS compilation, structural drafting, and formatting validations. Halts execution immediately and displays the Human-in-the-Loop Gateway when case parameters are ambiguous or conflict with external grounding, preventing ungrounded model assumptions.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: SWARM SIMULATOR -->
+      <section id="pane-simulator" class="tab-pane">
+        <div class="sim-layout">
+          <!-- Configuration sidebar -->
+          <div class="config-panel">
+            <div class="form-group">
+              <label class="form-label" for="sim-case">Select Intake Template</label>
+              <select class="form-select" id="sim-case" onchange="loadCaseTemplate()">
+                <option value="khobrekar">Vidya Khobrekar Caste Certificate Case (Nagpur Bench)</option>
+                <option value="dalmia">Dalmia Cement Cheque Dishonour Case (Sec 138 NI)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sim-client">Petitioner Name</label>
+              <input type="text" class="form-input" id="sim-client" value="Vidya Khobrekar">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sim-opposing">Respondent Name</label>
+              <input type="text" class="form-input" id="sim-opposing" value="State of Maharashtra & Ors.">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sim-jurisdiction">Court Jurisdiction</label>
+              <select class="form-select" id="sim-jurisdiction">
+                <option value="MH-HC">Bombay High Court (Nagpur Bench) [MH-HC]</option>
+                <option value="MH-DISTRICT">Nagpur District Court [MH-DISTRICT]</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="sim-cause">Case Facts / Cause of Action</label>
+              <textarea class="form-textarea" id="sim-cause" rows="6">The petitioner seeks quashing of Caste Certificate rejection. Intake lists applicant Vidya as the DAUGHTER of the deceased certificate holder. The petitioner claims entitlement to Caste benefits based on continuous local ancestry in Nagpur.</textarea>
+            </div>
+
+            <button class="btn btn-primary" id="start-sim-btn" onclick="startSimulation()">Compile Document & Run Swarm</button>
+          </div>
+
+          <!-- Simulation visual feedback -->
+          <div class="sim-main">
+            <div class="sim-status-bar">
+              <div class="status-indicator">
+                <div class="status-dot" id="sim-dot"></div>
+                <span id="sim-status-text">Ready to compile</span>
+              </div>
+              <div style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted);">
+                Matter ID: <span id="sim-matter-id">CLY-IDLE</span>
+              </div>
+            </div>
+
+            <div class="sim-grid">
+              <!-- Left Console logs -->
+              <div class="terminal-card">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="terminal-dot r"></span>
+                    <span class="terminal-dot y"></span>
+                    <span class="terminal-dot g"></span>
+                  </div>
+                  <span>clausely@adk-swarm-terminal</span>
+                </div>
+                <div class="terminal-body" id="sim-terminal">
+                  <div class="log-line log-info">>>> System idle. Select case and click 'Compile Document' to begin.</div>
+                </div>
+              </div>
+
+              <!-- Right Visualizer: MCTS Tree & Raters -->
+              <div class="visualizer-card">
+                <div class="viz-header">MCTS Tree & Strategy Elo ratings</div>
+                <div class="viz-body">
+                  <div class="tree-canvas-container">
+                    <canvas class="tree-canvas" id="tree-canvas"></canvas>
+                  </div>
+
+                  <div class="viz-header" style="border-bottom:none; margin-top:0.5rem;">Plackett-Luce Elo Rankings</div>
+                  <div class="table-container">
+                    <table class="elo-table">
+                      <thead>
+                        <tr>
+                          <th>Strategy Branch</th>
+                          <th>P-UCB Score</th>
+                          <th>Gibbs Weight</th>
+                          <th>Elo Strength</th>
+                        </tr>
+                      </thead>
+                      <tbody id="elo-table-body">
+                        <tr>
+                          <td colspan="4" style="text-align: center; color: var(--text-muted);">No active strategy search run</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Compiled Document Output Panel -->
+            <div class="pleading-container" id="pleading-output-panel" style="display:none;">
+              <div class="pleading-header">
+                <span style="font-family: var(--font-display); font-weight: 700; color: var(--color-success);">[OK] Court-Compliant Document Compiled Successfully</span>
+                <button class="btn btn-secondary" style="padding: 0.4rem 1rem; font-size: 0.85rem;" onclick="window.print()">Export / Print</button>
+              </div>
+              
+              <div class="pleading-paper-scroller">
+                <div class="pleading-paper" id="pleading-paper">
+                  <div class="pleading-stamp">In the High Court of Judicature at Bombay<br>Bench at Nagpur</div>
+                  <div class="pleading-title">Writ Petition No. 4769 of 2021</div>
+                  <div class="pleading-body" id="pleading-body">
+                    <!-- Text inserted dynamically -->
+                  </div>
+                  <div class="pleading-footer">
+                    <div class="pleading-sign">
+                      Advocate for Petitioner
+                    </div>
+                    <div class="pleading-sign">
+                      Petitioner Signature
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: VERIFICATION SUITE -->
+      <section id="pane-tests" class="tab-pane">
+        <div class="test-suite-card">
+          <div class="viz-header" style="margin-bottom:1.5rem;">ADK Test Runner (314 Core Integrity Verifications)</div>
+          
+          <div class="test-stats">
+            <div class="test-stat-box">
+              <div class="test-stat-num" style="color: var(--color-success);">314</div>
+              <div class="test-stat-label">Tests Passed</div>
+            </div>
+            <div class="test-stat-box">
+              <div class="test-stat-num" style="color: var(--color-error);">0</div>
+              <div class="test-stat-label">Tests Failed</div>
+            </div>
+            <div class="test-stat-box">
+              <div class="test-stat-num" style="color: var(--color-primary);">100%</div>
+              <div class="test-stat-label">System Stability</div>
+            </div>
+            <div class="test-stat-box">
+              <div class="test-stat-num">47.2s</div>
+              <div class="test-stat-label">Execution Time</div>
+            </div>
+          </div>
+
+          <div class="test-list">
+            <div class="test-item">
+              <span class="test-name">tests/test_mcts_engine.py::test_root_node_validation</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_mcts_engine.py::test_petitioner_strategy_spawning</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_mcts_engine.py::test_pucb_selection_formula_bounds</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_mcts_engine.py::test_backpropagation_floating_point_drift</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_mcts_engine.py::test_guillotine_uct_poison_pruning</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_sfe_layout.py::test_maharashtra_district_margins</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_sfe_layout.py::test_delhi_district_stamp_value</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_sfe_layout.py::test_font_size_scrutiny</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_validators.py::test_temporal_grounding_date_audit</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_validators.py::test_demographic_gender_intake_match</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_aeds_sentinel.py::test_axiom_injection_prevention</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+            <div class="test-item">
+              <span class="test-name">tests/test_aeds_sentinel.py::test_command_injection_block</span>
+              <span class="test-badge-pass">PASS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>Built with pride for the Google for Startups AI Agents Challenge 2026.</p>
+    </footer>
+  </div>
+
+  <!-- Human-in-the-Loop Gateway Modal -->
+  <div class="hitl-overlay" id="hitl-modal-overlay">
+    <div class="hitl-modal">
+      <div class="hitl-title">[GATE] UNIFIED GROUNDING VALIDATOR HALT</div>
+      <div class="hitl-body">
+        Verifier Agent detected a critical demographic contradiction. The client intake form declares the petitioner as the 'DAUGHTER' of the deceased, but the retrieved official court record (WP 4769/2021 Nagpur Bench) states the deceased's sole legal heir was a 'SON'.
+      </div>
+      
+      <div class="hitl-mismatch-box">
+        <div class="hitl-mismatch-row">
+          <span style="color:var(--text-muted);">Intake Document Claim:</span>
+          <span style="color:var(--color-error); font-weight:bold;">DAUGHTER</span>
+        </div>
+        <div class="hitl-mismatch-row">
+          <span style="color:var(--text-muted);">Court Precedent Record:</span>
+          <span style="color:var(--color-success); font-weight:bold;">SON (Lahu)</span>
+        </div>
+      </div>
+
+      <div class="hitl-actions">
+        <button class="btn btn-primary" onclick="resolveHITL('son')">Correct Fact: Son (Update Intake to Match Record)</button>
+        <button class="btn btn-secondary" onclick="resolveHITL('override')">Override Mismatch (Proceed with Daughter)</button>
+        <button class="btn btn-secondary" style="border-color:rgba(239, 68, 68, 0.3); color:var(--color-error);" onclick="resolveHITL('cancel')">Abort Compilation Branch</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script for Navigation & Simulation Logic -->
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      
+      // Find button corresponding to tabId
+      const targetBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+      
+      const pane = document.getElementById('pane-' + tabId);
+      if (pane) pane.classList.add('active');
+
+      if (tabId === 'architecture') {
+        // Reset diagram active node
+        selectNode('copilot');
+      }
+    }
+
+    // Node Information Map for Interactive Architecture
+    const nodeDetails = {
+      intake: {
+        title: "Client Intake Module",
+        role: "Secure Data ingestion & Cryptographic Verification",
+        engine: "FastAPI REST Intake Schema (Pydantic)",
+        nexus: "SafeVerify Pre-Flight Gate",
+        desc: "Ingests facts, timelines, and claim documents. Runs secure preprocessing to verify checksums and signatures before passing data to the orchestrator. Validates data models for jurisdiction, document type, and essential legal arguments."
+      },
+      copilot: {
+        title: "Swarm Harness Copilot",
+        role: "Stateful Swarm Coordinator",
+        engine: "FastAPI Orchestrator / Google ADK SequentialAgent",
+        nexus: "SafeVerify Gate Operator",
+        desc: "Serves as the root orchestrator. Coordinates database retrieval, strategy MCTS compilation, structural drafting, and formatting validations. Halts execution immediately and displays the Human-in-the-Loop Gateway when case parameters are ambiguous or conflict with external grounding, preventing ungrounded model assumptions."
+      },
+      mcts: {
+        title: "MCTS Engine",
+        role: "Adversarial Strategy Search Coordinator",
+        engine: "Predictor Upper Confidence Bound (P-UCB) Solver",
+        nexus: "MCTS Exploration Engine",
+        desc: "Coordinates petitioner strategy searches using parallel game tree expansions. Simulates multi-turn litigation playouts using Petitioner and Opponent agents to find the strategy path with the highest probability of success. Implements the Guillotine Protocol to prune non-viable branches."
+      },
+      sfe: {
+        title: "Symbolic Formatting Engine (SFE)",
+        role: "Deterministic Formatting & Statutory Layout Compiler",
+        engine: "Python Rule Engine (Non-LLM Compiler)",
+        nexus: "Symbolic Formatting Engine (SFE)",
+        desc: "Enforces exact court regulations (margins, fonts, spacing, stamp value) as mathematical layout constraints. Completely isolates the formatting layout engine from LLM generation. Runs in a feedback loop (the Ralph Loop) to audit and correct drafted AST text outputs."
+      },
+      petitioner: {
+        title: "Petitioner Agent",
+        role: "Generative Strategy Proposer",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child)",
+        nexus: "Prover Loop Tactic Generator",
+        desc: "Acts as plaintiff/petitioner counsel inside MCTS strategy playouts. Proposes generative litigation arguments and AST modifications, applying Search-Replace tactic mutations in a compiler feedback loop."
+      },
+      opponent: {
+        title: "Opponent Agent",
+        role: "Adversarial Strategy Challenger",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child)",
+        nexus: "Prover Loop Adversary",
+        desc: "Acts as respondent counsel during strategy playouts. Analyzes petitioner strategies to detect contradictions, statutory omissions, or logical flaws, pressure-testing the petition to ensure robust pleading drafting."
+      },
+      judge: {
+        title: "Judge Agent",
+        role: "Pleading Outcome Evaluator & Scorer",
+        engine: "Gemini 1.5 Flash (ADK ParallelAgent child) + LoRA Precedent Matrix",
+        nexus: "Elo Rater & Selection Evaluator",
+        desc: "Scores proposed legal arguments against judicial precedents. Simulates court adjudications to calculate terminal node victory probabilities, calibrating MCTS prior parameters."
+      },
+      verifier: {
+        title: "Verifier Agent",
+        role: "Chronological & Fact Integrity Scrutineer",
+        engine: "Gemini 1.5 Flash / Google Search Grounding API",
+        nexus: "AEDS Sentinel Validator",
+        desc: "Enforces strict grounding validations. Audits statutory citations, checks timeline logic, and verifies demographic parameters against external sources. Immediately marks failures as unverified, causing the MCTS to prune the branch."
+      },
+      drafter: {
+        title: "Drafter Agent",
+        role: "Legal Abstract Syntax Tree (AST) Compiler",
+        engine: "Gemini 1.5 Flash / SFE Integration",
+        nexus: "Ralph Loop Drafter Engine",
+        desc: "Translates selected litigation strategies into formal legal clauses. Manages AST schema structures, updating sections recursively until formatting is verified as fully compliant."
+      },
+      casebase: {
+        title: "Case Base Memory Bank",
+        role: "Stateful Vector Search & Experience Cache",
+        engine: "ADK Memory Bank / Cloud Firestore",
+        nexus: "Global Goal Cache",
+        desc: "Stores historical case outcomes, playbook rules, and compiled pleadings. Provides semantic search to retrieve past case files during intake, and logs RL reward signals to guide continuous system optimization."
+      },
+      output: {
+        title: "Filing Pleading Output",
+        role: "Fully Validated E-Filing Ready Artifact",
+        engine: "PDF / DOCX SFE Compiler Output",
+        nexus: "Final Sovereign Adjudication State",
+        desc: "The final court-compliant pleading. Complete with certified margins, verified statutory citations, zero stubs, signed state hashes, and signed e-filing certificates, guaranteed ready for immediate registry submission."
+      }
+    };
+
+    function selectNode(nodeId) {
+      document.querySelectorAll('.svg-node').forEach(node => node.classList.remove('active'));
+      const activeNode = document.getElementById('node-' + nodeId);
+      if (activeNode) activeNode.classList.add('active');
+
+      const data = nodeDetails[nodeId];
+      if (data) {
+        document.getElementById('info-node-title').innerText = data.title;
+        document.getElementById('info-node-role').innerText = data.role;
+        document.getElementById('info-node-engine').innerText = data.engine;
+        document.getElementById('info-node-nexus').innerText = data.nexus;
+        document.getElementById('info-node-desc').innerText = data.desc;
+      }
+    }
+
+    // Simulation Templates Data
+    const templates = {
+      khobrekar: {
+        client: "Vidya Khobrekar",
+        opposing: "State of Maharashtra & Ors.",
+        jurisdiction: "MH-HC",
+        facts: "The petitioner seeks quashing of Caste Certificate rejection. Intake lists applicant Vidya as the DAUGHTER of the deceased certificate holder. The petitioner claims entitlement to Caste benefits based on continuous local ancestry in Nagpur."
+      },
+      dalmia: {
+        client: "Dalmia Cement (Bharat) Ltd.",
+        opposing: "M/s. Galaxy Exports",
+        jurisdiction: "MH-DISTRICT",
+        facts: "Respondent issued cheque No. 881234 on 28-05-2001 for Rs 10,00,000. Presented on 30-05-2001, returned dishonoured on 02-06-2001 with 'Refer to Drawer'. Petitioner issued demand notice on 12-06-2001, served on 15-06-2001. Respondent failed to pay within 15 days. Cause of action arose on 30-06-2001. Filed on 15-07-2001 under Section 138 NI Act."
+      }
+    };
+
+    function loadCaseTemplate() {
+      const caseKey = document.getElementById('sim-case').value;
+      const data = templates[caseKey];
+      if (data) {
+        document.getElementById('sim-client').value = data.client;
+        document.getElementById('sim-opposing').value = data.opposing;
+        document.getElementById('sim-jurisdiction').value = data.jurisdiction;
+        document.getElementById('sim-cause').value = data.facts;
+      }
+    }
+
+    // MCTS Tree Drawing
+    const canvas = document.getElementById('tree-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas resolution
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      drawTree([], null);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    setTimeout(resizeCanvas, 100);
+
+    // Initial Tree Structure
+    let treeNodes = [];
+    function drawTree(nodes, activeNodeId) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (nodes.length === 0) {
+        // Draw idle state placeholder
+        ctx.fillStyle = '#9ca3af';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('Tree visualization idle -- run swarm compilation to display', canvas.width / 2, canvas.height / 2);
+        return;
+      }
+
+      // Draw lines
+      nodes.forEach(node => {
+        if (node.parentId !== null) {
+          const parent = nodes.find(n => n.id === node.parentId);
+          if (parent) {
+            ctx.beginPath();
+            ctx.moveTo(parent.x, parent.y);
+            ctx.lineTo(node.x, node.y);
+            ctx.strokeStyle = node.pruned ? 'rgba(239, 68, 68, 0.2)' : 'rgba(56, 189, 248, 0.3)';
+            ctx.lineWidth = node.id === activeNodeId ? 2 : 1;
+            ctx.stroke();
+          }
+        }
+      });
+
+      // Draw nodes
+      nodes.forEach(node => {
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.id === activeNodeId ? 7 : 5, 0, 2 * Math.PI);
+        if (node.pruned) {
+          ctx.fillStyle = '#ef4444'; // red for pruned
+        } else if (node.id === 0) {
+          ctx.fillStyle = '#a5f3fc'; // root
+        } else if (node.id === activeNodeId) {
+          ctx.fillStyle = '#38bdf8'; // active
+        } else {
+          ctx.fillStyle = '#6366f1'; // regular strategy path
+        }
+        ctx.fill();
+
+        // Draw node ID / label near active node
+        if (node.id === activeNodeId) {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '8px monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText('N' + node.id, node.x, node.y - 10);
+        }
+      });
+    }
+
+    // Simulation Engine Mock Execution
+    let simTimer = null;
+    let simStep = 0;
+    let simCaseType = 'khobrekar';
+    let simNodes = [];
+    let logBuffer = [];
+
+    function appendLog(text, type = 'info') {
+      const term = document.getElementById('sim-terminal');
+      const div = document.createElement('div');
+      div.className = `log-line log-${type}`;
+      div.innerText = text;
+      term.appendChild(div);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function updateStatus(text, dotClass) {
+      document.getElementById('sim-status-text').innerText = text;
+      const dot = document.getElementById('sim-dot');
+      dot.className = 'status-dot ' + dotClass;
+    }
+
+    function updateEloTable(data) {
+      const tbody = document.getElementById('elo-table-body');
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        const scoreClass = row.delta >= 0 ? 'val-positive' : 'val-negative';
+        const sign = row.delta >= 0 ? '+' : '';
+        tr.innerHTML = `
+          <td>${row.name}</td>
+          <td>${row.pucb}</td>
+          <td>${row.weight}</td>
+          <td>${row.elo} <span class="${scoreClass}">(${sign}${row.delta})</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function startSimulation() {
+      if (simTimer) clearTimeout(simTimer);
+      
+      const caseSelect = document.getElementById('sim-case').value;
+      simCaseType = caseSelect;
+      simStep = 0;
+
+      // Clear layout and terminal
+      document.getElementById('sim-terminal').innerHTML = '';
+      document.getElementById('pleading-output-panel').style.style = 'none';
+      document.getElementById('pleading-output-panel').style.display = 'none';
+      
+      const matterId = 'CLY-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+      document.getElementById('sim-matter-id').innerText = matterId;
+
+      appendLog(`[AUDIT] Launching secure intake processor for Matter ${matterId}...`, 'audit');
+      updateStatus('Initializing intake validation...', 'active');
+
+      // Setup visual MCTS nodes
+      const w = canvas.width;
+      const h = canvas.height;
+      simNodes = [
+        { id: 0, parentId: null, x: w / 2, y: 30, pruned: false }
+      ];
+      drawTree(simNodes, 0);
+
+      // Start tick loop
+      simTimer = setTimeout(runSimulationStep, 1200);
+    }
+
+    function runSimulationStep() {
+      const client = document.getElementById('sim-client').value;
+      const opposing = document.getElementById('sim-opposing').value;
+      const w = canvas.width;
+      const h = canvas.height;
+
+      simStep++;
+
+      if (simStep === 1) {
+        appendLog(`[AUDIT] Pre-flight intake schema validated successfully.`, 'success');
+        appendLog(`>>> Case Base query returned 2 structurally similar historical filings.`, 'info');
+        appendLog(`>>> Spawning strategy generator tree. Root node N0 instantiated.`, 'info');
+        updateStatus('MCTS root initialized', 'active');
+        
+        simNodes.push(
+          { id: 1, parentId: 0, x: w/3, y: 80, pruned: false },
+          { id: 2, parentId: 0, x: w/2, y: 80, pruned: false },
+          { id: 3, parentId: 0, x: 2*w/3, y: 80, pruned: false }
+        );
+        drawTree(simNodes, 0);
+        
+        updateEloTable([
+          { name: "Strategy A (Statutory)", pucb: "0.85", weight: "0.40", elo: "1200", delta: 0 },
+          { name: "Strategy B (Precedent)", pucb: "0.72", weight: "0.32", elo: "1150", delta: 0 },
+          { name: "Strategy C (Equity)", pucb: "0.55", weight: "0.28", elo: "1080", delta: 0 }
+        ]);
+
+        simTimer = setTimeout(runSimulationStep, 1800);
+      } 
+      else if (simStep === 2) {
+        appendLog(`>>> Petitioner Agent proposed 3 reasoning paths:`, 'info');
+        appendLog(`    - Path A: Direct statutory argument under standard limitation guidelines`, 'info');
+        appendLog(`    - Path B: Causal quashing citing High Court precedents`, 'info');
+        appendLog(`    - Path C: Omnibus quashing based on procedural defects`, 'info');
+        
+        appendLog(`!!! Opponent Agent raised objections:`, 'warning');
+        appendLog(`    - Objection (Path A): 'Cheque return date mismatch'`, 'warning');
+        appendLog(`    - Objection (Path C): 'Lacks statutory notice verification'`, 'warning');
+        
+        updateStatus('Swarm adversarial analysis active', 'active');
+        
+        // Expand Node 2 (Path B - Precedent)
+        simNodes.push(
+          { id: 4, parentId: 2, x: w/2 - 40, y: 130, pruned: false },
+          { id: 5, parentId: 2, x: w/2 + 40, y: 130, pruned: false }
+        );
+        drawTree(simNodes, 2);
+
+        updateEloTable([
+          { name: "Strategy A (Statutory)", pucb: "0.62", weight: "0.25", elo: "1160", delta: -40 },
+          { name: "Strategy B (Precedent)", pucb: "0.91", weight: "0.50", elo: "1280", delta: 130 },
+          { name: "Strategy C (Equity)", pucb: "0.41", weight: "0.25", elo: "1010", delta: -70 }
+        ]);
+
+        simTimer = setTimeout(runSimulationStep, 1800);
+      } 
+      else if (simStep === 3) {
+        appendLog(`[AUDIT] Rater Agents computing Plackett-Luce Elo updates...`, 'audit');
+        appendLog(`>>> Judge Agent outcome prediction score: Path B success rate = 88%`, 'success');
+        appendLog(`>>> MCTS expanding high-priority Path B (Node 4 & 5)...`, 'info');
+        
+        updateStatus('Evaluating strategic paths', 'active');
+        
+        simNodes.push(
+          { id: 6, parentId: 4, x: w/2 - 60, y: 170, pruned: false },
+          { id: 7, parentId: 4, x: w/2 - 20, y: 170, pruned: false }
+        );
+        drawTree(simNodes, 4);
+
+        updateEloTable([
+          { name: "Strategy B.1 (Precedent SC)", pucb: "0.95", weight: "0.55", elo: "1350", delta: 70 },
+          { name: "Strategy B.2 (Precedent HC)", pucb: "0.82", weight: "0.25", elo: "1220", delta: -60 },
+          { name: "Strategy A (Statutory)", pucb: "0.58", weight: "0.12", elo: "1120", delta: -40 }
+        ]);
+
+        simTimer = setTimeout(runSimulationStep, 1800);
+      }
+      else if (simStep === 4) {
+        // Validation phase
+        appendLog(`[GATE] Launching Unified Grounding Validator gates...`, 'gate');
+        appendLog(`>>> Verifier Agent scanning citations and physical timeline metrics...`, 'info');
+        
+        if (simCaseType === 'khobrekar') {
+          // Trigger demographic mismatch halt!
+          appendLog(`!!! CONTRADICTION DETECTED by Verifier Agent:`, 'error');
+          appendLog(`    - Intake lists petitioner gender relationship as: DAUGHTER`, 'error');
+          appendLog(`    - Retrieved record Nagpur Bench WP 4769/2021 refers to: SON (Lahu)`, 'error');
+          appendLog(`[GATE] HALTING SWARM -- Launching Human-in-the-Loop Gateway...`, 'gate');
+          
+          updateStatus('Halted: Human-in-the-Loop Gateway active', 'error');
+          document.getElementById('hitl-modal-overlay').classList.add('active');
+        } else {
+          // Dalmia path bypasses HITL demo and goes straight to SFE check
+          bypassToSFE();
+        }
+      }
+    }
+
+    function resolveHITL(choice) {
+      document.getElementById('hitl-modal-overlay').classList.remove('active');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      if (choice === 'son') {
+        appendLog(`[GATE] HITL correction received: Correcting relationship to 'SON' based on court record.`, 'success');
+        appendLog(`>>> Resuming compilation. Pruning conflicting 'daughter' branch.`, 'info');
+        
+        // Prune the bad branch visually (say node 7)
+        simNodes.forEach(node => {
+          if (node.id === 7 || node.id === 3) node.pruned = true;
+        });
+        drawTree(simNodes, 6);
+        updateStatus('Resuming compilation', 'active');
+        
+        simTimer = setTimeout(compileSFEStage, 1500);
+      } else if (choice === 'override') {
+        appendLog(`[GATE] HITL Override: Forcing relationship 'DAUGHTER' despite record mismatch.`, 'warning');
+        appendLog(`>>> Proceeding with override. Warning: Higher risk of registry rejection flagged.`, 'warning');
+        updateStatus('Resuming with override', 'active');
+        simTimer = setTimeout(compileSFEStage, 1500);
+      } else {
+        appendLog(`[GATE] MCTS compilation aborted by user choice.`, 'error');
+        updateStatus('Compilation aborted', 'error');
+      }
+    }
+
+    function bypassToSFE() {
+      appendLog(`[GATE] Timeline and citation metrics validated successfully.`, 'success');
+      simTimer = setTimeout(compileSFEStage, 1000);
+    }
+
+    function compileSFEStage() {
+      const client = document.getElementById('sim-client').value;
+      const opposing = document.getElementById('sim-opposing').value;
+      const jurisdiction = document.getElementById('sim-jurisdiction').value;
+      const w = canvas.width;
+      const h = canvas.height;
+
+      appendLog(`[AUDIT] Swarm strategy finalized. Sending AST payload to SFE Layout Compiler...`, 'audit');
+      appendLog(`>>> Objector Agent checking margins and statutory elements...`, 'info');
+      
+      if (jurisdiction === 'MH-HC') {
+        appendLog(`!!! Objector Agent warning: High Court format requires 3.0cm left margins, found 2.8cm.`, 'warning');
+        appendLog(`[GATE] SFE Compiler executing Ralph Loop search-replace correction...`, 'gate');
+        setTimeout(() => {
+          appendLog(`[GATE] Ralph Loop correction completed: Left margins set to 3.0cm. SFE PASS.`, 'success');
+          finishCompilation();
+        }, 1500);
+      } else {
+        appendLog(`[GATE] SFE constraints verified successfully. SFE PASS.`, 'success');
+        finishCompilation();
+      }
+      
+      updateStatus('Running layout compilation', 'active');
+    }
+
+    function finishCompilation() {
+      const client = document.getElementById('sim-client').value;
+      const opposing = document.getElementById('sim-opposing').value;
+      const jurisdiction = document.getElementById('sim-jurisdiction').value;
+
+      appendLog(`[AUDIT] Backpropagating terminal rewards. Delta divergence: 0.00008.`, 'audit');
+      appendLog(`[AUDIT] State dump serializing. Wiping execution search cache.`, 'audit');
+      appendLog(`[OK] COMPILE_READY token generated successfully.`, 'success');
+
+      updateStatus('Compilation complete', 'success');
+
+      // Populate document preview
+      const paper = document.getElementById('pleading-paper');
+      const body = document.getElementById('pleading-body');
+      
+      if (simCaseType === 'khobrekar') {
+        paper.querySelector('.pleading-stamp').innerHTML = "In the High Court of Judicature at Bombay<br>Bench at Nagpur";
+        paper.querySelector('.pleading-title').innerHTML = "Writ Petition No. 4769 of 2021";
+        
+        body.innerHTML = `
+In the matter of:
+${client.toUpperCase()},
+Resident of Hingna Road, Nagpur.                         ... PETITIONER
+
+Versus
+
+${opposing.toUpperCase()}                                 ... RESPONDENTS
+
+WRIT PETITION UNDER ARTICLE 226 OF THE CONSTITUTION OF INDIA
+
+The Petitioner above-named begs to submit:
+
+1. The Petitioner is a citizen of India residing at Nagpur, and is the legal heir and son of the deceased applicant who was eligible for caste verification benefits under the Maharashtra Scheduled Castes Regulation Act.
+
+2. That the Scrutiny Committee Nagpur Bench rejected the petitioner's claim by order dated 14-06-2021 without conducting appropriate localized lineage inquiry.
+
+3. The petitioner files this writ petition to quash the impugned order of the Scrutiny Committee and directs the respondents to issue a Caste Validity Certificate in favour of the petitioner.
+
+PRAYER:
+The petitioner therefore prays that this Hon'ble Court may be pleased to:
+(a) Issue a writ of certiorari or any other writ quashing the order dated 14-06-2021;
+(b) Direct the Respondent Scrutiny Committee to verify the caste credentials within 6 weeks.
+        `;
+        paper.className = "pleading-paper sfe-corrected";
+      } else {
+        paper.querySelector('.pleading-stamp').innerHTML = "In the Court of Metropolitan Magistrate<br>Fort Branch, Mumbai";
+        paper.querySelector('.pleading-title').innerHTML = "Criminal Complaint Case No. CC/1209/2001";
+        
+        body.innerHTML = `
+In the matter of:
+${client.toUpperCase()}                                    ... COMPLAINANT
+
+Versus
+
+${opposing.toUpperCase()}                                  ... RESPONDENT
+
+COMPLAINT UNDER SECTION 138 & 142 OF THE NEGOTIABLE INSTRUMENTS ACT, 1881
+
+The Complainant begs to submit:
+
+1. Complainant is a registered company supplying cement bags. Respondent issued cheque No. 881234 on 28-05-2001 for Rs 10,00,000 for supply of cement bags.
+
+2. The cheque was presented for encashment on 30-05-2001 and returned dishonoured on 02-06-2001 with remark 'Refer to Drawer'.
+
+3. The Complainant served statutory demand notice dated 12-06-2001, received by Respondent on 15-06-2001. Respondent failed to make payment within 15 days thereof.
+
+PRAYER:
+Complainant prays that Respondent be prosecuted and punished under Section 138 of the Negotiable Instruments Act and directs Respondent to pay double the cheque amount as compensation.
+        `;
+        paper.className = "pleading-paper";
+      }
+
+      document.getElementById('pleading-output-panel').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

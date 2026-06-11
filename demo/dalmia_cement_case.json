@@ -1,0 +1,13 @@
+{
+  "jurisdiction": "MH-DISTRICT",
+  "document_type": "Legal Notice",
+  "court_name": "Metropolitan Magistrate Court, Mumbai",
+  "case_number": "CC/1209/2001",
+  "client_name": "Dalmia Cement (Bharat) Ltd.",
+  "opposing_party": "M/s. Galaxy Exports",
+  "cause_of_action": "The respondent M/s. Galaxy Exports issued a cheque bearing No. 881234 dated 28-05-2001, drawn on Canara Bank, Fort Branch, Mumbai, for Rs. 10,00,000/- (Rupees Ten Lakhs Only) in favour of the petitioner for supply of cement bags. The cheque was presented for encashment on 30-05-2001 and was returned dishonoured on 02-06-2001 with the remark 'Refer to Drawer'. The petitioner issued a demand notice on 12-06-2001, which was served on the respondent on 15-06-2001. The respondent failed to pay within the statutory 15 days. The cause of action arose on 30-06-2001, and the complaint was filed on 15-07-2001, well within the 30-day limitation period under Section 142 of the Negotiable Instruments Act, 1881.",
+  "relief_sought": "Recovery of Rs. 10,00,000/- along with interest at 18% per annum and prosecution of the respondent under Section 138 of the Negotiable Instruments Act.",
+  "language": "English",
+  "prompt": "Emphasize service of notice on 15-06-2001 and completion of 15 days statutory grace period on 30-06-2001.",
+  "run_strategy": true
+}

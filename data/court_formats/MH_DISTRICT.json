@@ -1,0 +1,61 @@
+{
+  "court_name": "Maharashtra District Court",
+  "jurisdiction_code": "MH-DISTRICT",
+  "margin_left_cm": 3.0,
+  "margin_right_cm": 2.5,
+  "margin_top_cm": 2.5,
+  "margin_bottom_cm": 2.0,
+  "font_body": "Times New Roman",
+  "font_size_body": 14,
+  "font_heading": "Times New Roman",
+  "font_size_heading": 14,
+  "font_heading_bold": true,
+  "line_spacing": 1.5,
+  "paragraph_spacing_before": 0,
+  "paragraph_spacing_after": 12,
+  "header_required": true,
+  "header_format": "IN THE COURT OF THE {court_designation}\n{city_name}\n\n{case_type} NO. {case_number} OF {year}",
+  "footer_required": true,
+  "footer_format": "Page {page_num} of {total_pages} | Advocate: {advocate_name} | Bar No. {bar_number}",
+  "stamp_paper_required": true,
+  "stamp_paper_value": "100",
+  "stamp_paper_currency": "INR",
+  "notary_required": true,
+  "verification_clause_required": true,
+  "language_options": ["en", "hi", "mr"],
+  "required_sections": [
+    "cause_title",
+    "jurisdiction_clause",
+    "facts",
+    "grounds",
+    "prayer",
+    "verification",
+    "deponent_signature"
+  ],
+  "section_order": [
+    "cause_title",
+    "jurisdiction_clause",
+    "facts",
+    "grounds",
+    "prayer",
+    "verification",
+    "deponent_signature"
+  ],
+  "fatal_defects": [
+    "missing_cause_title",
+    "incorrect_margins",
+    "missing_verification",
+    "wrong_stamp_paper_value",
+    "missing_jurisdiction_clause"
+  ],
+  "curable_defects": [
+    "minor_formatting_inconsistency",
+    "missing_page_numbers",
+    "incorrect_font_size_by_1pt"
+  ],
+  "annexure_rules": {
+    "prefix": "Annexure",
+    "numbering": "alphabetical",
+    "format": "Annexure {letter}"
+  }
+}

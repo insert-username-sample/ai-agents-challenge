@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Clausely Demo Video Composition v2</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- GSAP CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #060913;
+        color: #f8fafc;
+        font-family: 'Inter', sans-serif;
+      }
+      
+      /* Glowing Background */
+      .bg-glows {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .glow-1 {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%);
+        top: -200px;
+        left: -200px;
+      }
+      .glow-2 {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+        bottom: -200px;
+        right: -200px;
+      }
+
+      /* Logo & Branding Header */
+      .video-header {
+        position: absolute;
+        top: 40px;
+        left: 80px;
+        right: 80px;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .logo-img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+      }
+      .logo-text {
+        font-family: 'Comfortaa', cursive;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .logo-text span {
+        color: #06b6d4;
+      }
+      .badge {
+        background: rgba(6, 182, 212, 0.1);
+        border: 1px solid rgba(6, 182, 212, 0.2);
+        color: #06b6d4;
+        padding: 0.6rem 1.4rem;
+        border-radius: 9999px;
+        font-family: 'Comfortaa', cursive;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* Continuous Slide Container */
+      .slides-wrapper {
+        position: absolute;
+        top: 160px;
+        left: 80px;
+        right: 80px;
+        bottom: 50px;
+        z-index: 2;
+      }
+      .slide-content {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        gap: 80px;
+        position: relative;
+      }
+      .left-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        height: 100%;
+      }
+      .right-panel {
+        flex: 1.2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 100%;
+      }
+
+      /* Animated Typography */
+      .text-block {
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(30px);
+        pointer-events: none;
+      }
+      .section-title {
+        font-family: 'Comfortaa', cursive;
+        font-size: 3.3rem;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #ffffff 50%, #a5f3fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .section-desc {
+        font-size: 1.45rem;
+        color: #94a3b8;
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      /* Visual Card Components */
+      .viz-component {
+        position: absolute;
+        width: 100%;
+        max-width: 780px;
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+        pointer-events: none;
+      }
+      
+      /* Premium Glassmorphism Cards */
+      .glass-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(16px);
+      }
+      .card-header {
+        font-family: 'Comfortaa', cursive;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: #64748b;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .code-block {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.2rem;
+        color: #38bdf8;
+        line-height: 1.5;
+        background: #070b16;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+      }
+
+      /* Specific Visual Styles */
+      /* Hook / Defect */
+      .defect-stamp {
+        border: 6px solid #ef4444;
+        color: #ef4444;
+        font-family: 'Comfortaa', cursive;
+        font-size: 2.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        padding: 15px 35px;
+        border-radius: 12px;
+        transform: rotate(-10deg);
+        background: rgba(15, 23, 42, 0.95);
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);
+        letter-spacing: 0.05em;
+        position: absolute;
+        z-index: 5;
+      }
+      .letterhead-card {
+        background: #ffffff;
+        color: #1e293b;
+        padding: 40px;
+        border-radius: 8px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        font-family: 'Inter', sans-serif;
+      }
+      .letterhead-title {
+        font-family: 'Comfortaa', cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid #1e293b;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        color: #0f172a;
+      }
+      .letterhead-body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+
+      /* Swarm Path Branching */
+      .branch-tree {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+      }
+      .branch-node {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 24px;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.15rem;
+      }
+      .branch-node.pruned {
+        border-color: rgba(239, 68, 68, 0.35);
+        background: rgba(239, 68, 68, 0.03);
+        color: #94a3b8;
+        text-decoration: line-through;
+      }
+      .branch-node.active-path {
+        border-color: #06b6d4;
+        background: rgba(6, 182, 212, 0.05);
+        color: #06b6d4;
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+      }
+      
+      /* Swarm / MCTS Agents Grid */
+      .agents-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        width: 100%;
+        margin-top: 15px;
+      }
+      .agent-node {
+        background: rgba(30, 41, 59, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        padding: 18px 10px;
+        text-align: center;
+        font-family: 'Comfortaa', cursive;
+        font-weight: 600;
+        font-size: 1.15rem;
+        color: #94a3b8;
+      }
+
+      /* AlphaProof / Elo table */
+      .elo-table {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .elo-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 20px;
+        background: rgba(30, 41, 59, 0.35);
+        border-radius: 8px;
+        font-size: 1.25rem;
+      }
+      .elo-val {
+        font-family: 'Comfortaa', cursive;
+        font-weight: 700;
+      }
+      .elo-val.glow {
+        color: #06b6d4;
+        text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+      }
+
+      /* HITL Gateway */
+      .hitl-modal {
+        background: rgba(15, 23, 42, 0.95);
+        border: 2px solid #ef4444;
+        border-radius: 16px;
+        padding: 35px;
+        width: 100%;
+        box-shadow: 0 0 50px rgba(239, 68, 68, 0.25);
+        backdrop-filter: blur(20px);
+      }
+      .hitl-header {
+        font-family: 'Comfortaa', cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ef4444;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .hitl-message {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.2rem;
+        color: #e2e8f0;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        background: #070b16;
+        padding: 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.03);
+      }
+      .hitl-actions {
+        display: flex;
+        gap: 15px;
+      }
+      .hitl-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 6px;
+        text-align: center;
+        font-family: 'Comfortaa', cursive;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+      .hitl-btn.primary {
+        background: #06b6d4;
+        color: #060913;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+      }
+      .hitl-btn.secondary {
+        border: 1px solid rgba(255,255,255,0.1);
+        color: #94a3b8;
+      }
+      
+      /* Pytest Terminal */
+      .terminal-box {
+        background: #030712;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        width: 100%;
+        padding: 25px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      }
+      .terminal-header {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        padding-bottom: 12px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .dot.red { background: #ef4444; }
+      .dot.yellow { background: #f59e0b; }
+      .dot.green { background: #10b981; }
+      .terminal-content {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #94a3b8;
+      }
+      .cmd-text {
+        color: #38bdf8;
+        font-weight: 600;
+      }
+      .passed-total {
+        color: #10b981;
+        font-weight: 700;
+        text-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+      }
+
+      /* Comparison Table */
+      .table-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+        padding: 25px;
+        width: 100%;
+      }
+      .comp-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+      .comp-table th, .comp-table td {
+        padding: 15px 18px;
+        font-size: 1.15rem;
+      }
+      .comp-table th {
+        font-family: 'Comfortaa', cursive;
+        color: #94a3b8;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .comp-table td {
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+      }
+      .feature-col { font-weight: 600; color: #e2e8f0; }
+      .them-col { color: #ef4444; }
+      .us-col { color: #06b6d4; font-weight: 700; }
+
+      /* Vision / Stats */
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        width: 100%;
+      }
+      .stat-card {
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+      }
+      .stat-num {
+        font-family: 'Comfortaa', cursive;
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: #06b6d4;
+        margin-bottom: 8px;
+      }
+      .stat-label {
+        font-size: 1.1rem;
+        color: #94a3b8;
+      }
+      .url-box {
+        margin-top: 30px;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+        border: 1px solid rgba(6, 182, 212, 0.2);
+        padding: 22px;
+        border-radius: 12px;
+        width: 100%;
+      }
+      .url-text {
+        font-family: 'Comfortaa', cursive;
+        font-size: 2.1rem;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+      .url-text span { color: #06b6d4; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="114"
+      data-width="1920"
+      data-height="1080"
+    >
+      <!-- Single Continuous Audio Narration Track -->
+      <audio id="audio-main" src="assets/full_voiceover.wav" data-start="0" data-duration="114" data-track-index="0" class="clip"></audio>
+
+      <!-- Background Glows -->
+      <div class="bg-glows">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+      </div>
+
+      <!-- Header Branding -->
+      <div class="video-header">
+        <div class="logo-container">
+          <img src="assets/clausely_logo.png" class="logo-img" alt="Clausely Logo">
+          <div class="logo-text">clausely<span>.ai</span></div>
+        </div>
+        <div class="badge">GOOGLE CLOUD RAPID AGENT HACKATHON</div>
+      </div>
+
+      <!-- Continuous Slide Arena -->
+      <div class="slides-wrapper">
+        <div class="slide-content">
+          
+          <!-- LEFT PANEL: Text Narrative updates smoothly in place -->
+          <div class="left-panel">
+            
+            <!-- Text 1: The AI Limit (0.00s - 19.71s) -->
+            <div id="text-hook" class="text-block">
+              <h1 class="section-title">The Challenge of<br>Generative AI</h1>
+              <p class="section-desc">Modern AI systems are becoming increasingly capable. But they still struggle with two fundamental problems: assumptions and hallucinations. A response can appear correct, even when critical facts were never verified.</p>
+            </div>
+            
+            <!-- Text 2: Clausely Launch (19.71s - 30.84s) -->
+            <div id="text-swarm" class="text-block">
+              <h1 class="section-title">Introducing<br>Clausely AI</h1>
+              <p class="section-desc">Clausely was built to challenge generated outputs before they become conclusions. Built on Google's Agent Development Kit, Clausely combines Gemini 3.5 Flash, Grounding with Google Search, and a coordinated swarm of specialized agents working in real time.</p>
+            </div>
+
+            <!-- Text 3: MCTS Path Generation (30.84s - 52.86s) -->
+            <div id="text-paths" class="text-block">
+              <h1 class="section-title">Decentralized Path<br>Verification</h1>
+              <p class="section-desc">When a user query enters the system, instead of committing to a single answer, Clausely generates multiple possible reasoning paths. Every path is continuously evaluated against grounded evidence, verifying facts throughout the reasoning process.</p>
+            </div>
+
+            <!-- Text 4: Swarm Operations & AlphaProof (52.86s - 80.48s) -->
+            <div id="text-alphaproof" class="text-block">
+              <h1 class="section-title">Swarm Mechanics &<br>Formal Search</h1>
+              <p class="section-desc">As facts enter, specialized agents begin evaluating paths. Sibling nodes compete and propose options, aligning closely with the verification-driven principles of Google DeepMind's AlphaProof Nexus framework.</p>
+            </div>
+
+            <!-- Text 5: Adversarial Elimination (80.48s - 97.62s) -->
+            <div id="text-pressure" class="text-block">
+              <h1 class="section-title">Adversarial Play &<br>Pruning Gates</h1>
+              <p class="section-desc">Rather than trusting the first response, Clausely compares competing possibilities and pressure-tests them. As evidence arrives, unsupported paths are pruned, and grounded paths continue forward.</p>
+            </div>
+
+            <!-- Text 6: HITL & Mismatch Case (97.62s - 120.44s) -->
+            <div id="text-hitl" class="text-block">
+              <h1 class="section-title">Human-in-the-Loop<br>Grounding</h1>
+              <p class="section-desc">When critical information is missing, Clausely does not guess. The system pauses and requests clarification. In one real-world case, a demographic mismatch was caught, eliminating the ungrounded path immediately.</p>
+            </div>
+
+            <!-- Text 7: The Vision (120.44s - 134.21s) -->
+            <div id="text-outro" class="text-block">
+              <h1 class="section-title">Zero-Hallucination<br>Compilation</h1>
+              <p class="section-desc">The result is a system designed not only to generate answers, but to verify them. Clausely demonstrates how coordinated AI agents can reduce hallucinations and produce reliable outcomes.</p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT PANEL: Visual Components morphing fluidly -->
+          <div class="right-panel">
+            
+            <!-- Hook Visual -->
+            <div id="viz-hook" class="viz-component">
+              <div class="letterhead-card">
+                <div class="letterhead-title">IN THE HIGH COURT OF JUDICATURE AT BOMBAY</div>
+                <div class="letterhead-body" style="color: #64748b;">
+                  <strong>WRIT PETITION NO. 4769 OF 2021</strong><br><br>
+                  Vidya alias Vidhyabai Khobrekar ... Petitioner<br>
+                  v.<br>
+                  State of Maharashtra ... Respondents
+                </div>
+              </div>
+              <div id="stamp-defective" class="defect-stamp" style="top: 20%; left: 30%; opacity: 0;">DEFECTIVE</div>
+            </div>
+
+            <!-- Swarm Visual -->
+            <div id="viz-swarm" class="viz-component">
+              <div class="glass-card">
+                <div class="card-header">Google ADK Swarm Hierarchy</div>
+                <div class="agents-grid">
+                  <div class="agent-node an-item">Petitioner</div>
+                  <div class="agent-node an-item">Opponent</div>
+                  <div class="agent-node an-item">Reviewer</div>
+                  <div class="agent-node an-item">Judge</div>
+                  <div class="agent-node an-item">Drafter</div>
+                  <div class="agent-node an-item">Verifier</div>
+                  <div class="agent-node an-item">Objector</div>
+                  <div class="agent-node an-item">Presenter</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paths Visual -->
+            <div id="viz-paths" class="viz-component">
+              <div class="glass-card">
+                <div class="card-header">State Tree Exploration Paths</div>
+                <div class="branch-tree">
+                  <div class="branch-node active-path" id="bp1">> Reasoning Path A [Grounding RAG Checked]</div>
+                  <div class="branch-node" id="bp2">> Reasoning Path B [Evaluating Fact Matrix]</div>
+                  <div class="branch-node" id="bp3">> Reasoning Path C [Formatting Check Gate]</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AlphaProof Visual -->
+            <div id="viz-alphaproof" class="viz-component" style="width: 100%;">
+              <div class="glass-card" style="margin-bottom: 20px;">
+                <div class="card-header">Evolutionary Strategy Ratings</div>
+                <div class="elo-table">
+                  <div class="elo-row"><span>Strategy A (Verified Tactics)</span><span class="elo-val glow" id="elo-val1">1420 (+45)</span></div>
+                  <div class="elo-row"><span>Strategy B (Adversarial Counter)</span><span class="elo-val" id="elo-val2">1050 (-45)</span></div>
+                </div>
+              </div>
+              <div class="terminal-box" style="margin-top: 15px;">
+                <div class="terminal-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <div class="terminal-content">
+                  <div>[Nexus Gate] Initializing sorry-free tactic search...</div>
+                  <div style="color: #06b6d4;">[P-UCB] Q_i = 0.94, visits = 340, elo = 1420</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pressure Visual -->
+            <div id="viz-pressure" class="viz-component">
+              <div class="glass-card">
+                <div class="card-header">Adversarial Pruning Gates</div>
+                <div class="branch-tree">
+                  <div class="branch-node active-path">> Reasoning Path A (Ground Check: OK)</div>
+                  <div class="branch-node pruned" id="bp-pruned1">> Reasoning Path B (Fictitious Timeline: VETOED)</div>
+                  <div class="branch-node pruned" id="bp-pruned2">> Reasoning Path C (Hallucinated Precedent: VETOED)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HITL Visual -->
+            <div id="viz-hitl" class="viz-component">
+              <div class="hitl-modal">
+                <div class="hitl-header">
+                  <span class="dot red" style="width: 14px; height: 14px; animation: blink 1s infinite;"></span>
+                  <span>[GATE] UNIFIED GROUNDING VALIDATOR HALT</span>
+                </div>
+                <div class="hitl-message" id="hitl-text-content">
+                  Fact Discrepancy Detected.<br>
+                  Judgment WP 4769/2021 refers to: "SON"<br>
+                  Intake Data Form specifies: "DAUGHTER"<br>
+                  Pruning branch B (UCT = -inf). Halting for verification.
+                </div>
+                <div class="hitl-actions">
+                  <div class="hitl-btn primary">Verify "SON" (Grounded from Judgment)</div>
+                  <div class="hitl-btn secondary">Edit Intake</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Outro / Vision Visual -->
+            <div id="viz-outro" class="viz-component">
+              <div class="terminal-box" style="margin-bottom: 25px;">
+                <div class="terminal-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <div class="terminal-content">
+                  <div class="cmd-line">> <span class="cmd-text">pytest tests/</span></div>
+                  <div class="passed-total" style="margin-top: 10px;">>>> 314 passed in 47.21s [GATE-VERIFIED]</div>
+                </div>
+              </div>
+              <div class="url-box">
+                <div class="url-text">clausely<span>.ai</span></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP Fluid Animation Sequence -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Slide 1: The Hook (0.00s - 16.75s)
+      tl.fromTo("#text-hook", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 0.5);
+      tl.fromTo("#viz-hook", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 0.85);
+      tl.to("#stamp-defective", { opacity: 1, scale: 1, rotation: -12, duration: 0.5, ease: "bounce.out" }, 4.7);
+      
+      // Transitions: Slide 1 -> Slide 2
+      tl.to("#text-hook", { opacity: 0, y: -30, duration: 0.8 }, 15.3);
+      tl.to("#viz-hook", { opacity: 0, scale: 0.95, duration: 0.8 }, 15.5);
+
+      // Slide 2: Introducing Clausely (16.75s - 26.20s)
+      tl.fromTo("#text-swarm", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 16.75);
+      tl.fromTo("#viz-swarm", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 17.0);
+      // Highlight agent nodes sequentially
+      const agentSelector = gsap.utils.toArray(".an-item");
+      agentSelector.forEach((node, i) => {
+        tl.to(node, { backgroundColor: "rgba(56, 189, 248, 0.15)", borderColor: "#06b6d4", color: "#06b6d4", duration: 0.25 }, 17.85 + (i * 0.3));
+      });
+      
+      // Transitions: Slide 2 -> Slide 3
+      tl.to("#text-swarm", { opacity: 0, y: -30, duration: 0.8 }, 25.1);
+      tl.to("#viz-swarm", { opacity: 0, scale: 0.95, duration: 0.8 }, 25.3);
+
+      // Slide 3: Path Generation (26.20s - 44.90s)
+      tl.fromTo("#text-paths", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 26.2);
+      tl.fromTo("#viz-paths", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 26.5);
+      tl.to("#bp1", { x: 10, duration: 0.4, yoyo: true, repeat: 1 }, 29.75);
+      tl.to("#bp2", { x: 10, duration: 0.4, yoyo: true, repeat: 1 }, 35.7);
+      
+      // Transitions: Slide 3 -> Slide 4
+      tl.to("#text-paths", { opacity: 0, y: -30, duration: 0.8 }, 43.8);
+      tl.to("#viz-paths", { opacity: 0, scale: 0.95, duration: 0.8 }, 44.0);
+
+      // Slide 4: AlphaProof & Elo (44.90s - 68.40s)
+      tl.fromTo("#text-alphaproof", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 44.9);
+      tl.fromTo("#viz-alphaproof", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 45.2);
+      tl.to("#elo-val1", { scale: 1.12, duration: 0.3, repeat: 1, yoyo: true }, 51.0);
+      tl.to("#elo-val2", { scale: 0.9, duration: 0.3, repeat: 1, yoyo: true }, 57.8);
+      
+      // Transitions: Slide 4 -> Slide 5
+      tl.to("#text-alphaproof", { opacity: 0, y: -30, duration: 0.8 }, 67.15);
+      tl.to("#viz-alphaproof", { opacity: 0, scale: 0.95, duration: 0.8 }, 67.3);
+
+      // Slide 5: Pressure & Pruning (68.40s - 83.00s)
+      tl.fromTo("#text-pressure", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 68.4);
+      tl.fromTo("#viz-pressure", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 68.7);
+      tl.to("#bp-pruned1", { color: "#ef4444", duration: 0.6 }, 72.25);
+      tl.to("#bp-pruned2", { color: "#ef4444", duration: 0.6 }, 77.35);
+      
+      // Transitions: Slide 5 -> Slide 6
+      tl.to("#text-pressure", { opacity: 0, y: -30, duration: 0.8 }, 81.6);
+      tl.to("#viz-pressure", { opacity: 0, scale: 0.95, duration: 0.8 }, 81.8);
+
+      // Slide 6: HITL & Mismatch Case (83.00s - 102.40s)
+      tl.fromTo("#text-hitl", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 83.0);
+      tl.fromTo("#viz-hitl", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 83.3);
+      tl.to("#viz-hitl .primary", { scale: 1.08, duration: 0.4, repeat: 1, yoyo: true }, 92.65);
+      
+      // Transitions: Slide 6 -> Slide 7
+      tl.to("#text-hitl", { opacity: 0, y: -30, duration: 0.8 }, 101.15);
+      tl.to("#viz-hitl", { opacity: 0, scale: 0.95, duration: 0.8 }, 101.3);
+
+      // Slide 7: Outro & Vision (102.40s - 114.00s)
+      tl.fromTo("#text-outro", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0 }, 102.4);
+      tl.fromTo("#viz-outro", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1.0 }, 102.7);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

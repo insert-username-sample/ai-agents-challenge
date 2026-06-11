@@ -1,0 +1,52 @@
+{
+  "type": "LegalAST",
+  "version": "1.0.0.0",
+  "timestamp": "2026-06-01T11:48:13Z",
+  "root": {
+    "id": "root-intake",
+    "type": "IntakeBrief",
+    "isGrounded": true,
+    "client": "Vidya Khobrekar",
+    "calculated_age_2026": 61,
+    "status_2026": "Retired"
+  },
+  "nodes": {
+    "sdo-grounded-node": {
+      "id": "sdo-grounded-node",
+      "type": "ProceduralMilestone",
+      "name": "SDO Grounded Path",
+      "description": "Bypassing ex-husband revenue records via maternal community affidavits",
+      "isGrounded": true,
+      "visits": 1244,
+      "success_rate": 1.0,
+      "uct_score": -48.892974005562536
+    },
+    "mediator-melaquera-node": {
+      "id": "mediator-melaquera-node",
+      "type": "ProceduralMilestone",
+      "name": "Melaquera",
+      "description": "VERIFIED & CONCILIATED (Melaquera double-layer safety gate clear)",
+      "isGrounded": true,
+      "action_code": "CONCILIATION_SUCCESS",
+      "warnings": [
+        "TEMPORAL GAP DETECTED: Swarm assumed active investigator standing in 2026. Fact Audit confirms age 61 > retirement threshold 60. Forcing transition to 'Retired' status."
+      ]
+    },
+    "precedent-citation-node": {
+      "id": "precedent-citation-node",
+      "type": "PrecedentCitation",
+      "citation": "Rameshbhai Dabhai Naika v. State of Gujarat (2012) 3 SCC 400",
+      "rulingCourt": "Supreme Court of India",
+      "holdingRatio": "Single mother can claim caste status based on maternal acceptance without ex-husband revenue records",
+      "isBinding": true,
+      "isGrounded": true
+    },
+    "maternal-lineage-node": {
+      "id": "maternal-lineage-node",
+      "type": "MaternalLineageNode",
+      "generationDepth": 3,
+      "communityAcceptanceVerified": true,
+      "isGrounded": true
+    }
+  }
+}

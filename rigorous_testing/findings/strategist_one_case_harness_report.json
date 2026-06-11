@@ -1,0 +1,461 @@
+{
+  "metadata": {
+    "case_title": "Kesavananda Bharati v. State of Kerala",
+    "timestamp": "2026-06-08T12:58:11.689539+00:00",
+    "harness": "eight_agent_micro_step_strategist_harness",
+    "canonical_agents": [
+      "petitioner_agent",
+      "opponent_agent",
+      "reviewer_agent",
+      "verifier_agent",
+      "objector_agent",
+      "presenter_agent",
+      "judge_agent",
+      "drafter_agent"
+    ],
+    "raw_log_status": "Existing rigorous_testing/raw_conversation_log*.jsonl artifacts are tracked in git; the live Codex transcript source is not exposed to this runner, so no synthetic raw log was created.",
+    "baseline_observation": "The pre-harness live baseline timed out after 180 seconds. The strict runner now fails closed under bounded grounding failures instead of fabricating completion."
+  },
+  "strict_gate": {
+    "strict_pass": false,
+    "decision": "FAIL_CLOSED",
+    "reason": "One or more critical micro-steps were unverified, source-less, or downstream-blocked."
+  },
+  "coverage": {
+    "total_micro_steps": 16,
+    "verified_micro_steps": 1,
+    "unverified_micro_steps": 15,
+    "downstream_blocked_steps": 13,
+    "source_bearing_verified_steps": 1,
+    "agent_step_counts": {
+      "petitioner_agent": 2,
+      "opponent_agent": 2,
+      "reviewer_agent": 2,
+      "verifier_agent": 2,
+      "objector_agent": 2,
+      "presenter_agent": 2,
+      "judge_agent": 2,
+      "drafter_agent": 2
+    }
+  },
+  "risk_metrics": {
+    "weighted_p_assumption": 0.9381,
+    "grounded_success_estimate": 6.19,
+    "unverified_critical_steps": [
+      "P1",
+      "P2",
+      "O2",
+      "R1",
+      "R2",
+      "V1",
+      "V2",
+      "OB1",
+      "OB2",
+      "PR1",
+      "PR2",
+      "J1",
+      "J2",
+      "D1",
+      "D2"
+    ]
+  },
+  "evidence_ledger": [
+    {
+      "query": "Kesavananda Bharati v. State of Kerala (1973) 4 SCC 225 basic structure doctrine ratio decidendi",
+      "agent_name": "petitioner_agent",
+      "node_id": "P1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Grounding API error: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'The request timed out. Please try again.', 'status': 'DEADLINE_EXCEEDED'}}",
+      "grounding_excerpt": "",
+      "step_id": "P1",
+      "phase": "petitioner_merits",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [],
+      "downstream_blocked": false,
+      "blocked_by": []
+    },
+    {
+      "query": "Article 368 Constitution of India parliamentary amendment power fundamental rights",
+      "agent_name": "petitioner_agent",
+      "node_id": "P2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): P1",
+      "grounding_excerpt": "",
+      "step_id": "P2",
+      "phase": "petitioner_relief",
+      "claim_type": "statute",
+      "critical": true,
+      "depends_on": [
+        "P1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "P1"
+      ]
+    },
+    {
+      "query": "Golaknath v. State of Punjab (1967) 2 SCR 762",
+      "agent_name": "opponent_agent",
+      "node_id": "O1",
+      "verified": true,
+      "sources": [
+        "unacademy.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHdD46HeaCVY4GoWV8RmSHLu9g3SeudIQGJ0a3a_CYW_iBReaPPkBBTfrlQtxs7HXzjJMVt4ArSe-mQJHrL_xsveBAmYg40ilhDO1ltDOk-FkNNF5-qjzo3XV08FQFsH9_YdSGSAqFQFdsUfMUX_lr6zaa34NXmo1r67LFGaWSaGmueDFA18TAC6ecn_O2b0WUD0LrmCg==",
+        "dennana.in: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEgyQ428HD9rVnZ_heWKcFYPIsFlfQc-23S-OqsBox5jYcfu7rnBG4m9_P88TmCbbvOhpxeD3GUE2RBQSlMmUa5aq6OdTO4off-bM4Mx3Qz6cBTZBytpOtOned2qPO8rZjNb0FAYlLfRIsWimRf77LBeYIxbttO6QAwwRxYCQEs-hF6mn8DpXhxV4IZag==",
+        "wikipedia.org: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGnvlFZR6NWaG8mew2kyDhYJUueeaPvH3kFWk4ZDZ_q9MPOoslRYBiwpA2URhCEueKgnTlM5orG57j7yhvrIA-0x7wfdDuvoVkhWNMxfaoEfXgTsPja71LFzcOCXifNan7jRkH9bFw2DewyoH2IPjX_mREfvddrFgwASyPWgqE6NHNB9BUyFLnhPBzCYhIihMfhON8=",
+        "legalbots.in: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEFdXiMQKQXhCOOKi9sO87i3mJTy4Aljl8_kwCfBYDy4SNrBi9ajC1kP9ajjQDS8Kb0pYcKmSlp0HyZ5CEbhik7OdiTD-Ewj-vyPEF-It0kGM8ROOhb5PUiuKmizjaDOecWBSOzXOmSg4AqdhipmzzrBrW6MfzH9na-Q7UZyxmlJ_Wo0ypkrBm933w=",
+        "indiankanoon.org: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGBiCRoW7Pvgh5P5ZIhGHL2VbYJbzMD4dBoar9gzNYrMW-RKB02jaNua7Xn-UO4H6P2yAnRSPUMdObP3rFyB4083yDM68r6g_s1kTRzK7JZsfjHfjE-oGRl3Ivu7uRIaQ==",
+        "delhilawacademy.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG6RAm9JRbYrwjfkZPmsGR2tLrKMJj90W2hE1TcGXZp4YRj1_LlS3lvEfuprBOl9nihTzvcDWjszEf0dxodxUr_ry5flSzXXhtyPwHKYGqPeUToaGOh_57sq9SwNOdaRVQgqME1MFbLbt1YIgJ4Oc96iucMi2aCjQ==",
+        "landeed.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHboIQ6WkoZrYDLXYDVDcVHff4HRS2dAHj7dS78rhriD774Nq50IQMu08kE4jIeMOUTcexLgISibQcog8VmUDiCkNDYM6_DYeOwRIUOq5qjT2VQJ_U3Jq051GEA7nyqo1F7xMxDLrXW2NwU2gyDr1l5IqzVaoV5-Ij6kJLTOaOgEu8OuqR6qScareLwNnsozGQ=",
+        "lexibal.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQESlvzIyLNbhc84JQZ0zygStKhPkPnD3DRacPqGnpDu6LP9GpHWg-NMwcTqXlv4n5pOBNfL76cdrchDRgeSPtYJifdyxPvwHh899KwyloBjmyZsjUBkAVnBxjRs_hZcyieY4WN27C3cVi7b0_Fjrk3xf0E7O_dSWgY1-Z3qTkMRawUfX--maA==",
+        "testbook.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGiDnrK1Cs8fkMpXJJ3tiTxk7Ixo6ntzcC775tRingu0hlEmlboryI4dsvpDvGj3XKP9hQK6JEQ3xa-LjwKxKCOLr12Cz1ff5ceVXTN1_otAY-2oPjH1yIKiimjc2d22gNAFMtupEskRTyrhT2O6PaRhZQLaqwgLfwAdyUnMP80bHgtXXt8aTP0PjoqKn1qG54eFbFeRlR4-DD_Waa1I6WAPzkWBpU2V5KiPw==",
+        "ipleaders.in: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHHYs6cLsPuGHnYylKFLQ3DYzWPIwc0WPY-wrwnp1dUA_M26jdP3O0xiC-ul0nob5pLljSKmcqrH4C2WfxK1HgqNjR4Jo9JaeOF0qY0pjRdX9jel6ple3YiND1JgctZ9aICA7BRMjdj8-iFDNlaztaer5urvLtFq084HaIh0VK-CmQV5CZYi4E=",
+        "jlrjs.com: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF4yHkXd7mq6ezjaHd_G5Ab6l8luwKBbzvR-yaYeDWVU_dodGFsDMdpuKF29L2VRv4kKqp7J_Nutj7QCgoB3yWyp1xPwoPVM85cXPmLVD9HHlpupGF3wZyK_77OWaMSOlnIpgsicZGmLwBFbSs22H_ekwma2fLEtL3niQOL-XQ=",
+        "dhyeyalaw.in: https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFoHFdBMUgWyo3xYRMu-xWTMq7zkvhaL4p4btfOE6yEkye4Nex-K_QOAraFqf8kq_zsHPWklJZEfzuz9oDLm0MltIGZZg8VqZpThvP6ztEoabMIMB3g_uxapN07f9vPeK82Zd6QPD_vuQDUeRvxh9yh6f8w"
+      ],
+      "source_count": 12,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 0.01,
+      "error": "",
+      "grounding_excerpt": "The Indian court case citation 'Golaknath v. State of Punjab (1967) 2 SCR 762' is accurate and refers to a landmark decision by the Supreme Court of India. The case is also cited as 1967 AIR 1643.\n\nHere's a breakdown of the details:\n\n*   **Existence and Correctness of Citation**: The citation 'Golaknath v. State of Punjab (1967) 2 SCR 762' is correct and widely recognized.\n*   **Court that Decided it**: The case was decided by the Supreme Court of India.\n*   **Year of Decision**: The judgment wa",
+      "step_id": "O1",
+      "phase": "opponent_precedent_attack",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [],
+      "downstream_blocked": false,
+      "blocked_by": []
+    },
+    {
+      "query": "Sajjan Singh v. State of Rajasthan AIR 1965 SC 845",
+      "agent_name": "opponent_agent",
+      "node_id": "O2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Grounding API error: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'The request timed out. Please try again.', 'status': 'DEADLINE_EXCEEDED'}}",
+      "grounding_excerpt": "",
+      "step_id": "O2",
+      "phase": "opponent_counter_authority",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [
+        "O1"
+      ],
+      "downstream_blocked": false,
+      "blocked_by": []
+    },
+    {
+      "query": "Kesavananda Bharati v. State of Kerala challenged Kerala Land Reforms Act and constitutional amendments",
+      "agent_name": "reviewer_agent",
+      "node_id": "R1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): P1",
+      "grounding_excerpt": "",
+      "step_id": "R1",
+      "phase": "reviewer_fact_lock",
+      "claim_type": "fact",
+      "critical": true,
+      "depends_on": [
+        "P1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "P1"
+      ]
+    },
+    {
+      "query": "Basic Structure Doctrine and limits of parliamentary amendment power decided by a 13 judge bench of the Supreme Court of India",
+      "agent_name": "reviewer_agent",
+      "node_id": "R2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): R1",
+      "grounding_excerpt": "",
+      "step_id": "R2",
+      "phase": "reviewer_issue_lock",
+      "claim_type": "fact",
+      "critical": true,
+      "depends_on": [
+        "R1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "R1"
+      ]
+    },
+    {
+      "query": "Kesavananda Bharati v. State of Kerala (1973) 4 SCC 225",
+      "agent_name": "verifier_agent",
+      "node_id": "V1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): P1",
+      "grounding_excerpt": "",
+      "step_id": "V1",
+      "phase": "verifier_primary_citation",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [
+        "P1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "P1"
+      ]
+    },
+    {
+      "query": "Twenty-fourth Twenty-fifth and Twenty-ninth Amendments Constitution of India Kesavananda Bharati",
+      "agent_name": "verifier_agent",
+      "node_id": "V2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): P2, V1",
+      "grounding_excerpt": "",
+      "step_id": "V2",
+      "phase": "verifier_statutory_context",
+      "claim_type": "statute",
+      "critical": true,
+      "depends_on": [
+        "P2",
+        "V1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "P2",
+        "V1"
+      ]
+    },
+    {
+      "query": "IN-SC writ petition maintainability for constitutional amendment challenge",
+      "agent_name": "objector_agent",
+      "node_id": "OB1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): V1",
+      "grounding_excerpt": "",
+      "step_id": "OB1",
+      "phase": "objector_maintainability",
+      "claim_type": "procedure",
+      "critical": true,
+      "depends_on": [
+        "V1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "V1"
+      ]
+    },
+    {
+      "query": "Ninth Schedule judicial review basic structure doctrine India",
+      "agent_name": "objector_agent",
+      "node_id": "OB2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): OB1",
+      "grounding_excerpt": "",
+      "step_id": "OB2",
+      "phase": "objector_ninth_schedule",
+      "claim_type": "procedure",
+      "critical": true,
+      "depends_on": [
+        "OB1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "OB1"
+      ]
+    },
+    {
+      "query": "Kesavananda Bharati binding precedent basic structure doctrine subsequent Indian courts",
+      "agent_name": "presenter_agent",
+      "node_id": "PR1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): P1, V1, OB2",
+      "grounding_excerpt": "",
+      "step_id": "PR1",
+      "phase": "presenter_binding_synthesis",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [
+        "P1",
+        "V1",
+        "OB2"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "P1",
+        "V1",
+        "OB2"
+      ]
+    },
+    {
+      "query": "Minerva Mills Waman Rao I R Coelho basic structure doctrine India",
+      "agent_name": "presenter_agent",
+      "node_id": "PR2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): PR1",
+      "grounding_excerpt": "",
+      "step_id": "PR2",
+      "phase": "presenter_follow_on_authority",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [
+        "PR1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "PR1"
+      ]
+    },
+    {
+      "query": "Kesavananda Bharati held Parliament cannot alter basic structure of Constitution",
+      "agent_name": "judge_agent",
+      "node_id": "J1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): PR1, PR2",
+      "grounding_excerpt": "",
+      "step_id": "J1",
+      "phase": "judge_outcome_basis",
+      "claim_type": "precedent",
+      "critical": true,
+      "depends_on": [
+        "PR1",
+        "PR2"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "PR1",
+        "PR2"
+      ]
+    },
+    {
+      "query": "Kesavananda Bharati was decided by narrow majority 7 6 Supreme Court India",
+      "agent_name": "judge_agent",
+      "node_id": "J2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): J1",
+      "grounding_excerpt": "",
+      "step_id": "J2",
+      "phase": "judge_probability_constraints",
+      "claim_type": "fact",
+      "critical": true,
+      "depends_on": [
+        "J1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "J1"
+      ]
+    },
+    {
+      "query": "Kesavananda Bharati v. State of Kerala compile Legal AST from verified swarm outputs with court formatting rules IN-SC",
+      "agent_name": "drafter_agent",
+      "node_id": "D1",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): PR2, J1",
+      "grounding_excerpt": "",
+      "step_id": "D1",
+      "phase": "drafter_ast_compilation",
+      "claim_type": "procedure",
+      "critical": true,
+      "depends_on": [
+        "PR2",
+        "J1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "PR2",
+        "J1"
+      ]
+    },
+    {
+      "query": "Symbolic Formatting Engine validation for IN-SC court filing requirements margins fonts sections",
+      "agent_name": "drafter_agent",
+      "node_id": "D2",
+      "verified": false,
+      "sources": [],
+      "source_count": 0,
+      "contradiction_detected": false,
+      "contradiction_detail": "",
+      "p_assumption": 1.0,
+      "error": "Blocked by unverified upstream step(s): D1",
+      "grounding_excerpt": "",
+      "step_id": "D2",
+      "phase": "drafter_sfe_validation",
+      "claim_type": "procedure",
+      "critical": true,
+      "depends_on": [
+        "D1"
+      ],
+      "downstream_blocked": true,
+      "blocked_by": [
+        "D1"
+      ]
+    }
+  ]
+}

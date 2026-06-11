@@ -1,0 +1,13 @@
+{
+  "jurisdiction": "MH-DISTRICT",
+  "document_type": "Affidavit",
+  "court_name": "Civil Judge Senior Division, Nagpur",
+  "case_number": "CS/245/2026",
+  "client_name": "Rajesh Vinod Kumar",
+  "opposing_party": "Suresh Ramchandra Sharma",
+  "cause_of_action": "The respondent Suresh Ramchandra Sharma issued a cheque bearing No. 456789 dated 01-02-2026, drawn on State Bank of India, Sitabuldi Branch, Nagpur, for a sum of Rs. 5,00,000/- (Rupees Five Lakhs Only) in favour of the petitioner towards consideration for sale of agricultural land at Survey No. 123/A, Village Hingna, Taluka Nagpur (Rural), District Nagpur. The said cheque was presented for encashment on 15-02-2026 but was returned dishonoured on 18-02-2026 with the endorsement 'Insufficient Funds'. Despite issuance of legal notice dated 20-02-2026 under Section 138 of the Negotiable Instruments Act, 1881, the respondent has failed to make the payment within the statutory period of 15 days.",
+  "relief_sought": "Direct the respondent to pay the cheque amount of Rs. 5,00,000/- along with interest at 18% per annum and costs of the proceedings",
+  "language": "English",
+  "prompt": "Include reference to BNS 2024 provisions. The property transaction was documented via a registered sale deed. Include prayer for interim relief.",
+  "run_strategy": true
+}

@@ -1,0 +1,30 @@
+{
+  "my-chrome-browser": {
+    "$typeName": "exa.cascade_plugins_pb.CascadePluginCommandTemplate",
+    "command": "g:/ai agents challenge/.venv/Scripts/python.exe",
+    "args": [
+      "g:/ai agents challenge/tools/mcps/my_chrome/server.py"
+    ]
+  },
+  "gemini-web": {
+    "$typeName": "exa.cascade_plugins_pb.CascadePluginCommandTemplate",
+    "command": "g:/ai agents challenge/.venv/Scripts/python.exe",
+    "args": [
+      "g:/ai agents challenge/tools/mcps/gemini_web/server.py"
+    ]
+  },
+  "chatgpt-web": {
+    "$typeName": "exa.cascade_plugins_pb.CascadePluginCommandTemplate",
+    "command": "g:/ai agents challenge/.venv/Scripts/python.exe",
+    "args": [
+      "g:/ai agents challenge/tools/mcps/chatgpt_web/server.py"
+    ]
+  },
+  "notebooklm-web": {
+    "$typeName": "exa.cascade_plugins_pb.CascadePluginCommandTemplate",
+    "command": "g:/ai agents challenge/.venv/Scripts/python.exe",
+    "args": [
+      "g:/ai agents challenge/tools/mcps/notebooklm/server.py"
+    ]
+  }
+}
