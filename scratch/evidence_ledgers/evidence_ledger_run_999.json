@@ -1,7 +1,7 @@
 {
   "case_title": "State v. Nagpur",
   "run_id": "run_999",
-  "created_at": "2026-06-11T20:40:11.925532+00:00",
+  "created_at": "2026-06-11T21:21:39.385670+00:00",
   "summary": {
     "case_title": "State v. Nagpur",
     "run_id": "run_999",
@@ -12,7 +12,7 @@
     "contradictions_detected": 0,
     "weighted_p_assumption": 0.0,
     "grounded_success_estimate": 100.0,
-    "created_at": "2026-06-11T20:40:11.925532+00:00"
+    "created_at": "2026-06-11T21:21:39.385670+00:00"
   },
   "entries": [
     {
@@ -28,7 +28,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -43,7 +43,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -58,7 +58,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -73,7 +73,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -88,7 +88,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -103,7 +103,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -118,7 +118,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -133,7 +133,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     },
     {
       "agent_name": "drafter_agent",
@@ -148,7 +148,7 @@
       "contradiction_detected": false,
       "contradiction_detail": "",
       "error": "",
-      "timestamp": "2026-06-11T20:40:11.925532+00:00"
+      "timestamp": "2026-06-11T21:21:39.385670+00:00"
     }
   ]
 }
