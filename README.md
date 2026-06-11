@@ -24,7 +24,7 @@ Think of it as a **compiler for law**: natural language goes in, court-ready doc
 Legal Intent → [Clausely ADK Pipeline] → Court-Ready Document
                     ├── Drafter Agent (Gemini 1.5 Flash)
                     ├── Acceptor Agent (Registry Simulation)
-                    ├── Strategist (7-Agent Adversarial Swarm)
+                    ├── Strategist (8-Agent Swarm)
                     └── Case Base (Firestore Memory Bank)
 ```
 
@@ -37,14 +37,15 @@ clausely_orchestrator (SequentialAgent)
 ├── case_base_agent      → ADK Memory Bank + Firestore
 ├── drafter_agent        → Gemini 1.5 Flash + SFE tools
 ├── acceptor_agent       → Registry simulation + procedural linting
-└── strategist_agent     → ParallelAgent (7-agent adversarial swarm)
+└── strategist_agent     → ParallelAgent (8-agent swarm)
     ├── petitioner_agent → Argues strongest case
     ├── opponent_agent   → Finds every weakness
     ├── reviewer_agent   → Checks legal accuracy
     ├── verifier_agent   → Verifies statute citations
     ├── objector_agent   → Procedural objections
     ├── presenter_agent  → Strategy synthesis
-    └── judge_agent      → Scores probability of success
+    ├── judge_agent      → Scores probability of success
+    └── drafter_agent    → Compiler with write-level access
 ```
 
 ## ADK Features Used
@@ -52,7 +53,7 @@ clausely_orchestrator (SequentialAgent)
 | ADK Feature | How Clausely Uses It |
 |---|---|
 | `SequentialAgent` | Orchestrates intake → draft → validate → store pipeline |
-| `ParallelAgent` | Runs 7 adversarial agents simultaneously in Strategist |
+| `ParallelAgent` | Runs 8 swarm agents in Strategist |
 | `Agent` with `FunctionTool` | Drafter, Acceptor, Case Base agents with custom tools |
 | `InMemorySessionService` | Session management for stateful agent conversations |
 | `Runner` | Executes the multi-agent pipeline end-to-end |
