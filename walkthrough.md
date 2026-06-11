@@ -121,6 +121,26 @@ pytest
 Expected output: `314 passed`
 
 ### 5.2 Local Launch
+To run the FastAPI backend server:
 ```powershell
-streamlit run app/main.py
+.venv\Scripts\python.exe app\main.py
 ```
+
+---
+
+## 6. Functional MVP: Strategist Swarm & RAG System
+
+We have implemented and verified a fully functional MVP for the Strategist module. It operates as follows:
+
+### 6.1 Backend API Endpoint
+- **Endpoint:** `POST /api/strategy/run`
+- **Request Payload:** Sends the user prompt, selected folder context sources, optional client-side API key, and in-memory parsed file arrays.
+- **RAG Ingestion (`app/rag_service.py`):** Automatically scans selected local desktop folders mapped in `context_sources.json`, parses `.txt`, `.md`, `.pdf`, `.docx`, and `.json` files, chunks them, computes `all-MiniLM-L6-v2` embeddings, and indexes them in a local in-memory **FAISS** index.
+- **Dynamic File Support:** Any files uploaded in the browser are parsed on the client side and sent as text payloads to the backend, which chunks and indexes them directly in the FAISS registry.
+- **Multi-Agent Sequential Playout (`app/strategist_swarm.py`):** Executes 5 distinct reasoning passes sequentially via the Gemini API (Petitioner → Opponent → Reviewer → Verifier → Lead Strategist), feeding intermediate outputs forward.
+
+### 6.2 Frontend Interface Integration (`public/strategist.html`)
+- Replaced the mock generator and static fallback logic with a real `fetch('/api/strategy/run')` call.
+- Dynamically parses the returned JSON strategy payload to display Executive Summary, Swarm Recommendation, Key Opportunities, Key Risks, Alternative Strategies, Assumptions, and Missing Information prompts.
+- Emits real-time progress steps and logs to the Glow console.
+- Generates live compliance checks in the Defects tab and compiles the formal Legal AST JSON representing the current grounded state in the AST tab.

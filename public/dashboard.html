@@ -412,7 +412,7 @@
           <h2 class="card-title">🔑 API Configuration</h2>
           <div class="form-group">
             <label class="form-label" for="apiKey">Gemini API Key</label>
-            <input type="password" id="apiKey" class="form-control" value="AIzaSyCH-AtYCsF1TCdCGegu3qDam36Db7B4JaI">
+            <input type="password" id="apiKey" class="form-control" placeholder="Enter Gemini API Key (Optional)">
           </div>
           <div class="btn-group">
             <button class="btn btn-primary" id="btnTestKey">Test Key Connection</button>
@@ -606,6 +606,11 @@ STATEMENT OF CLAIMS:
     document.addEventListener("DOMContentLoaded", () => {
       loadMockFile(activeFileName);
       setupEventListeners();
+      
+      const savedKey = localStorage.getItem('gemini_api_key') || '';
+      if (savedKey) {
+        document.getElementById("apiKey").value = savedKey;
+      }
     });
 
     // File Selector Logic
@@ -635,6 +640,12 @@ STATEMENT OF CLAIMS:
 
       // API Key Hide/Show Toggle
       const apiKeyInput = document.getElementById("apiKey");
+      
+      // Save key to localStorage on change
+      apiKeyInput.addEventListener("change", () => {
+        localStorage.setItem('gemini_api_key', apiKeyInput.value.trim());
+      });
+
       const btnToggleKey = document.getElementById("btnToggleKeyVisibility");
       btnToggleKey.addEventListener("click", () => {
         if (apiKeyInput.type === "password") {
@@ -658,7 +669,7 @@ STATEMENT OF CLAIMS:
         appendLog("[SYSTEM] Testing connection to Gemini API...", "log-info");
 
         try {
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -700,7 +711,7 @@ STATEMENT OF CLAIMS:
         responseArea.innerText = "Querying live Gemini model, please wait...";
 
         try {
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

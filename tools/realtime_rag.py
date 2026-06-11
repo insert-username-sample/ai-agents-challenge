@@ -86,7 +86,7 @@ class RealtimeRAGClient:
                     client = genai.Client(api_key=api_key)
                     google_search_tool = Tool(google_search=GoogleSearch())
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash",
+                        model="gemini-3.5-flash",
                         contents=f"Find recent case information or filings for: '{query}' published recently in 2024-2026. Focus only on Indian courts (sci.gov.in, ecourts.gov.in, casemine.com, livelaw.in, barandbench.com, indiankanoon.org).",
                         config=GenerateContentConfig(tools=[google_search_tool]),
                     )
@@ -226,7 +226,7 @@ class RealtimeRAGClient:
                     client = genai.Client(api_key=api_key)
                     google_search_tool = Tool(google_search=GoogleSearch())
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash",
+                        model="gemini-3.5-flash",
                         contents=f"Verify the Indian legal precedent case: '{query}'. Provide its status, dates, and official source links from casemine.com, indiankanoon.org, sci.gov.in, ecourts.gov.in, livelaw.in, or barandbench.com.",
                         config=GenerateContentConfig(tools=[google_search_tool]),
                     )

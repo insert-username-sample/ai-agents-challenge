@@ -35,6 +35,9 @@ from tools.reward_signal import log_signal, get_aggregate_stats
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 
+from app.rag_service import RAGService
+from app.strategist_swarm import run_swarm_simulation
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("clausely.api")
 
@@ -327,6 +330,97 @@ async def health():
         "service": "clausely-adk",
         "model": "gemini-3.5-flash",
     }
+
+
+# ---------------------------------------------------------------------------
+# Strategist Swarm MVP Route
+# ---------------------------------------------------------------------------
+
+class StrategySources(BaseModel):
+    matter_context: bool = True
+    documents: bool = True
+    case_base: bool = True
+    playbooks: bool = True
+    research: bool = True
+
+class UploadedFile(BaseModel):
+    name: str
+    content: str
+
+class StrategyRequest(BaseModel):
+    query: str
+    sources: StrategySources
+    api_key: Optional[str] = None
+    uploaded_files: Optional[List[UploadedFile]] = None
+
+class StrategyResponse(BaseModel):
+    summary: str
+    risks: List[str]
+    opportunities: List[str]
+    assumptions: List[str]
+    missing_information: List[str]
+    recommendation: str
+    alternative_strategies: List[str]
+    evidence: List[str]
+    confidence: float
+
+rag_service = RAGService()
+
+@app.post("/api/strategy/run", response_model=StrategyResponse)
+async def run_strategy_api(request: StrategyRequest):
+    """
+    Execute real RAG retrieval and 5-agent sequential swarm reasoning simulation using Gemini.
+    """
+    api_key = request.api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        raise HTTPException(
+            status_code=400,
+            detail="Neither GEMINI_API_KEY nor GOOGLE_API_KEY is configured. Please configure it to use the Strategist Swarm."
+        )
+        
+    try:
+        # 1. Build index from selected sources
+        selected_dict = {
+            "matter_context": request.sources.matter_context,
+            "documents": request.sources.documents,
+            "case_base": request.sources.case_base,
+            "playbooks": request.sources.playbooks,
+            "research": request.sources.research
+        }
+        
+        logger.info(f"Building RAG index for: {selected_dict}")
+        uploaded_list = [f.model_dump() for f in request.uploaded_files] if request.uploaded_files else None
+        num_chunks = rag_service.build_index(selected_dict, uploaded_list)
+        logger.info(f"Indexed {num_chunks} chunks.")
+        
+        # 2. Retrieve relevant chunks
+        logger.info(f"Retrieving top chunks for query: '{request.query}'")
+        retrieved = rag_service.retrieve(request.query, k=5)
+        logger.info(f"Retrieved {len(retrieved)} chunks.")
+        
+        # 3. Run multi-agent sequential swarm simulation
+        logger.info("Running Multi-Agent Swarm Simulation...")
+        result = run_swarm_simulation(request.query, retrieved, api_key)
+        
+        # Format response evidence
+        evidence_sources = list(set([chunk["source"] for chunk in retrieved])) if retrieved else []
+        if not evidence_sources:
+            evidence_sources = ["General Precedents"]
+            
+        return StrategyResponse(
+            summary=result.get("summary", ""),
+            risks=result.get("risks", []),
+            opportunities=result.get("opportunities", []),
+            assumptions=result.get("assumptions", []),
+            missing_information=result.get("missing_information", []),
+            recommendation=result.get("recommendation", ""),
+            alternative_strategies=result.get("alternative_strategies", []),
+            evidence=evidence_sources,
+            confidence=result.get("confidence", 0.8)
+        )
+    except Exception as e:
+        logger.error(f"Error executing strategy run: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # ---------------------------------------------------------------------------

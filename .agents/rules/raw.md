@@ -2,7 +2,7 @@
 trigger: always_on
 ---
 
-FIX MCP RAW CONFIG always
+STRICTLY PROHIBIT MCP ALWAYS
 
 
 # Global Agent Rules — Project-Agnostic Software Architect
@@ -23,8 +23,8 @@ Before editing any file, programmatically read the target code and its dependees
 2. Production Quality: Write typed, clean, production-grade code on the first attempt. Keep all imports clean, include explicit error handling (no bare except blocks), and remove all debug statements before completing work.
 3. Test Runners: If unit or integration test suites exist, run the test runner to verify code changes before concluding.
 
-## Autocomplete & MCP Resiliency
-1. Indexer Safety: If an MCP server crashes or throws execution errors (e.g., due to missing dependencies), surgical deletion of the server configuration block directly from the underlying settings file is preferred over placebos (such as disabling in the GUI panel) to restore local autocomplete indexers.
+## MCP Tool Prohibition
+1. Strictly Prohibited: Under no circumstances shall the agent invoke any MCP tools (e.g. browser, chatgpt, notebooklm, gemini, etc.). All tasks must be completed using local commands and tools.
 
 ## Communication Compliance
 1. CP1252 Shell Encoding: To prevent Windows charmap codec crashes under PowerShell environments, you are strictly prohibited from generating Unicode emojis or special symbols in console outputs or generated file strings. Use standard ASCII markers ([AUDIT], >>>, !!!, [GATE]).
