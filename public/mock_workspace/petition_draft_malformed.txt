@@ -1,0 +1,19 @@
+[PETITION_DRAFT: MALFORMED]
+COURT OF THE CENTRAL ADMINISTRATIVE TRIBUNAL, NEW DELHI
+
+In the matter of:
+Smt. Manasvi Khobrekar ... Petitioner
+v.
+Union of India & Ors. ... Respondents
+
+LAYOUT_PROPERTIES:
+- Page Margin Left: 2.0cm (CRITICAL EXCEPTION: Required 3.0cm)
+- Font: Comic Sans (CRITICAL EXCEPTION: Required Times New Roman/Inter)
+- Line Spacing: 1.0 (CRITICAL EXCEPTION: Required 1.5)
+
+STATEMENT OF CLAIMS:
+1. The Petitioner was appointed to the Civil Services in 1992 and served honorably.
+2. Upon retirement, the respondent failed to compute pension benefits correctly.
+3. CITATION: Supreme Court of India in State of Punjab v. Dharam [UNVERIFIED: Citation missing official volume register].
+4. CITATION: Central Service Rules, Section 9 [UNVERIFIED: Sub-clause reference invalid].
+5. Grounding coordinates are set to [EMPTY_PLACEHOLDER: Enter PEC location].

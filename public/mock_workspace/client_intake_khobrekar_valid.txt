@@ -1,0 +1,10 @@
+[CASE_INTAKE_RECORD: VALID]
+Client Name: Smt. Manasvi Khobrekar
+Date of Birth: 1968-04-15
+Civil Service Appointment: 1992-08-10
+Proposed Retirement Date: 2028-04-30
+Computed Age at Retirement: 60 years, 0 months, 15 days
+Territorial Coordinate: Delhi-NCR (28.6139, 77.2090)
+Case Matter: Pension Arrears and Gratuity Computation
+Status: Grounding Validation PASS
+Summary: The petitioner's retirement date matches the age-60 civil service retirement cap exactly.

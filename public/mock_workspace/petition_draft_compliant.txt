@@ -1,0 +1,19 @@
+[PETITION_DRAFT: COMPLIANT]
+COURT OF THE CENTRAL ADMINISTRATIVE TRIBUNAL, NEW DELHI
+
+In the matter of:
+Smt. Manasvi Khobrekar ... Petitioner
+v.
+Union of India & Ors. ... Respondents
+
+LAYOUT_PROPERTIES:
+- Page Margin Left: 3.0cm (PASS)
+- Font: Times New Roman (PASS)
+- Line Spacing: 1.5 (PASS)
+
+STATEMENT OF CLAIMS:
+1. The Petitioner was appointed to the Civil Services on 10th August 1992 and served honorably.
+2. Upon retirement in April 2028, the respondent is requested to compute pension benefits correctly.
+3. CITATION: Supreme Court of India in State of Punjab v. Dharam, (2001) 3 SCC 211 (VERIFIED).
+4. CITATION: Central Service Rules, Section 9 (VERIFIED).
+5. Grounding coordinates are set to Delhi-NCR Central Registry PEC (28.6139, 77.2090) (VERIFIED).

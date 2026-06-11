@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clausely.ai — Scope of Work (SOW)</title>
+  <meta name="description" content="Official Scope of Work and Statement of Work for the Clausely zero-hallucination Legal Compilation Engine swarm interface.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Styling variables - Slate & Indigo Dark Mode */
+    :root {
+      --bg-dark: #070a13;
+      --bg-card: rgba(13, 19, 33, 0.85);
+      --bg-active: rgba(22, 33, 54, 0.9);
+      --border-card: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --color-primary: #38bdf8;
+      --color-primary-glow: rgba(56, 189, 248, 0.2);
+      --color-accent: #6366f1;
+      --color-accent-glow: rgba(99, 102, 241, 0.2);
+      --color-success: #10b981;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.08) 0%, transparent 35%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      flex-grow: 1;
+    }
+
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-card);
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo span {
+      color: var(--color-primary);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(17, 24, 39, 0.4);
+      padding: 0.25rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-card);
+    }
+
+    .tab-link {
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .tab-link:hover {
+      color: var(--text-main);
+    }
+
+    .tab-link.active {
+      background: var(--bg-active);
+      color: var(--color-primary);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    /* Content Styling */
+    .sow-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.4rem;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #d1d5db;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    ul, ol {
+      color: #d1d5db;
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border-card);
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    td {
+      color: #d1d5db;
+    }
+
+    .badge {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: var(--color-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="logo">clausely<span>.ai</span></a>
+      <div class="nav-tabs">
+        <a href="index.html" class="tab-link">Simulator</a>
+        <a href="architecture.html" class="tab-link">Board Map</a>
+        <a href="code.html" class="tab-link">Code Explorer</a>
+        <a href="dashboard.html" class="tab-link">Testing Dashboard</a>
+      </div>
+    </header>
+
+    <main class="sow-content">
+      <div class="badge">Alpha v0.0.0.1 Sandbox Gate</div>
+      <h1>Scope & Statement of Work</h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 300;">
+        Official technical guidelines, scheduling, and verification metrics for the Clausely Legal Compilation Engine.
+      </p>
+
+      <h2>1. Objective & Background</h2>
+      <p>
+        The objective of this project is to construct a stateful legal compilation pipeline that enforces zero-hallucination policies for legal document generation. By combining an 8-agent Monte Carlo Tree Search (MCTS) simulation swarm with a compiler checking engine (Symbolic Formatting Engine) and chronological audit gates (SafeVerify), the system achieves strict compliance with court filing standards.
+      </p>
+
+      <h2>2. Scope of Work (SOW)</h2>
+      
+      <h3>A. 8-Agent Swarm Simulation</h3>
+      <ul>
+        <li><strong>Petitioner Agent:</strong> Spawns prospective litigation nodes based on Client Intake parameters.</li>
+        <li><strong>Opponent Agent:</strong> Generates adversarial pressure-test claims to challenge the petitioner's path.</li>
+        <li><strong>Reviewer Agent:</strong> Evaluates node compliance against historic case databases using Jaccard and Cosine Similarity metrics.</li>
+        <li><strong>Judge Agent:</strong> Runs LoRA bias outcomes checking to assign terminal rewards.</li>
+        <li><strong>Drafter Agent:</strong> Reconstructs the selected litigation path into an immutable Abstract Syntax Tree (AST).</li>
+        <li><strong>Verifier Agent:</strong> Audits coordinates and temporal boundaries.</li>
+        <li><strong>Objector Agent:</strong> Enforces formatting, typography, line spacing, and margin requirements.</li>
+        <li><strong>Presenter Agent:</strong> Compresses the final document size and manages cognitive constraints.</li>
+      </ul>
+
+      <h3>B. SafeVerify Validation Gates</h3>
+      <ul>
+        <li><strong>Retirement Age Auditing:</strong> Checks birth and retirement dates, enforcing strict validation math to verify compliance against the civil service retirement cap (e.g. 60 years limit).</li>
+        <li><strong>SFE Compiler Loops:</strong> Dynamically identifies formatting violations (e.g. left margin size mismatch, unverified citations).</li>
+        <li><strong>Sorry-Free Checks:</strong> Blocks commits if placeholder stub tokens or invalid URL links are present.</li>
+      </ul>
+
+      <h2>3. Statement of Work (SOW) & Timelines</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Milestone</th>
+            <th>Deliverable</th>
+            <th>Status</th>
+            <th>Verification Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Phase 1</strong></td>
+            <td>History Sanitize & Git Rebuild</td>
+            <td><span style="color: var(--color-success); font-weight: 600;">COMPLETED</span></td>
+            <td>Push protection verification check</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 2</strong></td>
+            <td>Interactive Board Map & Code Explorer</td>
+            <td><span style="color: var(--color-success); font-weight: 600;">COMPLETED</span></td>
+            <td>Local routing and layout checks</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 3</strong></td>
+            <td>Real-API Testing Dashboard & Mock Workspace</td>
+            <td><span style="color: var(--color-success); font-weight: 600;">ACTIVE</span></td>
+            <td>Client-side sandbox execution</td>
+          </tr>
+          <tr>
+            <td><strong>Phase 4</strong></td>
+            <td>Live Firebase hosting sync</td>
+            <td>PENDING</td>
+            <td>Deployment URL validation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>4. Operational Constraints</h2>
+      <p>
+        All development artifacts, script commands, and generated files must conform strictly to <strong>CP1252 Shell Encoding</strong>. The use of Unicode special characters, icons, or emojis inside output codes is blocked.
+      </p>
+    </main>
+  </div>
+</body>
+</html>

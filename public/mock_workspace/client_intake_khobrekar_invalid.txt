@@ -1,0 +1,10 @@
+[CASE_INTAKE_RECORD: INVALID]
+Client Name: Smt. Manasvi Khobrekar
+Date of Birth: 1960-04-15
+Civil Service Appointment: 1984-08-10
+Proposed Retirement Date: 2026-06-30
+Computed Age at Retirement: 66 years, 2 months, 15 days
+Territorial Coordinate: Delhi-NCR (28.6139, 77.2090)
+Case Matter: Pension Arrears and Gratuity Computation
+Status: Grounding Validation FAIL
+Summary: The petitioner's retirement age (66) exceeds the statutory age-60 civil service retirement cap. This triggers a temporal gate exception in the Verifier Agent.

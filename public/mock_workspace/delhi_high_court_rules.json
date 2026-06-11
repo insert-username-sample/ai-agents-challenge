@@ -1,0 +1,22 @@
+{
+  "court_name": "Delhi High Court",
+  "rules": {
+    "formatting": {
+      "margins": {
+        "left_cm": 3.0,
+        "right_cm": 2.5,
+        "top_cm": 2.5,
+        "bottom_cm": 2.5
+      },
+      "typography": {
+        "allowed_fonts": ["Times New Roman", "Inter", "Outfit"],
+        "min_font_size": 12,
+        "line_spacing": 1.5
+      }
+    },
+    "statutes": {
+      "retirement_age_cap": 60,
+      "limitation_period_years": 3
+    }
+  }
+}
